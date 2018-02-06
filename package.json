@@ -8,18 +8,21 @@
     "start": "nodemon server.js",
     "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
     "client": "node scripts/start-client.js",
-    "build": "node scripts/build.js",
-    "postinstall": "cd client && npm install && npm run build"
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
+    "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "morgan": "~1.9.0"
+    "firebase": "^4.9.1",
+    "morgan": "~1.9.0",
+    "react-materialize": "^1.1.2",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
   }
-  
 }

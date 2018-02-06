@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import UserHomepage from './components/UserHomepage';
 
 class App extends Component {
   componentDidMount(){
@@ -9,9 +11,14 @@ class App extends Component {
 
   render(){
     return(
-      <div>
-        <h1>Landing</h1>
-      </div>
+      <Router>
+        <div>
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/" component={SignIn} />
+        <Route exact path="/userhomepage" component={UserHomepage} />
+        </div>
+       
+      </Router>
     );
   }
 }
