@@ -7,9 +7,9 @@ class App extends Component {
     console.log('this is working')
   }
 
-  render() {
+  render(){
+    return(
     <Router>
-    return (
       <div>
         <h1>Landing</h1>
       </div>
