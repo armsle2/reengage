@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes')
+const mongoose = require('mongoose');
 
 var app = express();
 const PORT = process.env.PORT || 8080;
@@ -21,7 +22,12 @@ app.use(express.static(__dirname + '/client/build'));
 app.use(routes);
 
 
-  
+// Set up promises with mongoose
+mongoose.Promise = global.Promise;
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/engage"
+); 
 
 app.listen(PORT, () => {console.log(`listening to port ${PORT}`)})
 
