@@ -4,8 +4,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const SurveySchema = new Schema({
-  questions:[],
-  active: true
+  title: String,
+  description: String,
+  questions:[String],
+  feedback: []
 });
 
 // This creates our model from the above schema, using mongoose's model method

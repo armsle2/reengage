@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BusinessSchema = new Schema({
-  type: business,
+  type: usiness,
   businessName: {
     type: String,
     unique: true
@@ -35,11 +35,11 @@ const BusinessSchema = new Schema({
     default: Date.now
   },
   //rewards are defaulted to completed false and 
-  survey: [
+  surveys: [
     {
       type: Schema.Types.ObjectId,
       ref: "Survey",
-      active: false
+      active: true
     }
   ]
 });

@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  type: user,
   userName: {
     type: String,
-    unique: true
+    unique: true,
+    required:true
   },
   // `email` must be of type String
   // `email` must be unique
@@ -16,7 +16,8 @@ const UserSchema = new Schema({
     type: String,
     trim: true,
     unique: true,
-    match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
+    match: [/.+\@.+\..+/, "Please enter a valid e-mail address"],
+    required:true    
   },
   password: {
     type: String,
@@ -28,6 +29,11 @@ const UserSchema = new Schema({
       },
       "Password should be longer."
     ]
+  },
+  phoneNumber: {
+    type: Number,
+    min: 10,
+    max:11
   },
   // `date` must be of type Date. The default value is the current date
   userCreated: {
