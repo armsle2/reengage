@@ -9,6 +9,8 @@ var users = require('./routes/users-api');
 var surveys = require('./routes/surveys-api');
 
 var app = express();
+const PORT = process.env.PORT || 8080;
+
 
 
 // uncomment after placing your favicon in /public
@@ -22,6 +24,8 @@ app.use(express.static('client/build'));
 app.use('/api', rewards);
 app.use('/api', users);
 app.use('/api', surveys);
+
+app.listen(PORT, () => {console.log(`listening to port ${PORT}`)})
 
 
 
