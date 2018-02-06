@@ -6,7 +6,7 @@
   "scripts": {
     "server": "node server.js",
     "start": "nodemon server.js",
-    "dev": "concurrently \"nodemon ./bin/www\" \"cd client && npm start\"",
+    "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
     "build": "node scripts/build.js"
   },
   "dependencies": {

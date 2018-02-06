@@ -3,10 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var rewards = require('./routes/rewards-api');
-var users = require('./routes/users-api');
-var surveys = require('./routes/surveys-api');
+var routes = require('./routes')
 
 var app = express();
 const PORT = process.env.PORT || 8080;
@@ -21,9 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('client/build'));
 
-app.use('/api', rewards);
-app.use('/api', users);
-app.use('/api', surveys);
+app.use(routes);
 
 app.listen(PORT, () => {console.log(`listening to port ${PORT}`)})
 
