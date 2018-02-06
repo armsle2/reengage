@@ -20,9 +20,7 @@ app.use(express.static(__dirname + '/client/build'));
 
 app.use(routes);
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, "client/build/index.html"));
-});
+
   
 
 app.listen(PORT, () => {console.log(`listening to port ${PORT}`)})
