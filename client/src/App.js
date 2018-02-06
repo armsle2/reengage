@@ -9,11 +9,9 @@ class App extends Component {
 
   render(){
     return(
-    <Router>
       <div>
         <h1>Landing</h1>
       </div>
-    </Router>
     );
   }
 }
