@@ -1,22 +1,20 @@
 {
-  "name": "mern",
-  "version": "1.0.0",
-  "description": "Mern Demo",
-  "main": "server.js",
+  "name": "reengage",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "server": "node server.js",
-    "client": "node scripts/start-client.js",
-    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
-    "build": "node scripts/build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^3.5.0",
-    "nodemon": "^1.11.0"
+    "start": "nodemon ./bin/www",
+    "dev": "concurrently \"nodemon ./bin/www\" \"cd client && npm start\""
   },
   "dependencies": {
-    "express": "^4.15.4"
-  }
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  },
+  "proxy": "http://localhost:8080"
 }
