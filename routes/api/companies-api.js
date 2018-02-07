@@ -4,9 +4,9 @@ const db = require('../../models');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  db.Business.find()
-    .then(function(dbBusiness) {
-      res.json(dbBusiness);
+  db.Company.find()
+    .then(function(dbCompanies) {
+      res.json(dbCompanies);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  db.Business.findOne({_id: req.params.id})
+  db.Company.findOne({_id: req.params.id})
   .populate('surveys')
   .then(function(dbBusiness) {
     res.json(dbBusiness)
