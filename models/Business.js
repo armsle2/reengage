@@ -37,10 +37,13 @@ const BusinessSchema = new Schema({
   surveys: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Survey",
-      active: true
+      ref: "Survey"
     }
-  ]
+  ],
+  activeSurvey:{
+    type: Schema.Types.ObjectId,
+    ref: "Survey"
+  }
 });
 
 // This creates our model from the above schema, using mongoose's model method

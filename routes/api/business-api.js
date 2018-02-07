@@ -30,7 +30,7 @@ router.post('/new', function(req, res){
 router.post("/:id", function(req, res){
   db.Survey.create(req.body)
     .then(function(dbSurvey){
-      return db.Business.updateOne({ _id: req.params.id }, { $push: {surveys: dbSurvey._id }});
+      return db.Business.updateOne({ _id: req.params.id }, { $push: {surveys: dbSurvey._id, }});
     })
     .then(function(dbBusiness) {
       // If we were able to successfully update an Article, send it back to the client
