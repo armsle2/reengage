@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import {Button, Icon, Section, Row, Col, Parallax, Toast, Input } from 'react-materialize';
+import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card } from 'react-materialize';
 import '../styles/UserHomepage.css';
 
 
@@ -12,7 +12,16 @@ class UserHomepage extends Component {
 
     render() {
         return (
-            <h1>This is my User Homepage!</h1>
+           <Section>
+               <Navbar fixed className="navbar" brand='Engage' right>
+	                <NavItem href='/BusHomepage'>Current Rewards</NavItem>
+	                <NavItem href='/#'>Pending Rewards</NavItem>
+                    <NavItem href='/#'>Redeemed Rewards</NavItem>
+                    <NavItem href='/#'>My Account</NavItem>
+                    <NavItem href='/#'>Logout</NavItem>
+                </Navbar>
+
+           </Section>
         )
     }
 }

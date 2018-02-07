@@ -4,7 +4,12 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Navbar, NavItem
 import '../styles/BusHomepage.css';
 
 export default class BusHomepage extends React.Component {
-    state = {};
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+    
     render(){
         return(
             <Section>
