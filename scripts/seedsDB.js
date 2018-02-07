@@ -46,6 +46,7 @@ const customerSeed = [
     password : "password",
     phoneNumber : '5557778888',
     surveys: [],
+    rewards: [],
     customerCreated: "2018-02-06T19:30:13.078Z"
   }
 ];
