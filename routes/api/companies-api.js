@@ -1,5 +1,3 @@
-import functions from '../../../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/lodash-es/functions';
-
 var express = require('express');
 var router = express.Router();
 const db = require('../../models');
@@ -41,10 +39,10 @@ router.post('/new', function(req, res){
 
 
 //create a survey /api/companies/survey/:id 
-router.post('/survey/:id', function(req, res){
+router.post('/survey/:companyID', function(req, res){
   db.Survey.create(req.body)
     .then(function(dbSurvey){
-      return db.Company.updateOne({ _id: req.params.id }, { $push: {surveys: dbSurvey._id, }});
+      return db.Company.updateOne({ _id: req.params.companyID }, { $push: {surveys: dbSurvey._id, }});
     })
     .then(function(dbComapny) {
       // If we were able to successfully update an Article, send it back to the client
@@ -57,10 +55,10 @@ router.post('/survey/:id', function(req, res){
 });
 
 //create a survey /api/companies/reward/:id 
-router.post('/reward/:id', function(req, res){
+router.post('/reward/:companyID', function(req, res){
   db.Reward.create(req.body)
     .then(function(dbReward){
-      return db.Company.updateOne({ _id: req.params.id }, { $push: {rewards: dbReward._id, }})
+      return db.Company.updateOne({ _id: req.params.companyID }, { $push: {rewards: dbReward._id, }})
     })
     .then(function(dbComapny) {
       // If we were able to successfully update an Article, send it back to the client
