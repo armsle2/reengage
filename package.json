@@ -8,7 +8,8 @@
     "start": "nodemon server.js",
     "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
     "client": "node scripts/start-client.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "seed": "node scripts/seedsDB.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
