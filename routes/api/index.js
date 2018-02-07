@@ -5,7 +5,7 @@ const users = require("./users-api");
 const business = require("./business-api");
 
 
-// Book routes
+//  routes
 router.use("/rewards", rewards);
 router.use("/surveys", surveys);
 router.use("/users", users);

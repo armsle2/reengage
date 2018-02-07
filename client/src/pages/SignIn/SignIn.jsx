@@ -1,10 +1,17 @@
 import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input } from 'react-materialize';
+<<<<<<< HEAD:client/src/components/SignIn.jsx
 import '../styles/SignIn.css';
+=======
+import styles from './SignIn.css';
+>>>>>>> bfba3d9e8c39382512384e314ffbb6bdd4bcffda:client/src/pages/SignIn/SignIn.jsx
 
 
-export default class Form extends React.Component {
+
+
+
+export default class SignIn extends React.Component {
    state = {
        email: "",
        password: ""

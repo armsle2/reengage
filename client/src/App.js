@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
-import UserHomepage from './components/UserHomepage';
-import BusHomepage from './components/BusHomepage';
+
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import UserHomepage from './pages/UserHomepage';
 
 class App extends Component {
   componentDidMount(){
