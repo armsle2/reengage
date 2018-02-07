@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "path";
-import {Button, Icon, Section, Row, Col, Parallax, Toast } from 'react-materialize';
+import {Button, Icon, Section, Row, Col, Parallax, Toast, Input } from 'react-materialize';
 import '../styles/SignIn.css';
 import UserHomepage from "../components/UserHomepage.jsx";
 
@@ -22,28 +22,34 @@ export default class Form extends React.Component {
             <Parallax className='parallax1' imageSrc="https://iso.500px.com/wp-content/uploads/2015/11/photo-129299193.jpg"/>  
                 <Section>
                     <Row>
-                        <form>
-                            <Col s={6} className='offset-l3'>
-                                <input 
-                                    label="email"
+                                <Col s={3}>
+                                </Col>
+                                <Input s={6}
+                                    label="Email"
                                     name="email"
                                     type="email"
                                     placeholder="email" 
+                                    className='offset-l3'
                                     value={this.state.email} 
                                     onChange={e => this.change(e)}
                                 />
-                            </Col>
-                            <Col s={6} className='offset-l3'>
-                                <input 
-                                    label="password"
+                    </Row>
+                    <Row>
+                                <Col s={3}>
+                                </Col>
+                                <Input s={6}
+                                    label="Password"
                                     name="password"
                                     type="password"
-                                    placeholder="password" 
+                                    placeholder="password"
+                                    className='offset-l3' 
                                     value={this.state.password} 
                                     onChange={e => this.change(e)}
                                 />
-                            </Col>
-                            <Col s={6} className='buttons center-align offset-l3'>
+                    </Row>
+                    <Row>
+                                <Col s={4} className="center-align offset-l4">
+                                
                                 <Button onClick={e => this.onSubmit(e)} waves='light' href='UserHomepage'>
                                     Sign In 
                                     <Icon right>send</Icon>
@@ -52,8 +58,7 @@ export default class Form extends React.Component {
                                      Sign Up 
                                     <Icon right>assignment</Icon>
                                 </Button>
-                            </Col>
-                        </form>
+                                </Col>
                     </Row>
                 </Section>
 
