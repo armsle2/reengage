@@ -87,7 +87,7 @@ export default class SignUp extends React.Component {
                 <Row>
                         <Col s={5}>
                         </Col>
-                        <Button s={2} waves='light'>
+                        <Button s={2} waves='light' node='a' href='/UserHomepage'>
                         Create Account 
                         <Icon right>check</Icon>
                         </Button>

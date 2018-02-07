@@ -50,11 +50,11 @@ export default class Form extends React.Component {
                     <Row>
                                 <Col s={4} className="center-align offset-l4">
                                 
-                                <Button onClick={e => this.onSubmit(e)} waves='light' href='UserHomepage'>
+                                <Button onClick={e => this.onSubmit(e)} node='a' href='/UserHomepage' waves='light'>
                                     Sign In 
                                     <Icon right>send</Icon>
                                 </Button>
-                                <Button waves='light'>
+                                <Button node='a' href='/SignUp' waves='light'>
                                      Sign Up 
                                     <Icon right>assignment</Icon>
                                 </Button>
