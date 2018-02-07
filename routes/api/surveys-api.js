@@ -5,7 +5,14 @@ const db = require('../../models');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send('surveys')
+  db.Survey.find()
+  .then(function(dbSurvey) {
+    res.json(dbSurvey);
+  })
+  .catch(function(err) {
+    // If an error occurred, send it to the client
+    res.json(err);
+  });
 });
 
 module.exports = router;
