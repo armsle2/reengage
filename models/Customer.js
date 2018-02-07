@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
-  userName: {
+const CustomerSchema = new Schema({
+  customerName: {
     type: String,
     unique: true,
     required:true
@@ -36,7 +36,7 @@ const UserSchema = new Schema({
     max:11
   },
   // `date` must be of type Date. The default value is the current date
-  userCreated: {
+  customerCreated: {
     type: Date,
     default: Date.now
   },
@@ -49,7 +49,7 @@ const UserSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const User = mongoose.model("User", UserSchema);
+const Customer = mongoose.model("Customer", CustomerSchema);
 
-// Export the User model
-module.exports = User;
+// Export the Customer model
+module.exports = Customer;

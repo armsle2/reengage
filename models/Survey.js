@@ -15,7 +15,8 @@ const SurveySchema = new Schema({
   description:{
     type: String,
     required: true
-  }
+  },
+  completed
 });
 
 const Survey = mongoose.model("Survey", SurveySchema);
