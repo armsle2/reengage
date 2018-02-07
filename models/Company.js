@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;
 
-const BusinessSchema = new Schema({
-  businessName: {
+const CompanySchema = new Schema({
+  companyName: {
     type: String,
     unique: true
   },
@@ -28,8 +28,9 @@ const BusinessSchema = new Schema({
       "Password should be longer."
     ]
   },
+  activeSurvey: String,
   // `date` must be of type Date. The default value is the current date
-  businessCreated: {
+  companyCreated: {
     type: Date,
     default: Date.now
   },
@@ -37,14 +38,19 @@ const BusinessSchema = new Schema({
   surveys: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Survey",
-      active: true
+      ref: "Survey"
+    }
+  ],
+  rewards: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Survey"
     }
   ]
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const Business = mongoose.model("Business", BusinessSchema);
+const Company = mongoose.model("Company", CompanySchema);
 
 // Export the Business model
-module.exports = Business;
+module.exports = Company;
