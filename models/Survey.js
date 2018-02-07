@@ -16,20 +16,21 @@ const SurveySchema = new Schema({
     type: String,
     required: true
   },
-  completed: [
+  customersCompleted: [
     {
       type: Schema.Types.ObjectId,
       ref: "Customer"
     }
   ],
-  customers: [
+  customersPending: [
     {
       type: Schema.Types.ObjectId,
       ref: "Customer"
     }
   ],
   reward:{
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Rewards"
   }
 });
 

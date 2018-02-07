@@ -31,9 +31,9 @@ const CustomerSchema = new Schema({
     ]
   },
   phoneNumber: {
-    type: Number,
-    min: 10,
-    max:11
+    type: String,
+    minlength: 10,
+    maxlength: 11
   },
   // `date` must be of type Date. The default value is the current date
   customerCreated: {

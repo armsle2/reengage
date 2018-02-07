@@ -14,6 +14,18 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/:id', function(req, res) {
+  db.Business.findOne({_id: req.params.id})
+  .populate('surveys')
+  .then(function(dbBusiness) {
+    res.json(dbBusiness)
+  })
+  .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+  });
+});
+
 router.post('/new', function(req, res){
   db.Business.create(req.body)
     .then(function(dbBusiness) {
