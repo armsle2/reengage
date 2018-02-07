@@ -17,8 +17,8 @@ router.get('/', function(req, res) {
 router.get('/:id', function(req, res) {
   db.Company.findOne({_id: req.params.id})
   .populate('surveys')
-  .then(function(dbBusiness) {
-    res.json(dbBusiness)
+  .then(function(dbCompany) {
+    res.json(dbCompany)
   })
   .catch(function(err) {
       // If an error occurred, send it to the client
