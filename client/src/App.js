@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import UserHomepage from './components/UserHomepage';
+import BusHomepage from './components/BusHomepage';
 
 class App extends Component {
   componentDidMount(){
@@ -16,6 +17,7 @@ class App extends Component {
         <Route exact path="/" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/userhomepage" component={UserHomepage} />
+        <Route exact path="/bushomepage" component={BusHomepage} />
         </div>
        
       </Router>
