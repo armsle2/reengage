@@ -2,6 +2,7 @@ import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast } from 'react-materialize';
 import '../styles/SignIn.css';
+import UserHomepage from "../components/UserHomepage.jsx";
 
 
 export default class Form extends React.Component {
@@ -43,7 +44,7 @@ export default class Form extends React.Component {
                                 />
                             </Col>
                             <Col s={6} className='buttons center-align offset-l3'>
-                                <Button waves='light'>
+                                <Button onClick={e => this.onSubmit(e)} waves='light' href='UserHomepage'>
                                     Sign In 
                                     <Icon right>send</Icon>
                                 </Button>
