@@ -30,8 +30,12 @@ const SurveySchema = new Schema({
   ],
   reward:{
     type: Schema.Types.ObjectId,
-    ref: "Rewards"
-  }
+    ref: "Reward"
+  },
+  company:{
+      type: Schema.Types.ObjectId,
+      ref: "Company"
+    }
 });
 
 const Survey = mongoose.model("Survey", SurveySchema);

@@ -11,15 +11,15 @@ const RewardSchema = new Schema({
     type: String,
     required: true
   },
-  users: [
+  customers: [
     {
-      type: Schema.Type.ObjectId,
-      ref: "User"
+      type: Schema.Types.ObjectId,
+      ref: "Customer"
     }
   ],
   company:{
-      type: Schema.Type.ObjectId,
-      ref: "User"
+      type: Schema.Types.ObjectId,
+      ref: "Company"
     },
   rewardCreated: {
     type: Date,

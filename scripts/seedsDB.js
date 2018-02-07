@@ -32,7 +32,8 @@ let surveySeed = [
       description : "You get a 5% discpount when completed!!!",
       customersCompleted: [],
       customersPending: [],
-      reward: ''
+      // reward: '',
+      // company: ''
   }
 ];
 
@@ -47,13 +48,12 @@ const customerSeed = [
   }
 ];
 
-const rewardSeed = [
+let rewardSeed = [
   {
     title : '50% off sub',
     description : 'BOGO off 50%',
     customers : [],
-    company : '',
-    surveys: [],
+    // company : '',
     rewardCreated: "2018-02-06T19:30:13.078Z"
   }
 ];
@@ -74,7 +74,7 @@ db.Company
   .remove({})
   .then(() => db.Company.collection.insertMany(companySeed))
   .then(data => {
-    bizId = data.ops[0]._id
+    companyId = data.ops[0]._id;
     console.log(data.insertedCount + " inserted into company collection!");
   })
   .catch(err => {
@@ -86,8 +86,8 @@ db.Reward
   .remove({})
   .then(() => db.Reward.create(rewardSeed))
     .then((dbReward) => {
-      surveySeed.reward = dbReward._id;
       console.log(dbReward.length + " inserted into Reward collection!");
+      return db.Company.updateOne({_id: companyId}, {$push: {rewards: dbReward[0]._id}})
     }).catch((err) => {
       console.log(err);
       process.exit(1);
@@ -98,7 +98,7 @@ db.Survey
   .then(() => db.Survey.create(surveySeed))
     .then((dbSurvey) => {
       console.log(dbSurvey.length + " inserted into Survey collection!");
-      return db.Company.updateOne({_id: companyId}, {$push: {surveys: db.survey[0]._id}})
+      return db.Company.updateOne({_id: companyId}, {$push: {surveys: dbSurvey[0]._id}})
     })
     .then(function(dbcompany) {
       // If we were able to successfully update an Article, send it back to the client
