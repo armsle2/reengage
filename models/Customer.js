@@ -4,7 +4,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CustomerSchema = new Schema({
-  customerName: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: String,
+  userName: {
     type: String,
     unique: true,
     required:true

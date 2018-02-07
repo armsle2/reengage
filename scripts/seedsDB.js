@@ -39,7 +39,9 @@ let surveySeed = [
 
 const customerSeed = [
   {
-    customerName : 'jarboe_the_great',
+    firstName: 'Andre',
+    lastName: 'Jarboe',
+    userName : 'jarboe_the_great',
     email : 'jarboe@jarboestudios.com',
     password : "password",
     phoneNumber : '5557778888',
