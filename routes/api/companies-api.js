@@ -4,9 +4,9 @@ const db = require('../../models');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  db.Business.find()
-    .then(function(dbBusiness) {
-      res.json(dbBusiness);
+  db.Company.find()
+    .then(function(dbComapny) {
+      res.json(dbComapny);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -15,10 +15,10 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  db.Business.findOne({_id: req.params.id})
+  db.Company.findOne({_id: req.params.id})
   .populate('surveys')
-  .then(function(dbBusiness) {
-    res.json(dbBusiness)
+  .then(function(dbComapny) {
+    res.json(dbComapny)
   })
   .catch(function(err) {
       // If an error occurred, send it to the client
@@ -27,9 +27,9 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/new', function(req, res){
-  db.Business.create(req.body)
-    .then(function(dbBusiness) {
-      res.json(dbBusiness);
+  db.Company.create(req.body)
+    .then(function(dbComapny) {
+      res.json(dbComapny);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -38,15 +38,31 @@ router.post('/new', function(req, res){
 });
 
 
-//create a survey
-router.post("/:id", function(req, res){
+//create a survey /api/companies/survey/:id 
+router.post('/survey/:companyID', function(req, res){
   db.Survey.create(req.body)
     .then(function(dbSurvey){
-      return db.Business.updateOne({ _id: req.params.id }, { $push: {surveys: dbSurvey._id, }});
+      return db.Company.updateOne({ _id: req.params.companyID }, { $push: {surveys: dbSurvey._id, }});
     })
-    .then(function(dbBusiness) {
+    .then(function(dbComapny) {
       // If we were able to successfully update an Article, send it back to the client
-      res.json(dbBusiness);
+      res.json(dbComapny);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+//create a survey /api/companies/reward/:id 
+router.post('/reward/:companyID', function(req, res){
+  db.Reward.create(req.body)
+    .then(function(dbReward){
+      return db.Company.updateOne({ _id: req.params.companyID }, { $push: {rewards: dbReward._id, }})
+    })
+    .then(function(dbComapny) {
+      // If we were able to successfully update an Article, send it back to the client
+      res.json(dbComapny);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
