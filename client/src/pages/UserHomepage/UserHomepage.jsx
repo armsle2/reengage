@@ -24,8 +24,7 @@ class UserHomepage extends Component {
                 <Section>
                     <Row>
                         <Col s={12} m={8} l={5} className="offset-l1">
-                            <Card 
-                                className="card" 
+                            <Card
                                 header={<CardTitle reveal image={"https://img1.10bestmedia.com/Images/Photos/329093/p-blacks_54_990x660.jpg"} waves='light'/>}
                                 title="Blacks BBQ"
                                 reveal={
@@ -45,8 +44,7 @@ class UserHomepage extends Component {
                             </Card>
                         </Col>
                         <Col s={12} m={8} l={5} >
-                            <Card 
-                                className="card" 
+                            <Card  
                                 header={<CardTitle reveal image={"http://nz.businessdirectoryformobile.com/blog/wp-content/uploads/2014/08/Hell-Pizza-Papamoa-2.jpg"} waves='light'/>}
                                 title="Rays Pizza"
                                 reveal={
