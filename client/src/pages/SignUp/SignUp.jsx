@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input } from 'react-materialize';
-import '../styles/SignUp.css';
+import styles from './SignUp.css';
 
 export default class SignUp extends React.Component {
    state = {

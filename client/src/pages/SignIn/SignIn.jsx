@@ -1,11 +1,13 @@
 import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input } from 'react-materialize';
-import '../styles/SignIn.css';
-import UserHomepage from "../components/UserHomepage.jsx";
+import styles from './SignIn.css';
 
 
-export default class Form extends React.Component {
+
+
+
+export default class SignIn extends React.Component {
    state = {
        email: "",
        password: ""
