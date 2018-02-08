@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import UserHomepage from './pages/UserHomepage';
+import BusHomepage from './pages/BusHomepage';
 
 class App extends Component {
   componentDidMount(){
