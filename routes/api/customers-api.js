@@ -31,10 +31,18 @@ router.post('/new', function(req, res) {
 // });
 
 //view Customer rewards
-router.get("/:userName/:surveyId", function(req, res){
+router.get("/:userName/", function(req, res){
   db.Customer.findOne({ userName: req.params.userName })
   	.populate('rewards')
     .then(dbUserRewards => res.json(dbUserRewards))
+    .catch(err => res.json(err));
+});
+
+//view customer surveys
+router.get("/:userName/", function(req, res){
+  db.Customer.findOne({ userName: req.params.userName })
+  	.populate('surveys')
+    .then(dbUserSurveys => res.json(dbUserSurveys))
     .catch(err => res.json(err));
 });
 
