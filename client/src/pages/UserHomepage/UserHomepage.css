@@ -1,11 +1,19 @@
-.card {
+.Card {
     height: 300px;
 }
 
 .navbar {
-    background-color: rgb(6, 112, 45)
+    background-color: rgb(5, 85, 85)
 }
 
 .btn {
     text-align: center;
+}
+
+.topbar {
+    padding-top: 0;
+}
+.section{
+    padding-top: 0;
+
 }

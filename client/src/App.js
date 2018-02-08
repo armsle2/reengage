@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import UserHomepage from './pages/UserHomepage';
+import RedeemRewards from './pages/RedeemRewards';
+
 
 class App extends Component {
   componentDidMount(){
@@ -16,6 +18,8 @@ class App extends Component {
         <Route exact path="/" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/userhomepage" component={UserHomepage} />
+        <Route exact path="/redeemrewards" component={RedeemRewards} />
+
         </div>
        
       </Router>
