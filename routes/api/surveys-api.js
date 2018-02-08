@@ -3,9 +3,10 @@ var router = express.Router();
 const db = require('../../models');
 
 
-/* GET users listing. */
+//view all surveys
 router.get('/', function(req, res) {
-  res.send('surveys')
+  db.Survey.find()
+  .then(dbSurvey => res.json(dbSurvey))
+  .catch(err => res.json(err));
 });
-
 module.exports = router;

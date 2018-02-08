@@ -1,5 +1,6 @@
 module.exports = {
-  User: require("./User"),
-  Business: require("./Business"),
-  Survey: require("./Survey")  
+  Customer: require("./Customer"),
+  Company: require("./Company"),
+  Survey: require("./Survey"),
+  Reward: require("./Reward")
 }

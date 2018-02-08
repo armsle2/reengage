@@ -3,7 +3,12 @@ const mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const CustomerSchema = new Schema({
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: String,
   userName: {
     type: String,
     unique: true,
@@ -31,28 +36,31 @@ const UserSchema = new Schema({
     ]
   },
   phoneNumber: {
-    type: Number,
-    min: 10,
-    max:11
+    type: String,
+    minlength: 10,
+    maxlength: 11
   },
   // `date` must be of type Date. The default value is the current date
-  userCreated: {
+  customerCreated: {
     type: Date,
     default: Date.now
   },
-  //rewards are defaulted to completed false and 
-  rewards: [
-    {
+  surveys: [
+    { 
       type: Schema.Types.ObjectId,
-      ref: "Survey",
-      completed: false,
-      used: false
+      ref: "Survey"
+    }
+  ],
+  rewards: [
+    { 
+      type: Schema.Types.ObjectId,
+      ref: "Reward"
     }
   ]
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const User = mongoose.model("User", UserSchema);
+const Customer = mongoose.model("Customer", CustomerSchema);
 
-// Export the User model
-module.exports = User;
+// Export the Customer model
+module.exports = Customer;
