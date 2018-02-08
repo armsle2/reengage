@@ -16,34 +16,39 @@ router.post('/new', function(req, res) {
   .catch(err => res.json(err))
 });
 
-//attach survey to Customer
-// router.post("/:businessId/:CustomerName/:surveyId", function(req, res){
-//   db.Business.findOne({_id: req.params.businessId})
-//     .then(function(dbBusiness){
-//       return db.Customer.updateOne({ CustomerName: req.params.CustomerName }, { $push: {rewards: req.params.surveyId }});
-//     }).then((dbCustomer) => {
-//     	res.json(dbCustomer)
-//     })
-//     .catch(function(err) {
-//       // If an error occurred, send it to the client
-//       res.json(err);
-//     });
-// });
-
-//view Customer rewards
+//view Customer info
 router.get("/:userName/", function(req, res){
   db.Customer.findOne({ userName: req.params.userName })
   	.populate('rewards')
+  	.populate('surveys')
     .then(dbUserRewards => res.json(dbUserRewards))
     .catch(err => res.json(err));
 });
 
-//view customer surveys
-router.get("/:userName/", function(req, res){
-  db.Customer.findOne({ userName: req.params.userName })
-  	.populate('surveys')
-    .then(dbUserSurveys => res.json(dbUserSurveys))
-    .catch(err => res.json(err));
-});
+//add customer to customersCompleted field - YOU ALREADY KNOW WHAT IM GONNA SAY!
+router.post('/:customerId/:surveyId', function(req, res){
+  db.Survey.findOne({_id: req.params.surveyId}).then(dbSurvey => {
+  	dbSurvey.customersPending.forEach((customerId, index) => {
+  		if (customerId == req.params.customerId){
+  			db.Survey.updateOne({_id: req.params.surveyId}, {$push: {customersCompleted: req.params.customerId}})
+  			.then(dbCustomerComplete => res.json(dbCustomerComplete))
+  			.catch(err => res.json(err))
+  		}
+  	})
+  }).catch(err => res.json(err));
+})
+
+// remove them from customersPending field - OH YEA BY THE WAY, THIS ONE WORKS TOO!
+router.post('/:customerId/:surveyId/remove', function(req, res){
+  db.Survey.findOne({_id: req.params.surveyId}).then(dbSurvey => {
+  	dbSurvey.customersPending.forEach((customerId, index) => {
+  		if (customerId == req.params.customerId){
+  			db.Survey.updateOne({_id: req.params.surveyId}, {$pull: {customersPending: {$in: [req.params.customerId]}}})
+  			.then(dbRemoveCustomer => res.json(dbRemoveCustomer))
+  			.catch(err => res.json(err))
+  		}
+  	})
+  }).catch(err => res.json(err))
+})
 
 module.exports = router;

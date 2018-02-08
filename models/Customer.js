@@ -54,7 +54,7 @@ const CustomerSchema = new Schema({
   rewards: [
     { 
       type: Schema.Types.ObjectId,
-      ref: "Survey"
+      ref: "Reward"
     }
   ]
 });
