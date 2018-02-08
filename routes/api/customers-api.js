@@ -26,7 +26,7 @@ router.get("/:userName/", function(req, res){
 });
 
 //add customer to customersCompleted field - YOU ALREADY KNOW WHAT IM GONNA SAY!
-router.post('/:customerId/:surveyId', function(req, res){
+router.post('/:customerId/:surveyId/completed', function(req, res){
   db.Survey.findOne({_id: req.params.surveyId}).then(dbSurvey => {
   	dbSurvey.customersPending.forEach((customerId, index) => {
   		if (customerId == req.params.customerId){
