@@ -44,7 +44,7 @@ const CompanySchema = new Schema({
   rewards: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Survey"
+      ref: "Reward"
     }
   ],
   activeSurvey:{
