@@ -24,6 +24,7 @@ class UserHomepage extends Component {
 	                <NavItem href='/UserHomepage'>Current Rewards</NavItem>
 	                <NavItem href='/#'>Pending Rewards</NavItem>
                     <NavItem href='/UserHomepage/#redeemReward'>Redeemed Rewards</NavItem>
+
                     <NavItem href='/#'>My Account</NavItem>
                     <NavItem href='/#'>Logout</NavItem>
                 </Navbar>

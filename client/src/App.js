@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import UserHomepage from './pages/UserHomepage';
 import RedeemRewards from './pages/RedeemRewards';
+import BusHomepage from './pages/BusHomepage';
 
 
 class App extends Component {
@@ -19,9 +21,8 @@ class App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/userhomepage" component={UserHomepage} />
         <Route exact path="/redeemrewards" component={RedeemRewards} />
-
-        </div>
-       
+        <Route exact path="/bushomepage" component={BusHomepage} />
+        </div>    
       </Router>
     );
   }
