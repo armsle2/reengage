@@ -5,7 +5,7 @@ const customers = require("./customers-api");
 const companies = require("./companies-api");
 
 
-// Book routes
+//  routes
 router.use("/rewards", rewards);
 router.use("/surveys", surveys);
 router.use("/customers", customers);

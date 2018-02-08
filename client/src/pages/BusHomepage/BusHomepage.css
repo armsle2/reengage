@@ -1,0 +1,17 @@
+.navbar {
+    background-color: rgb(8, 6, 112);
+    
+}
+
+.section{
+    padding-top: 0;
+
+}
+
+.spacer {
+    height:75px;
+}
+
+a.brand-logo {
+    padding-left: 15px;
+}

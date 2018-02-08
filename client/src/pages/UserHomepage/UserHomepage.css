@@ -1,0 +1,36 @@
+Card {
+    height: 300px;
+}
+
+.navbar {
+    background-color: rgb(5, 85, 85)
+}
+
+a.brand-logo {
+    padding-left: 15px;
+}
+
+.btn {
+    text-align: center;
+}
+
+.topbar {
+    padding-top: 0;
+}
+.section{
+    padding-top: 0;
+
+}
+
+.spacer2 {
+    height:30px;
+}
+
+h4 {
+    margin-bottom:0px;
+    
+}
+
+.blue{
+    background-color: blue;
+}
