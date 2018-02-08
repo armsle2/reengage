@@ -92,7 +92,10 @@ router.post('/:companyID/:surveyID/activate', function(req, res){
 router.post('/:companyID/:surveyID/:customerID/send', function(req, res){
   db.Customer.findOne({ _id: req.params.customerID })
     .then(function(){
-      updateOne({ _id: req.params.companyID }, { $push: {activeSurvey: req.params.surveyID, }})
+      db.Company.findOne( {_id: req.params.companyID })
+    })
+    .then(function(){
+      updateOne({ _id: req.params.customerID }, { $push: {surveys: req.params.surveyID, }})
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
