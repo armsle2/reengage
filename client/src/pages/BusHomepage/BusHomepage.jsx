@@ -4,11 +4,60 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Navbar, NavItem
 import styles from "./BusHomepage.css";
 
 export default class BusHomepage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        }
+    state = {
+        Surveys=[],
+        Rewards=[]
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
+    loadSurveys = () => {
+        API.getSurveys()
+        .then(res => 
+        this.setState({surveys: res.data, })
+        )
+        .catch(err => console.log(err));
+    };
+
+    handleAddSurvey = event => {
+        event.preventDefault();
+        if (this.state.title && this.state.author) {
+          API.saveSurvey({
+            title: this.state.title,
+            author: this.state.author,
+            synopsis: this.state.synopsis
+          })
+            .then(res => this.loadSurveys())
+            .catch(err => console.log(err));
+        }
+      };
+
+      loadRewards = () => {
+        API.getRewards()
+        .then(res => 
+        this.setState({rewards: res.data, })
+        )
+        .catch(err => console.log(err));
+    };
+
+    handleAddRewards = event => {
+        event.preventDefault();
+        if (this.state.title && this.state.author) {
+          API.saveReward({
+            title: this.state.title,
+            author: this.state.author,
+            synopsis: this.state.synopsis
+          })
+            .then(res => this.loadRewards())
+            .catch(err => console.log(err));
+        }
+      };
+    
     
     render(){
         return(
@@ -108,6 +157,44 @@ export default class BusHomepage extends React.Component {
                                                 </tr>
                                             </tbody>
                                         </Table>
+                                        <Modal
+                                            header='Add a Survey'
+                                            trigger={<Button>Add a Survey</Button>}>
+                                                <Section>
+                                                    <Row>
+                                                        <Col s={3}></Col>
+                                                            <Input s={6}
+                                                                label="Email"
+                                                                name="email"
+                                                                type="email"
+                                                                placeholder="email" 
+                                                                className='offset-l3'
+                                                                value={this.state.email} 
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                    </Row>
+                                                    <Row>
+                                                        <Col s={3}></Col>
+                                                            <Input s={6}
+                                                                label="Password"
+                                                                name="password"
+                                                                type="password"
+                                                                placeholder="password"
+                                                                className='offset-l3' 
+                                                                value={this.state.password} 
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                    </Row>
+                                                    <Row>
+                                                        <Col s={4} className="center-align offset-l4">
+                                                            <Button onClick={this.handleAddSurvey} waves='light'>
+                                                                Sign In 
+                                                                <Icon right>send</Icon>
+                                                            </Button>                                   
+                                                        </Col>
+                                                    </Row>
+                                            </Section>
+                                        </Modal>
                                     </Section>
                                 }>
                             </Card>
@@ -149,6 +236,44 @@ export default class BusHomepage extends React.Component {
                                                 </tr>
                                             </tbody>
                                         </Table>
+                                        <Modal
+                                            header='Add a Reward'
+                                            trigger={<Button>Add a Reward</Button>}>
+                                                <Section>
+                                                    <Row>
+                                                        <Col s={3}></Col>
+                                                            <Input s={6}
+                                                                label="Email"
+                                                                name="email"
+                                                                type="email"
+                                                                placeholder="email" 
+                                                                className='offset-l3'
+                                                                value={this.state.email} 
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                    </Row>
+                                                    <Row>
+                                                        <Col s={3}></Col>
+                                                            <Input s={6}
+                                                                label="Password"
+                                                                name="password"
+                                                                type="password"
+                                                                placeholder="password"
+                                                                className='offset-l3' 
+                                                                value={this.state.password} 
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                    </Row>
+                                                    <Row>
+                                                        <Col s={4} className="center-align offset-l4">
+                                                            <Button onClick={this.handleAddReward} waves='light'>
+                                                                Sign In 
+                                                                <Icon right>send</Icon>
+                                                            </Button>                                   
+                                                        </Col>
+                                                    </Row>
+                                            </Section>
+                                        </Modal>
                                     </Section>
                                 }>
                             </Card>
