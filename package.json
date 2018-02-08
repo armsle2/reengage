@@ -16,14 +16,14 @@
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "mongoose": "^5.0.3",
     "firebase": "^4.9.1",
     "mongoose": "^5.0.3",
     "morgan": "~1.9.0",
+    "react": "^16.2.0",
     "react-materialize": "^1.1.2",
     "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
     "redux": "^3.7.2"
+
   },
   "devDependencies": {
     "concurrently": "^3.5.0"

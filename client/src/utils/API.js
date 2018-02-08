@@ -5,37 +5,37 @@ export default {
 //Customers
   // Gets all users
   getCustomers: function() {
-    return axios.get("/api/customers-api");
+    return axios.get("/api/customers");
   },
   // Gets the customer with the given id
   getCustomer: function(id) {
-    return axios.get("/api/customers-api/" + id);
+    return axios.get("/api/customers/" + id);
   },
   // Deletes the customer with the given id
   deleteCustomer: function(id) {
-    return axios.delete("/api/customers-api/" + id);
+    return axios.delete("/api/customers/" + id);
   },
   // Saves a customer to the database
   saveCustomer: function(customerData) {
-    return axios.post("/api/customers-api", customerData);
+    return axios.post("/api/customers/new", customerData);
   },
 
 //Businesses
   // Gets all businesses
   getCompanies: function() {
-    return axios.get("/api/companies-api");
+    return axios.get("/api/companies");
   },
   // Gets the customer with the given id
   getCompany: function(id) {
-    return axios.get("/api/companies-api/" + id);
+    return axios.get("/api/companies/" + id);
   },
   // Deletes the customer with the given id
   deleteCompany: function(id) {
-    return axios.delete("/api/companies-api/" + id);
+    return axios.delete("/api/companies/" + id);
   },
   // Saves a customer to the database
   saveCompany: function(companyData) {
-    return axios.post("/api/companies-api", companyData);
+    return axios.post("/api/companies/new", companyData);
   },
 
 //Surveys

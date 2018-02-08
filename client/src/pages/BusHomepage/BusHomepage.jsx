@@ -106,7 +106,7 @@ export default class BusHomepage extends React.Component {
                     </Row>
                     <a name="CurrentSurveys"></a>
                     <Row>
-                         <div class="spacer"></div>       
+                         <div className="spacer"></div>       
                     </Row>
                     <Row>                    
                         <Col s={12} m={8} l={6} className="offset-l3">                        
@@ -199,7 +199,7 @@ export default class BusHomepage extends React.Component {
                     </Row>
                     <a name="Rewards"></a>
                     <Row>
-                        <div class="spacer"></div>      
+                        <div className="spacer"></div>      
                     </Row>
                     <Row>
                         <Col s={12} m={8} l={6} className="offset-l3">                        

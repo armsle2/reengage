@@ -17,8 +17,8 @@ router.post('/new', function(req, res) {
 });
 
 //view Customer info
-router.get("/:userName/", function(req, res){
-  db.Customer.findOne({ userName: req.params.userName })
+router.get("/:id/", function(req, res){
+  db.Customer.findOne({ _id: req.params.id })
   	.populate('rewards')
   	.populate('surveys')
     .then(dbUserRewards => res.json(dbUserRewards))
