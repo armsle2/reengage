@@ -87,20 +87,16 @@ router.post('/:companyId/reward', function(req, res){
 //add customer who hasn't completed survey to customersPending field on survey document - THIS WORKS TOO!!
 router.post('/:companyId/:customerId/pending-survey', function(req, res){
   db.Company.findOne({_id: req.params.companyId}).then(dbCompany => {
-
-    return db.Survey.updateOne({_id: dbCompany.activeSurvey}, {$push: {customersPending: req.params.customerId}})
+    db.Survey.updateOne({_id: dbCompany.activeSurvey}, {$push: {customersPending: req.params.customerId}})
+    .then(customersAdded => console.log('customer has been added to the pending list'))
+    .catch(err => console.log(err))
+    db.Customer.updateOne({_id: req.params.customerId}, {$push: {surveys: dbCompany.activeSurvey}})
+    .then(surveyAddedToCustomer => console.log(surveyAddedToCustomer))
+    .catch(err => console.log(err))
   }).then(dbCustomerPending => res.json(dbCustomerPending))
     .catch(err => res.json(err))
 })
 
-//add active survey to customer document - THIS DEFINITELY WORKS!!
-router.post('/:companyId/:customerId/add-survey', function(req, res){
-  db.Company.findOne({_id: req.params.companyId}).then(dbCompany => {
-
-    return db.Customer.updateOne({_id: req.params.customerId}, {$push: {surveys: dbCompany.activeSurvey}})
-  }).then(dbCustomerSurvey => res.json(dbCustomerSurvey))
-    .catch(err => res.json(err))
-})
 
 
 module.exports = router;

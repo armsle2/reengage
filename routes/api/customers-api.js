@@ -43,7 +43,10 @@ router.post('/:customerId/:surveyId/completed', function(req, res){
 	  			db.Reward.updateOne({_id: dbSurvey.reward}, {$push: {customers: customerId}})
 	  			.then(dbRewardUpdated => console.log('Reward Document Updated!'))
 	  			.catch(err => console.log(err))
-	  			db.Customer.updateOne({_id: customerId}, {$push: {rewards: dbSurvey.reward}})
+	  			db.Customer.updateOne({_id: customerId}, {
+	  				$push: {rewards: dbSurvey.reward},
+	  				$pull: {surveys: {$in: [surveyId]}}
+	  			})
 	  			.then(dbCustomerComplete => res.json(dbCustomerComplete))
 	  			.catch(err => res.json(err))
 	  		}
