@@ -15,9 +15,9 @@ class UserHomepage extends Component {
         return (
            <Section>
                <Navbar fixed className="navbar" brand='Engage' right>
-	                <NavItem href='/BusHomepage'>Current Rewards</NavItem>
+	                <NavItem href='/#'>Current Rewards</NavItem>
 	                <NavItem href='/#'>Pending Rewards</NavItem>
-                    <NavItem href='/#'>Redeemed Rewards</NavItem>
+                    <NavItem href='/RedeemedRewards'>Redeemed Rewards</NavItem>
                     <NavItem href='/#'>My Account</NavItem>
                     <NavItem href='/#'>Logout</NavItem>
                 </Navbar>

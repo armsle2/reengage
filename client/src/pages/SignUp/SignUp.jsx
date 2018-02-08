@@ -52,7 +52,7 @@ export default class SignUp extends React.Component {
            <Section>
                 <Row>
                     <Col s={8} className='center-align offset-l2'>
-                        <h1>Sign Up Below</h1>
+                        <h2>Sign Up Below</h2>
                     </Col>
                 </Row>
                 <Row>
@@ -170,6 +170,17 @@ export default class SignUp extends React.Component {
                                 </Row>
                             </Section>
                         </Modal>
+                </Row>
+                <Row>
+                    <Col s={4} className="center-align offset-l4">
+                        <h4 className="sign-in-txt">Already have an Account? Go login</h4>
+                        <Button node='a' href='/#' waves='light'>
+                            Back to Login 
+                        </Button> 
+                    </Col>
+                </Row>
+                <Row>
+                    <Parallax className="parallax" imageSrc="https://i.unu.edu/media/ourworld.unu.edu-en/article/8564/Champions_of_Cumbria_Human_Landscapes1.jpg"/>
                 </Row>
             </Section>
        );
