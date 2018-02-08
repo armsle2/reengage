@@ -74,5 +74,41 @@ router.post('/:companyID/reward', function(req, res){
     });
 });
 
+//set active survey
+router.post('/:companyID/:surveyID/activate', function(req, res){
+  db.Company.findOne({ _id: req.params.companyID })
+    .then(function(){
+      updateOne({ _id: req.params.companyID }, { $set: {activeSurvey: req.params.surveyID, }})
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+
+});
+
+
+//send a survey to a customer
+router.post('/:companyID/:surveyID/:customerID/send', function(req, res){
+  db.Customer.findOne({ _id: req.params.customerID })
+    .then(function(){
+      updateOne({ _id: req.params.companyID }, { $push: {activeSurvey: req.params.surveyID, }})
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+
+
+
+
+  db.Customer.updateOne({ _id: req.params.customerID }, { $push: {surveys: req.params.surveyID, }})
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+
 
 module.exports = router;
