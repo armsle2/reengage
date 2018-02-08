@@ -2,11 +2,10 @@ import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Navbar, NavItem, Card, CardTitle, Table, Modal} from 'react-materialize';
 import styles from "./BusHomepage.css";
+import API from "../../utils/API";
 
 export default class BusHomepage extends React.Component {
     state = {
-        Surveys=[],
-        Rewards=[]
     }
 
     handleInputChange = event => {
@@ -49,9 +48,7 @@ export default class BusHomepage extends React.Component {
         event.preventDefault();
         if (this.state.title && this.state.author) {
           API.saveReward({
-            title: this.state.title,
-            author: this.state.author,
-            synopsis: this.state.synopsis
+          
           })
             .then(res => this.loadRewards())
             .catch(err => console.log(err));
