@@ -29,34 +29,29 @@ router.get("/:userName/", function(req, res){
 router.post('/:customerId/:surveyId/completed', function(req, res){
 	const customerId = req.params.customerId;
 	const surveyId = req.params.surveyId;
+	const surveyFeedback = req.body.feedback;
   db.Survey.findOne({_id: surveyId}).then(dbSurvey => {
-  	dbSurvey.customersPending.forEach((surveyCustomerId, index) => {
-  		if (surveyCustomerId == customerId){
-  			db.Survey.updateOne({_id: surveyId}, {$push: {customersCompleted: customerId}, $pull: {customersPending: {$in: [customerId]}}})
-  			.then(dbUpdatedSurvey => console.log('Survey Document Updated!'))
-  			.catch(err => console.log(err))
-  			db.Reward.updateOne({_id: dbSurvey.reward}, {$push: {customers: customerId}})
-  			.then(dbRewardUpdated => console.log('Reward Document Updated!'))
-  			.catch(err => console.log(err))
-  			db.Customer.updateOne({_id: customerId}, {$push: {rewards: dbSurvey.reward}})
-  			.then(dbCustomerComplete => res.json(dbCustomerComplete))
-  			.catch(err => res.json(err))
-  		}
-  	})
+  	if(dbSurvey.customersPending.length > 0){
+	  	dbSurvey.customersPending.forEach((surveyCustomerId, index) => {
+	  		if (surveyCustomerId == customerId){
+	  			db.Survey.updateOne({_id: surveyId}, {
+	  				$push: {customersCompleted: customerId, feedback: surveyFeedback}, 
+	  				$pull: {customersPending: {$in: [customerId]}}
+	  			})
+	  			.then(dbUpdatedSurvey => console.log('Survey Document Updated!'))
+	  			.catch(err => console.log(err))
+	  			db.Reward.updateOne({_id: dbSurvey.reward}, {$push: {customers: customerId}})
+	  			.then(dbRewardUpdated => console.log('Reward Document Updated!'))
+	  			.catch(err => console.log(err))
+	  			db.Customer.updateOne({_id: customerId}, {$push: {rewards: dbSurvey.reward}})
+	  			.then(dbCustomerComplete => res.json(dbCustomerComplete))
+	  			.catch(err => res.json(err))
+	  		}
+	  	})
+	}else{
+		res.json('no customers pending')
+	}
   }).catch(err => res.json(err));
 })
-
-// // remove them from customersPending field - OH YEA BY THE WAY, THIS ONE WORKS TOO!
-// router.post('/:customerId/:surveyId/remove', function(req, res){
-//   db.Survey.findOne({_id: surveyId}).then(dbSurvey => {
-//   	dbSurvey.customersPending.forEach((customerId, index) => {
-//   		if (customerId == req.params.customerId){
-//   			db.Survey.updateOne({_id: req.params.surveyId}, {$pull: {customersPending: {$in: [req.params.customerId]}}})
-//   			.then(dbRemoveCustomer => res.json(dbRemoveCustomer))
-//   			.catch(err => res.json(err))
-//   		}
-//   	})
-//   }).catch(err => res.json(err))
-// })
 
 module.exports = router;
