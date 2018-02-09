@@ -1,6 +1,16 @@
-#form {
-    font-weight: 300;
-    background: rgba(96, 125, 139, .4);
-    padding: 40px;
-    border-radius: 10px;
+.form {
+    position:absolute;
+    right:0;
+    top:20%;
+    animation:fadeIn 2s ease-in-out 500ms;
 }
+
+@keyframes fadeIn{
+    0%{
+      transform: scale(0.1);
+    }
+    
+    100%{
+      transform: scale(1);
+    }
+  }

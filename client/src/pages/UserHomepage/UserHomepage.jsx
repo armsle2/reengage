@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card, CardTitle, Navbar, NavItem, Modal, Table } from 'react-materialize';
+import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card, CardTitle, Navbar, NavItem, Modal, Table, Preloader } from 'react-materialize';
 import styles from './UserHomepage.css';
 import Survey from '../../components/Survey';
 import API from "../../utils/API";
@@ -49,10 +49,17 @@ class UserHomepage extends Component {
                                         <br></br> 
                                         <br></br>
                                         <br></br>                                            
-                                                <Modal
+                                                <Modal className="center-align"
                                                     header='Here You Go!'
                                                     trigger={<Button>Redeem</Button>}>
-                                                    <p>sQwFy47</p>
+                                                    <Section className="modal-content">
+                                                        <p>sQwFy47</p>
+                                                        <Row>
+                                                            <Col s={4}>
+                                                                <Preloader flashing size='big'/>
+                                                            </Col>
+                                                        </Row>
+                                                    </Section>
                                                 </Modal>                                       
                                         </Col>
                                     </Row>
@@ -72,10 +79,17 @@ class UserHomepage extends Component {
                                             <br></br> 
                                             <br></br>
                                             <br></br>                               
-                                            <Modal
+                                            <Modal className="center-align"
                                                 header='Here You Go!'
                                                 trigger={<Button>Redeem</Button>}>
-                                                <p>sQwFy47</p>
+                                                <Section className="modal-content">
+                                                    <p>sQwFy47</p>
+                                                    <Row>
+                                                            <Col s={4}>
+                                                                <Preloader flashing size='big'/>
+                                                            </Col>
+                                                    </Row>
+                                                </Section>
                                             </Modal>
                                         </Col>
                                     </Row>
@@ -95,10 +109,17 @@ class UserHomepage extends Component {
                                             <br></br> 
                                             <br></br>
                                             <br></br>                               
-                                                <Modal
+                                                <Modal className="center-align"
                                                     header='Here You Go!'
                                                     trigger={<Button>Redeem</Button>}>
-                                                    <p>kjghjkgkj67</p>
+                                                    <Section className="modal-content">
+                                                        <p>kjghjkgkj67</p>
+                                                        <Row>
+                                                            <Col s={4}>
+                                                                <Preloader flashing size='big'/>
+                                                            </Col>
+                                                        </Row>
+                                                    </Section>
                                                 </Modal>
                                             </Col>
                                         </Row>
@@ -118,10 +139,17 @@ class UserHomepage extends Component {
                                             <br></br> 
                                             <br></br>
                                             <br></br>                               
-                                                <Modal
+                                                <Modal 
                                                     header='Here You Go!'
                                                     trigger={<Button>Redeem</Button>}>
-                                                    <p>a65d4fas5</p>
+                                                    <Section className="modal-content">
+                                                        <p>a65d4fas5</p>
+                                                        <Row>
+                                                            <Col s={4}>
+                                                                <Preloader flashing size='big'/>
+                                                            </Col>
+                                                        </Row>
+                                                    </Section>
                                                 </Modal>
                                             </Col>
                                         </Row>

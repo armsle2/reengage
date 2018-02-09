@@ -6,6 +6,7 @@ import API from "../../utils/API";
 
 export default class BusHomepage extends React.Component {
     state = {
+        company: {}
     }
 
     handleInputChange = event => {
@@ -54,6 +55,15 @@ export default class BusHomepage extends React.Component {
             .catch(err => console.log(err));
         }
       };
+      componentDidMount (){
+        API.getCompany('5a7c97520d03de35e4e16e23') 
+        .then(res => this.setState({ company: res.data}))
+        .catch(err => console.log(err))
+        }
+      
+       
+
+    
     
     
     render(){
@@ -70,8 +80,7 @@ export default class BusHomepage extends React.Component {
                     <Row>
                         <Col s={12} m={8} l={6} className="offset-l3">                        
                             <Card header={<CardTitle reveal image={"https://www.topbusinessjournal.com/wp-content/uploads/2016/11/data-science-illustration-%C2%ADFeature_1290x688_MS.jpg"} waves='light'/>}
-                                title="Survey Data"
-                                reveal={
+                                title={`${this.state.company.companyName} Survey Data`}                                 reveal={
                                     <Section>
                                         <Table centered hoverable bordered>
                                             <thead>
@@ -106,12 +115,12 @@ export default class BusHomepage extends React.Component {
                     </Row>
                     <a name="CurrentSurveys"></a>
                     <Row>
-                         <div class="spacer"></div>       
+                         <div className="spacer"></div>       
                     </Row>
                     <Row>                    
                         <Col s={12} m={8} l={6} className="offset-l3">                        
                             <Card header={<CardTitle reveal image={"https://www.surveymonkey.com/business/images/Group-52x-fb512d9b.svg?1513791835"} waves='light'/>}
-                                title="Current Surveys"
+                                title={`${this.state.company.companyName} Current Surveys`}
                                 reveal={
                                     <Section>
                                         <Table centered hoverable bordered>
@@ -123,7 +132,7 @@ export default class BusHomepage extends React.Component {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Northpointe</td>
+                                                    <td>{this.state.company.companyName}</td>
                                                     <td>
                                                         <Modal
                                                             header='Northpointe Survey'
@@ -199,12 +208,12 @@ export default class BusHomepage extends React.Component {
                     </Row>
                     <a name="Rewards"></a>
                     <Row>
-                        <div class="spacer"></div>      
+                        <div className="spacer"></div>      
                     </Row>
                     <Row>
                         <Col s={12} m={8} l={6} className="offset-l3">                        
                             <Card header={<CardTitle reveal image={"https://mcclatchy.nextbee.com/idahostatesman/img/rewards-logo.png"} waves='light'/>}
-                                title="Coupons/Rewards"
+                                title={`${this.state.company.companyName} Coupons/Rewards`}
                                 reveal={
                                     <Section>
                                         <Table centered hoverable bordered>
