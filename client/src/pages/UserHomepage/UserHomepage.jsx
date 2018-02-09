@@ -56,7 +56,7 @@ class UserHomepage extends Component {
                                                         <p>sQwFy47</p>
                                                         <Row>
                                                             <Col s={4}>
-                                                                <Preloader flashing size='big'/>
+                                                                <Preloader className="count-down" flashing size='big'/>
                                                             </Col>
                                                         </Row>
                                                     </Section>
