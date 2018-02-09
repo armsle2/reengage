@@ -2,6 +2,7 @@ import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'react-materialize';
 import styles from './SignIn.css';
+import API from "../../utils/API";
 
 
 
@@ -27,7 +28,7 @@ export default class SignIn extends React.Component {
        return(
         <Section>
             <Parallax className='parallax' imageSrc="http://www.freegreatpicture.com/files/photo105/52413-landscape.jpg"/>  
-                <Section>
+                <Section class="form">
                     <Row>
                         <Col s={4} >
                         </Col>
