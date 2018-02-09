@@ -34,3 +34,8 @@ h4 {
 .blue{
     background-color: blue;
 }
+
+.modal-content {
+    text-align: center;
+    align-content: center;
+}
