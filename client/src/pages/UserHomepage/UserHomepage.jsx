@@ -8,7 +8,8 @@ class UserHomepage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            click: true
+            click: true,
+            date: 200
         }
         this.onPress = this.onPress.bind(this);
     }
@@ -17,6 +18,23 @@ class UserHomepage extends Component {
             click: !this.state.click
         })
     }
+
+    componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: 100
+    });
+  }
 
     render() {
         return (
@@ -146,7 +164,7 @@ class UserHomepage extends Component {
                                                         <p>a65d4fas5</p>
                                                         <Row>
                                                             <Col s={4}>
-                                                                <Preloader flashing size='big'/>
+                                                                <Preloader value="" flashing size='big'/>{this.state.date.toLocaleTimeString()}
                                                             </Col>
                                                         </Row>
                                                     </Section>

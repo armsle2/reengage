@@ -39,3 +39,7 @@ h4 {
     text-align: center;
     align-content: center;
 }
+
+.row .col.s4{
+    padding-left: 46%;
+}
