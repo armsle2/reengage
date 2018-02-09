@@ -53,6 +53,7 @@ export default class SignUp extends React.Component {
                 password: this.state.password
             })
             .then((response) => {
+                alert(response._id)
                 this.setState({ redirect_comp: true });
                 console.log(response)
             })
@@ -149,9 +150,7 @@ export default class SignUp extends React.Component {
                                         />
                                 </Row>
                                 <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Button className="modal-action modal-close" s={2} onClick={this.handleCustomerSubmit}>                                        
+                                        <Button className="modal-action modal-close" onClick={this.handleCustomerSubmit}>                                        
                                         Create Customer Account 
                                         <Icon right>check</Icon>
                                         </Button>
@@ -198,8 +197,6 @@ export default class SignUp extends React.Component {
                                         />
                                 </Row>
                                 <Row>
-                                        <Col s={3}>
-                                        </Col>
                                         <Button s={2} className="modal-action modal-close" onClick={this.handleCompanySubmit}>                                      
                                         Create Company Account 
                                         <Icon right>check</Icon>
