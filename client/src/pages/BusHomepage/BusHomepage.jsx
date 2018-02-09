@@ -58,11 +58,6 @@ export default class BusHomepage extends React.Component {
         .then(res => this.setState({ company: res.data}))
         .catch(err => console.log(err))
         }
-      
-       
-
-    
-    
     
     render(){
         return(
@@ -78,7 +73,8 @@ export default class BusHomepage extends React.Component {
                     <Row>
                         <Col s={12} m={8} l={6} className="offset-l3">                        
                             <Card header={<CardTitle reveal image={"https://www.topbusinessjournal.com/wp-content/uploads/2016/11/data-science-illustration-%C2%ADFeature_1290x688_MS.jpg"} waves='light'/>}
-                                title={`${this.state.company.companyName} Survey Data`}                                 reveal={
+                                title={`${this.state.company.companyName} Survey Data`}                                 
+                                reveal={
                                     <Section>
                                         <Table centered hoverable bordered>
                                             <thead>
