@@ -53,8 +53,9 @@ export default class BusHomepage extends React.Component {
             .catch(err => console.log(err));
         }
       };
-      componentDidMount = () =>{
-        API.getCompany('5a7c73591b681352005436f6') 
+      componentDidMount(){
+        const companyId = this.props.match.params.id;
+        API.getCompany(companyId) 
         .then(res => this.setState({ company: res.data}))
         .catch(err => console.log(err))
         }
