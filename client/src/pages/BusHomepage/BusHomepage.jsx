@@ -29,14 +29,12 @@ export default class BusHomepage extends React.Component {
         if (this.state.title && this.state.author) {
           API.saveSurvey({
             title: this.state.title,
-            author: this.state.author,
-            synopsis: this.state.synopsis
+            questions: this.state.questions
           })
             .then(res => this.loadSurveys())
             .catch(err => console.log(err));
         }
       };
-
       loadRewards = () => {
         API.getRewards()
         .then(res => 
@@ -60,11 +58,6 @@ export default class BusHomepage extends React.Component {
         .then(res => this.setState({ company: res.data}))
         .catch(err => console.log(err))
         }
-      
-       
-
-    
-    
     
     render(){
         return(
@@ -171,24 +164,48 @@ export default class BusHomepage extends React.Component {
                                                     <Row>
                                                         <Col s={3}></Col>
                                                             <Input s={6}
-                                                                label="Email"
-                                                                name="email"
-                                                                type="email"
-                                                                placeholder="email" 
+                                                                label="Title"
+                                                                name="title"
+                                                                type="text"
+                                                                placeholder="Title" 
                                                                 className='offset-l3'
-                                                                value={this.state.email} 
+                                                                value={this.state.title} 
                                                                 onChange={this.handleInputChange}
                                                             />
                                                     </Row>
                                                     <Row>
                                                         <Col s={3}></Col>
                                                             <Input s={6}
-                                                                label="Password"
-                                                                name="password"
-                                                                type="password"
-                                                                placeholder="password"
+                                                                label="Question 1"
+                                                                name="question1"
+                                                                type="text"
+                                                                placeholder="Add a question"
                                                                 className='offset-l3' 
-                                                                value={this.state.password} 
+                                                                value={this.state.questions} 
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                    </Row>
+                                                    <Row>
+                                                        <Col s={3}></Col>
+                                                            <Input s={6}
+                                                                label="Question 2"
+                                                                name="question2"
+                                                                type="text"
+                                                                placeholder="Add a question"
+                                                                className='offset-l3' 
+                                                                value={this.state.questions} 
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                    </Row>
+                                                    <Row>
+                                                        <Col s={3}></Col>
+                                                            <Input s={6}
+                                                                label="Question 3"
+                                                                name="question3"
+                                                                type="text"
+                                                                placeholder="Add a question"
+                                                                className='offset-l3' 
+                                                                value={this.state.questions} 
                                                                 onChange={this.handleInputChange}
                                                             />
                                                     </Row>
@@ -250,31 +267,31 @@ export default class BusHomepage extends React.Component {
                                                     <Row>
                                                         <Col s={3}></Col>
                                                             <Input s={6}
-                                                                label="Email"
-                                                                name="email"
-                                                                type="email"
-                                                                placeholder="email" 
+                                                                label="title"
+                                                                name="title"
+                                                                type="text"
+                                                                placeholder="title" 
                                                                 className='offset-l3'
-                                                                value={this.state.email} 
+                                                                value={this.state.title} 
                                                                 onChange={this.handleInputChange}
                                                             />
                                                     </Row>
                                                     <Row>
                                                         <Col s={3}></Col>
                                                             <Input s={6}
-                                                                label="Password"
-                                                                name="password"
-                                                                type="password"
-                                                                placeholder="password"
+                                                                label="description"
+                                                                name="description"
+                                                                type="text"
+                                                                placeholder="description"
                                                                 className='offset-l3' 
-                                                                value={this.state.password} 
+                                                                value={this.state.description} 
                                                                 onChange={this.handleInputChange}
                                                             />
                                                     </Row>
                                                     <Row>
                                                         <Col s={4} className="center-align offset-l4">
                                                             <Button onClick={this.handleAddReward} waves='light'>
-                                                                Sign In 
+                                                                Add Reward 
                                                                 <Icon right>send</Icon>
                                                             </Button>                                   
                                                         </Col>
