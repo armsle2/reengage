@@ -5,18 +5,16 @@ import Survey from '../../components/Survey';
 import API from "../../utils/API";
 
 class UserHomepage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            click: true
-        }
-        this.onPress = this.onPress.bind(this);
+    state = {
+        customer: {}
     }
-    onPress(){
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
         this.setState({
-            click: !this.state.click
-        })
-    }
+          [name]: value
+        });
+      };
 
     render() {
         return (
