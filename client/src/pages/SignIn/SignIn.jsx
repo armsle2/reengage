@@ -3,6 +3,8 @@ import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'react-materialize';
 import styles from './SignIn.css';
 import API from "../../utils/API";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+
 
 
 
@@ -12,7 +14,9 @@ import API from "../../utils/API";
 export default class SignIn extends React.Component {
    state = {
        email: "",
-       password: ""
+       password: "",
+       userId: "",
+       redirect: false
    };
    change = e =>{
        this.setState({
@@ -20,11 +24,31 @@ export default class SignIn extends React.Component {
        })
    }    
    
-   onSubmit = () => {
+   onSubmit = (e) => {
+    e.preventDefault();
+    if(this.state.email && this.state.password){
+        API.login({
+        email: this.state.email,
+        password: this.state.password
+        }).then((response)=> {
+            console.log(response);
+            this.state.redirect=true;
+            this.state.userId = response.data;
+        })
+        .catch(err => console.log(err));
+    }
 
    }
  
    render(){
+    //    const { redirect } = this.state;
+    //    const { redirect_comp } = this.state;
+       if (this.state.redirect) {
+           return <Redirect to={`/UserHomepage/${this.state.userId}`} />
+       }
+    //    if (redirect_comp) {
+    //        return <Redirect to='/bushomepage'/>
+    //    }
        return(
         <Section>
             <Parallax className='parallax' imageSrc="http://www.freegreatpicture.com/files/photo105/52413-landscape.jpg"/>  
