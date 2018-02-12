@@ -2,6 +2,40 @@ var express = require('express');
 var router = express.Router();
 const db = require('../../models');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
+
+//Password check
+router.post("/login", function(req, res){
+
+	db.Customer.findOne({$or: [
+    {email: req.body.email},
+    {userName: req.body.userName}
+]} )
+		.then(dbCustomer => {
+			const password = req.body.password;
+			const hash = dbCustomer.password;
+			console.log(hash);
+			console.log(req.body);
+			console.log("***************************");
+			bcrypt.compare(password, dbCustomer.password, function(err, doesMatch){
+				if (doesMatch){
+					 //log him in
+				 console.log(`match userID:`);
+				 res.json(dbCustomer._id);
+				 
+				}else{
+					 //go away
+				 console.log("DOES NOT match");
+				}
+			 });
+
+		})
+		.catch(err => res.json(err))
+});
+
 //GET all customers
 router.get('/', function(req, res) {
   db.Customer.find()
@@ -11,9 +45,17 @@ router.get('/', function(req, res) {
 
 //create customer
 router.post('/new', function(req, res) {
-  db.Customer.create(req.body)
-  .then(dbCustomer => res.json(dbCustomer))
-  .catch(err => res.json(err))
+	bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+				// Store hash in your password DB.
+				console.log("hash: "+hash);
+				req.body.password = hash;
+				console.log("req.body.password: "+req.body.password);
+				db.Customer.create(req.body)
+				.then(dbCustomer => res.json(dbCustomer))
+				.catch(err => res.json(err))
+    });
+	});
 });
 
 //view Customer info
@@ -56,5 +98,6 @@ router.post('/:customerId/:surveyId/completed', function(req, res){
 	}
   }).catch(err => res.json(err));
 })
+
 
 module.exports = router;
