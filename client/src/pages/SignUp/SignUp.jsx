@@ -3,6 +3,8 @@ import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'react-materialize';
 import styles from './SignUp.css';
 import API from "../../utils/API";
+import images from "../../images/hybrid-437269.jpg"
+
 
 export default class SignUp extends React.Component {
    state = {
@@ -173,14 +175,14 @@ export default class SignUp extends React.Component {
                 </Row>
                 <Row>
                     <Col s={4} className="center-align offset-l4">
-                        <h4 className="sign-in-txt">Already have an Account? Go login</h4>
+                        <h3 className="sign-in-txt">Already have an Account? Go login</h3>
                         <Button node='a' href='/#' waves='light'>
                             Back to Login 
                         </Button> 
                     </Col>
                 </Row>
                 <Row>
-                    <Parallax className="parallax" imageSrc="https://unsplash.com/photos/pElSkGRA2NU"/>
+                    <img className="parallax" image src={images}/>
                 </Row>
             </Section>
        );

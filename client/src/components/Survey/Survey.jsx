@@ -13,9 +13,10 @@ class Survey extends Component {
         return(
             <section>
                 <h3 className="Thin">Taste</h3>
-                
+                <hr/>  
+                <br/>
                 <h5>How would you rate the food at the restaurant?</h5>
-                
+                <br/>
                 
                {/*<Row> 
                <Col s={2} className='grid-example'>
