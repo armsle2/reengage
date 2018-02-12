@@ -16,6 +16,16 @@ class UserHomepage extends Component {
         });
       };
 
+    componentWillMount(){
+        API.getCustomer(this.props.match.params.id)
+            .then((response)=>{
+                console.log(response.data.firstName);
+                this.state.customer;
+                console.log("params: "+this.props.match.params.id);
+            })
+            .catch(err => console.log(err));
+    }
+
     render() {
         return (
            <Section>
