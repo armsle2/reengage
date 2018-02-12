@@ -12,6 +12,7 @@
     "seed": "node scripts/seedsDB.js"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
@@ -23,7 +24,6 @@
     "react-materialize": "^1.1.2",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
-
   },
   "devDependencies": {
     "concurrently": "^3.5.0"

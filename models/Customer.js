@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;
@@ -61,6 +63,29 @@ const CustomerSchema = new Schema({
 
 // This creates our model from the above schema, using mongoose's model method
 const Customer = mongoose.model("Customer", CustomerSchema);
+
+// CustomerSchema.pre('save', function(next){
+//   const newUser = this;
+//   if (!newUser.isModified('password')) return next();
+
+//   // bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+//   //     if(err) return next(err);
+
+//   //     bcrypt.hash(newUser.password, salt, function(err, hash){
+//   //         if(err) return next(err);
+
+//   //         newUser.password = hash;
+//   //         next();
+//   //     });
+//   // });
+
+//   bcrypt.genSalt(saltRounds, function(err, salt) {
+//     bcrypt.hash(newUser.password, salt, function(err, hash) {
+//         // Store hash in your password DB.
+//         newUser.password = hash;
+//     });
+//   });
+// });
 
 // Export the Customer model
 module.exports = Customer;
