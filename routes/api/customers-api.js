@@ -9,14 +9,23 @@ const saltRounds = 10;
 
 //Password check
 router.post("/login", function(req, res){
-	const password = req.body.password;
-	const hash = dbCustomer.password;
-	db.Customer.findOne({ userName: req.body.userName})
+
+	db.Customer.findOne({$or: [
+    {email: req.body.email},
+    {userName: req.body.userName}
+]} )
 		.then(dbCustomer => {
-			bcrypt.compare(password, hash, function(err, doesMatch){
+			const password = req.body.password;
+			const hash = dbCustomer.password;
+			console.log(hash);
+			console.log(req.body);
+			console.log("***************************");
+			bcrypt.compare(password, dbCustomer.password, function(err, doesMatch){
 				if (doesMatch){
 					 //log him in
-				 console.log("match");
+				 console.log(`match userID:`);
+				 res.json(dbCustomer._id);
+				 
 				}else{
 					 //go away
 				 console.log("DOES NOT match");
