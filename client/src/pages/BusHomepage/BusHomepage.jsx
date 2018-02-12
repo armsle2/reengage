@@ -6,7 +6,9 @@ import API from "../../utils/API";
 
 export default class BusHomepage extends React.Component {
     state = {
-        company: {}
+        company: {},
+        rewards: [],
+        surveys: []
     }
 
     handleInputChange = event => {
@@ -14,7 +16,7 @@ export default class BusHomepage extends React.Component {
         this.setState({
           [name]: value
         });
-      };
+    };
 
     loadSurveys = () => {
         API.getSurveys()
@@ -34,8 +36,9 @@ export default class BusHomepage extends React.Component {
             .then(res => this.loadSurveys())
             .catch(err => console.log(err));
         }
-      };
-      loadRewards = () => {
+    };
+
+    loadRewards = () => {
         API.getRewards()
         .then(res => 
         this.setState({rewards: res.data, })
@@ -52,13 +55,52 @@ export default class BusHomepage extends React.Component {
             .then(res => this.loadRewards())
             .catch(err => console.log(err));
         }
-      };
-      componentDidMount(){
+    };
+
+    surveyAverage = (arr) => {
+        const surveySums = [];
+
+        function getSum(total, num) {
+            return total + num
+        }
+
+        arr.forEach((result, index) => {
+            surveySums.push(result.reduce(getSum)/result.length);
+        }) 
+
+        const surveyAvg = Math.round((surveySums.reduce(getSum)/surveySums.length)*10)/10;
+        
+        if(surveyAvg >= 4 && surveyAvg <= 5){
+            return '😍';
+        }
+        if(surveyAvg >= 3 && surveyAvg < 4){
+            return '🙂';
+        }
+        if(surveyAvg >= 2 && surveyAvg < 3){
+            return '😐';
+        }
+        if(surveyAvg >= 1 && surveyAvg < 2){
+            return '🙁';
+        }
+        if(surveyAvg >= 0 && surveyAvg < 1){
+            return '😠';
+        }
+    };
+
+
+    componentDidMount(){
         const companyId = this.props.match.params.id;
         API.getCompany(companyId) 
-        .then(res => this.setState({ company: res.data}))
+        .then(res => {
+            console.log(res)
+            this.setState({ 
+                company: res.data,
+                rewards: res.data.rewards,
+                surveys: res.data.surveys
+            })
+        })
         .catch(err => console.log(err))
-        }
+    }
     
     render(){
         return(
@@ -80,27 +122,51 @@ export default class BusHomepage extends React.Component {
                                         <Table centered hoverable bordered>
                                             <thead>
                                                 <tr>
-                                                    <th data-field="type">Survey Type</th>
+                                                    <th data-field="type">Survey</th>
                                                     <th data-field="views"># Completed</th>
-                                                    <th data-field="rating">Rating</th>
+                                                    <th data-field="rating">Average Rating</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Service</td>
-                                                    <td>7</td>
-                                                    <td>😍</td>
-                                                </tr>
-                                                <tr>
+                                                {this.state.surveys.map(survey => (
+                                                    <tr key={survey._id}>
+                                                        <td>{survey.title}</td>
+                                                        <td>{survey.customersCompleted.length}</td>
+                                                        <td className='avg-emoji'>{this.surveyAverage(survey.feedback)}</td>
+                                                        <td><Modal
+                                                            header={`${survey.title} Data`}
+                                                            trigger={<Button>View Survey</Button>}>
+                                                            <Table centered hoverable bordered>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th data-field="type">Questions</th>
+                                                                        <th data-field="rating">Average Rating</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                            {survey.questions.map((question, index) => (
+                                                                <tr key={index + 1}>
+                                                                    <td>{index + 1}</td> 
+                                                                    <td>{question}</td>
+                                                                    <td>{}</td>
+                                                                </tr>
+                                                                ))}
+                                                            </tbody>
+                                                            </Table>
+                                                        </Modal></td>
+                                                    </tr>
+                                                ))}
+                                                {/*<tr>
                                                     <td>Experience</td>
                                                     <td>4</td>
-                                                    <td>😊</td>
+                                                    <td>😊😍</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Atmosphere</td>
                                                     <td>9</td>
                                                     <td>😕</td>
-                                                </tr>
+                                                </tr>*/}
                                             </tbody>
                                         </Table>
                                     </Section>
