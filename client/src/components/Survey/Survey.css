@@ -1,3 +1,50 @@
 /* .Taste{
     font-size: 0em;
 } */
+
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.emoji{background-image:url(https://cdn.shopify.com/s/files/1/1061/1924/products/Heart_Eyes_Emoji_large.png?v=1480481053);}
+.smileEmoji{background-image:url(https://cdn.shopify.com/s/files/1/1061/1924/files/Slightly_Smiling_Emoji_Icon.png?11214052019865124406);}
+.neutralEmoji{background-image:url(https://cdn.shopify.com/s/files/1/1061/1924/files/Neutral_Face_Emoji.png?9898922749706957214);}
+.frownEmoji{background-image:url(https://cdn.shopify.com/s/files/1/1061/1924/products/Confused_Face_Emoji_large.png?v=1480481051);}
+.angryEmoji{background-image:url(https://cdn.shopify.com/s/files/1/1061/1924/products/Angry_Face_Emoji_Icon_ios10_large.png?v=1513251030);}
+
+.cc-selector input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.drinkcard-cc{
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:120px;height:150px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(2.0) grayscale(1) opacity(.8);
+       -moz-filter: brightness(2.0) grayscale(1) opacity(.8);
+            filter: brightness(2.0) grayscale(1) opacity(.8);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+[type="radio"]+label:before, [type="radio"]+label:after{
+    content:none;
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label{
+    height: 65px;
+}
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}
+

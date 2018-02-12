@@ -180,7 +180,7 @@ export default class SignUp extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Parallax className="parallax" imageSrc="https://i.unu.edu/media/ourworld.unu.edu-en/article/8564/Champions_of_Cumbria_Human_Landscapes1.jpg"/>
+                    <Parallax className="parallax" imageSrc="https://unsplash.com/photos/pElSkGRA2NU"/>
                 </Row>
             </Section>
        );
