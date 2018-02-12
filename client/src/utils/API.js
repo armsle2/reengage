@@ -44,23 +44,15 @@ export default {
     return axios.post(`/api/companies/${companyId}/survey`, surveyData);
   },
   // Gets the survey with the given id
-  getSurvey: function(id) {
-    return axios.get("/api/surveys-api/" + id);
+  activateSurvey: function(data) {
+    return axios.post(`/api/surveys/activate`, data);
   },
   // Deletes the customer with the given id
   deleteSurvey: function(id) {
     return axios.delete("/api/surveys-api/" + id);
   },
-  // Saves a customer to the database
-  saveSurvey: function(surveyData) {
-    return axios.post("/api/surveys-api", surveyData);
-  },
 
 //Rewards
-  // Gets all rewards
-  getRewards: function() {
-    return axios.get("/api/rewards-api");
-  },
   // Gets the survey with the given id
   createReward: function(companyId, rewardData) {
     return axios.post(`/api/companies/${companyId}/reward`, rewardData);
@@ -68,9 +60,5 @@ export default {
   // Deletes the customer with the given id
   deleteReward: function(id) {
     return axios.delete("/api/rewards-api/" + id);
-  },
-  // Saves a customer to the database
-  saveReward: function(rewardData) {
-    return axios.post("/api/rewards-api", rewardData);
   }
 };

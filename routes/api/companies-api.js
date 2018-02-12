@@ -28,17 +28,6 @@ router.get('/:id', function(req, res) {
   });
 });
 
-//set active survey - THIS WORKS!
-router.post('/:companyId/:surveyId/activate', function(req, res) {
-  db.Company.updateOne({_id: req.params.companyId}, {$set: {activeSurvey: req.params.surveyId}})
-  .then(function(dbActiveSurvey) {
-    res.json(dbActiveSurvey)
-  })
-  .catch(function(err) {
-      res.json(err);
-  });
-});
-
 //create a new company
 router.post('/new', function(req, res){
   db.Company.create(req.body)
