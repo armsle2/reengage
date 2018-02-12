@@ -58,34 +58,42 @@ export default class BusHomepage extends React.Component {
     };
 
     surveyAverage = (arr) => {
-        const surveySums = [];
+        const surveySums = arr.map(result => this.getArrAverage(result))
 
+        const surveyAvg = Math.round(this.getArrAverage(surveySums));
+        return this.rating(surveyAvg);
+    };
+
+    questionAverage = (arr, questionNum) => {
+       const feedback = arr.map((result, index) => result[questionNum-1]);
+       const avg = Math.round(this.getArrAverage(feedback));
+       return this.rating(avg);
+    }
+
+    getArrAverage = (arr) => {
         function getSum(total, num) {
             return total + num
         }
+        return arr.reduce(getSum)/arr.length;
+    }
 
-        arr.forEach((result, index) => {
-            surveySums.push(result.reduce(getSum)/result.length);
-        }) 
-
-        const surveyAvg = Math.round((surveySums.reduce(getSum)/surveySums.length)*10)/10;
-        
-        if(surveyAvg >= 4 && surveyAvg <= 5){
+    rating = (avg) => {
+        if(avg >= 4 && avg <= 5){
             return '😍';
         }
-        if(surveyAvg >= 3 && surveyAvg < 4){
+        if(avg >= 3 && avg < 4){
             return '🙂';
         }
-        if(surveyAvg >= 2 && surveyAvg < 3){
+        if(avg >= 2 && avg < 3){
             return '😐';
         }
-        if(surveyAvg >= 1 && surveyAvg < 2){
+        if(avg >= 1 && avg < 2){
             return '🙁';
         }
-        if(surveyAvg >= 0 && surveyAvg < 1){
+        if(avg >= 0 && avg < 1){
             return '😠';
         }
-    };
+    }
 
 
     componentDidMount(){
@@ -149,7 +157,7 @@ export default class BusHomepage extends React.Component {
                                                                 <tr key={index + 1}>
                                                                     <td>{index + 1}</td> 
                                                                     <td>{question}</td>
-                                                                    <td>{}</td>
+                                                                    <td className='avg-emoji'>{this.questionAverage(survey.feedback, index+1)}</td>
                                                                 </tr>
                                                                 ))}
                                                             </tbody>
