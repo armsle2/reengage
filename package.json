@@ -17,7 +17,6 @@
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "firebase": "^4.9.1",
-    "mongoose": "^5.0.3",
     "morgan": "~1.9.0",
     "react": "^16.2.0",
     "react-materialize": "^1.1.2",

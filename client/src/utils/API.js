@@ -40,8 +40,8 @@ export default {
 
 //Surveys
   // Gets all surveys
-  getSurveys: function() {
-    return axios.get("/api/surveys-api");
+  createSurvey: function(companyId, surveyData) {
+    return axios.post(`/api/companies/${companyId}/survey`, surveyData);
   },
   // Gets the survey with the given id
   getSurvey: function(id) {
@@ -62,8 +62,8 @@ export default {
     return axios.get("/api/rewards-api");
   },
   // Gets the survey with the given id
-  getReward: function(id) {
-    return axios.get("/api/rewards-api/" + id);
+  createReward: function(companyId, rewardData) {
+    return axios.post(`/api/companies/${companyId}/reward`, rewardData);
   },
   // Deletes the customer with the given id
   deleteReward: function(id) {

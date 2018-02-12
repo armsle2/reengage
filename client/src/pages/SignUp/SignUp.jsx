@@ -14,8 +14,8 @@ export default class SignUp extends React.Component {
        email: "",
        password: "",
        phoneNumber: "",
-       redirect_user: false,
-       redirect_comp: false,
+       redirect_userId: "",
+       redirect_compId: "",
    };
 
    change = e =>{
@@ -53,8 +53,7 @@ export default class SignUp extends React.Component {
                 password: this.state.password
             })
             .then((response) => {
-                alert(response._id)
-                this.setState({ redirect_comp: true });
+                this.setState({ redirect_compId: response.data._id });
                 console.log(response)
             })
             .catch(err => console.log(err));
@@ -63,13 +62,12 @@ export default class SignUp extends React.Component {
     }
 
    render(){
-       const { redirect_user } = this.state;
-       const { redirect_comp } = this.state;
-       if (redirect_user) {
+       const { redirect_userId, redirect_compId } = this.state;
+       if (redirect_userId) {
            return <Redirect to='/userhomepage'/>
        }
-       if (redirect_comp) {
-           return <Redirect to='/bushomepage'/>
+       if (redirect_compId) {
+           return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
        }
        return(
            <Section>
@@ -159,7 +157,7 @@ export default class SignUp extends React.Component {
                             </Section>
                         </Modal>
                         <Modal
-                            header='Comapany Sign Up'
+                            header='Company Sign Up'
                             trigger={<Button>Company Sign Up</Button>}>
                             <Section>
                             <Row>
@@ -167,7 +165,6 @@ export default class SignUp extends React.Component {
                                         </Col>
                                         <Input s={6}
                                         name = "companyName"
-                                        label="Company Name"
                                         placeholder="Company Name" 
                                         value={this.state.companyName} 
                                         onChange={e => this.change(e)}
@@ -178,8 +175,8 @@ export default class SignUp extends React.Component {
                                         </Col>
                                         <Input s={6}
                                         name = "email"
-                                        label="Email"
-                                        placeholder="email" 
+                                        type = "email"
+                                        placeholder="Email" 
                                         value={this.state.email} 
                                         onChange={e => this.change(e)}
                                         />
@@ -189,7 +186,6 @@ export default class SignUp extends React.Component {
                                         </Col>
                                         <Input s={6}
                                         name = "password"
-                                        label="Password"
                                         type='password'
                                         placeholder="Password" 
                                         value={this.state.password} 
