@@ -8,7 +8,9 @@ export default class BusHomepage extends React.Component {
     state = {
         company: {},
         rewards: [],
-        surveys: []
+        surveys: [],
+        editRewardTitle: '',
+        editRewardDescription: ''
     }
 
     handleInputChange = event => {
@@ -46,13 +48,15 @@ export default class BusHomepage extends React.Component {
         .catch(err => console.log(err));
     };
 
-    handleAddRewards = event => {
+    handleAddReward = event => {
         event.preventDefault();
-        if (this.state.title && this.state.author) {
-          API.saveReward({
-          
+        if (this.state.rewardTitle && this.state.rewardDescription) {
+            console.log(this.state.rewardTitle, this.state.rewardDescription)
+          API.createReward(this.state.company._id, {
+            title: this.state.rewardTitle,
+            description: this.state.rewardDescription
           })
-            .then(res => this.loadRewards())
+            .then(res => this.loadCompanyInfo())
             .catch(err => console.log(err));
         }
     };
@@ -95,8 +99,7 @@ export default class BusHomepage extends React.Component {
         }
     }
 
-
-    componentDidMount(){
+    loadCompanyInfo = () => {
         const companyId = this.props.match.params.id;
         API.getCompany(companyId) 
         .then(res => {
@@ -108,6 +111,10 @@ export default class BusHomepage extends React.Component {
             })
         })
         .catch(err => console.log(err))
+    }
+
+    componentDidMount(){
+        this.loadCompanyInfo();
     }
     
     render(){
@@ -130,7 +137,7 @@ export default class BusHomepage extends React.Component {
                                         <Table centered hoverable bordered>
                                             <thead>
                                                 <tr>
-                                                    <th data-field="type">Survey</th>
+                                                    <th data-field="type">Survey Name</th>
                                                     <th data-field="views"># Completed</th>
                                                     <th data-field="rating">Average Rating</th>
                                                 </tr>
@@ -143,7 +150,7 @@ export default class BusHomepage extends React.Component {
                                                         <td className='avg-emoji'>{this.surveyAverage(survey.feedback)}</td>
                                                         <td><Modal
                                                             header={`${survey.title} Data`}
-                                                            trigger={<Button>View Survey</Button>}>
+                                                            trigger={<Button>View Info</Button>}>
                                                             <Table centered hoverable bordered>
                                                                 <thead>
                                                                     <tr>
@@ -165,16 +172,6 @@ export default class BusHomepage extends React.Component {
                                                         </Modal></td>
                                                     </tr>
                                                 ))}
-                                                {/*<tr>
-                                                    <td>Experience</td>
-                                                    <td>4</td>
-                                                    <td>😊😍</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Atmosphere</td>
-                                                    <td>9</td>
-                                                    <td>😕</td>
-                                                </tr>*/}
                                             </tbody>
                                         </Table>
                                     </Section>
@@ -193,107 +190,96 @@ export default class BusHomepage extends React.Component {
                                 reveal={
                                     <Section>
                                         <Table centered hoverable bordered>
-                                            <thead>
-                                                <tr>
-                                                    <th data-field="id">Location</th>
-                                                    <th data-field="name">Surveys</th>
-                                                </tr>
-                                            </thead>
+                                           
                                             <tbody>
-                                                <tr>
-                                                    <td>{this.state.company.companyName}</td>
+                                            {this.state.surveys.map(survey => (
+                                                <tr key={survey._id}>
+                                                    <td>
+                                                        {survey.title}
+                                                    </td>
                                                     <td>
                                                         <Modal
-                                                            header='Northpointe Survey'
-                                                            trigger={<Button>View Survey</Button>}>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                                                            header={survey.title}
+                                                            trigger={<Button>View</Button>}>
+                                                            <Table centered hoverable bordered>
+                                                                <tbody>
+                                                            {survey.questions.map((question, index) => (
+                                                                <tr key={index + 1}>
+                                                                    <td>{question}</td>
+                                                                </tr>
+                                                                ))}
+                                                            </tbody>
+                                                            </Table> 
                                                         </Modal>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Lakeside</td>
-                                                    <td>
-                                                        <Modal
-                                                            header='Lakeside Survey'
-                                                            trigger={<Button>View Survey</Button>}>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                                                        </Modal>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Midtown</td>
-                                                    <td>
-                                                        <Modal
-                                                            header='Midtown Survey'
-                                                            trigger={<Button>View Survey</Button>}>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                                                        </Modal>
-                                                    </td>
-                                                </tr>
+                                                ))}
                                             </tbody>
                                         </Table>
-                                        <Modal
-                                            header='Add a Survey'
-                                            trigger={<Button>Add a Survey</Button>}>
-                                                <Section>
-                                                    <Row>
-                                                        <Col s={3}></Col>
-                                                            <Input s={6}
-                                                                label="Title"
-                                                                name="title"
-                                                                type="text"
-                                                                placeholder="Title" 
-                                                                className='offset-l3'
-                                                                value={this.state.title} 
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                    </Row>
-                                                    <Row>
-                                                        <Col s={3}></Col>
-                                                            <Input s={6}
-                                                                label="Question 1"
-                                                                name="question1"
-                                                                type="text"
-                                                                placeholder="Add a question"
-                                                                className='offset-l3' 
-                                                                value={this.state.questions} 
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                    </Row>
-                                                    <Row>
-                                                        <Col s={3}></Col>
-                                                            <Input s={6}
-                                                                label="Question 2"
-                                                                name="question2"
-                                                                type="text"
-                                                                placeholder="Add a question"
-                                                                className='offset-l3' 
-                                                                value={this.state.questions} 
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                    </Row>
-                                                    <Row>
-                                                        <Col s={3}></Col>
-                                                            <Input s={6}
-                                                                label="Question 3"
-                                                                name="question3"
-                                                                type="text"
-                                                                placeholder="Add a question"
-                                                                className='offset-l3' 
-                                                                value={this.state.questions} 
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                    </Row>
-                                                    <Row>
-                                                        <Col s={4} className="center-align offset-l4">
-                                                            <Button onClick={this.handleAddSurvey} waves='light'>
-                                                                Sign In 
-                                                                <Icon right>send</Icon>
-                                                            </Button>                                   
-                                                        </Col>
-                                                    </Row>
-                                            </Section>
-                                        </Modal>
+                                        <div className='center-btn'>
+                                            <Modal
+                                                header='Add a Survey'
+                                                trigger={<Button>Add a Survey</Button>}>
+                                                    <Section>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Title"
+                                                                    name="title"
+                                                                    type="text"
+                                                                    placeholder="Title" 
+                                                                    className='offset-l3'
+                                                                    value={this.state.title} 
+                                                                    onChange={this.handleInputChange}
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Question 1"
+                                                                    name="question1"
+                                                                    type="text"
+                                                                    placeholder="Add a question"
+                                                                    className='offset-l3' 
+                                                                    value={this.state.questions} 
+                                                                    onChange={this.handleInputChange}
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Question 2"
+                                                                    name="question2"
+                                                                    type="text"
+                                                                    placeholder="Add a question"
+                                                                    className='offset-l3' 
+                                                                    value={this.state.questions} 
+                                                                    onChange={this.handleInputChange}
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Question 3"
+                                                                    name="question3"
+                                                                    type="text"
+                                                                    placeholder="Add a question"
+                                                                    className='offset-l3' 
+                                                                    value={this.state.questions} 
+                                                                    onChange={this.handleInputChange}
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={4} className="center-align offset-l4">
+                                                                <Button onClick={this.handleAddSurvey} waves='light'>
+                                                                    Sign In 
+                                                                    <Icon right>send</Icon>
+                                                                </Button>                                   
+                                                            </Col>
+                                                        </Row>
+                                                </Section>
+                                            </Modal>
+                                        </div>
                                     </Section>
                                 }>
                             </Card>
@@ -315,64 +301,100 @@ export default class BusHomepage extends React.Component {
                                                     <th data-field="id">Coupon</th>
                                                     <th data-field="name">Value</th>
                                                     <th data-field="price">Redeemed</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>BOGO Pizza Slice</td>
-                                                    <td>$2.25</td>
-                                                    <td>10</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1/2 off Ice Cream Cone</td>
-                                                    <td>$.75</td>
-                                                    <td>12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Free Combo Upgrade</td>
-                                                    <td>$2.75</td>
-                                                    <td>7</td>
-                                                </tr>
+                                               {this.state.rewards.map(reward => (
+                                                    <tr key={reward._id}>
+                                                        <td>{reward.title}</td>
+                                                        <td></td>
+                                                        <td>{reward.customers.length}</td>
+                                                        <td>
+                                                            <Modal
+                                                            header={`${reward.title} Data`}
+                                                            trigger={<Button>Edit</Button>}>
+                                                            <Section>
+                                                                <Row>
+                                                                    <Col s={3}></Col>
+                                                                        <Input s={6}
+                                                                            label='Title'
+                                                                            name="editRewardTitle"
+                                                                            type="text"
+                                                                            className='offset-l3'
+                                                                            defaultValue={reward.title}
+                                                                            onChange={this.handleInputChange}
+                                                                           
+                                                                        />
+                                                                </Row>
+                                                                <Row>
+                                                                    <Col s={3}></Col>
+                                                                        <Input s={6}
+                                                                            label="Description"
+                                                                            name="editRewardDescription"
+                                                                            type="text"
+                                                                            className='offset-l3' 
+                                                                            defaultValue={reward.description}
+                                                                            onChange={this.handleInputChange}
+                                                                           
+                                                                            
+                                                                        />
+                                                                </Row>
+                                                                <Row>
+                                                                    <Col s={4} className="center-align offset-l4">
+                                                                        <Button onClick={this.handleAddReward} waves='light'>
+                                                                            Add Reward 
+                                                                            <Icon right>send</Icon>
+                                                                        </Button>                                   
+                                                                    </Col>
+                                                                </Row>
+                                                            </Section>
+                                                            </Modal>
+                                                        </td>
+                                                    </tr>
+                                                ))}
                                             </tbody>
                                         </Table>
-                                        <Modal
-                                            header='Add a Reward'
-                                            trigger={<Button>Add a Reward</Button>}>
-                                                <Section>
-                                                    <Row>
-                                                        <Col s={3}></Col>
-                                                            <Input s={6}
-                                                                label="title"
-                                                                name="title"
-                                                                type="text"
-                                                                placeholder="title" 
-                                                                className='offset-l3'
-                                                                value={this.state.title} 
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                    </Row>
-                                                    <Row>
-                                                        <Col s={3}></Col>
-                                                            <Input s={6}
-                                                                label="description"
-                                                                name="description"
-                                                                type="text"
-                                                                placeholder="description"
-                                                                className='offset-l3' 
-                                                                value={this.state.description} 
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                    </Row>
-                                                    <Row>
-                                                        <Col s={4} className="center-align offset-l4">
-                                                            <Button onClick={this.handleAddReward} waves='light'>
-                                                                Add Reward 
-                                                                <Icon right>send</Icon>
-                                                            </Button>                                   
-                                                        </Col>
-                                                    </Row>
-                                            </Section>
-                                        </Modal>
+                                        <div className='center-btn'>
+                                            <Modal
+                                                header='Add a Reward'
+                                                trigger={<Button>Add a Reward</Button>}>
+                                                    <Section>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Title"
+                                                                    name="rewardTitle"
+                                                                    type="text"
+                                                                    className='offset-l3'
+                                                                    defaultValue={this.state.rewardTitle}
+                                                                    onChange={this.handleInputChange}
+                                                                           
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Description"
+                                                                    name="rewardDescription"
+                                                                    type="text"
+                                                                    className='offset-l3' 
+                                                                    defaultValue={this.state.rewardDescription}
+                                                                    onChange={this.handleInputChange}
+                                                                   
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={4} className="center-align modal-close offset-l4">
+                                                                <Button onClick={this.handleAddReward} waves='light'>
+                                                                    Add Reward 
+                                                                    <Icon right>send</Icon>
+                                                                </Button>                                   
+                                                            </Col>
+                                                        </Row>
+                                                </Section>
+                                            </Modal>
+                                        </div>
                                     </Section>
                                 }>
                             </Card>

@@ -19,3 +19,7 @@ input[type=search],
 textarea.materialize-textarea {
     margin: 0;
 }
+
+.card .card-reveal .card-title {
+	text-align: center;
+}
