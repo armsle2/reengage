@@ -3,14 +3,13 @@ import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Navbar, NavItem, Card, CardTitle, Table, Modal} from 'react-materialize';
 import styles from "./BusHomepage.css";
 import API from "../../utils/API";
+import RewardModal from '../../components/Modals/RewardModal'
 
 export default class BusHomepage extends React.Component {
     state = {
         company: {},
         rewards: [],
-        surveys: [],
-        editRewardTitle: '',
-        editRewardDescription: ''
+        surveys: []
     }
 
     handleInputChange = event => {
@@ -30,14 +29,16 @@ export default class BusHomepage extends React.Component {
 
     handleAddSurvey = event => {
         event.preventDefault();
-        if (this.state.title && this.state.author) {
-          API.saveSurvey({
+        if (this.state.title && this.state.question1 && this.state.rewardChoice) {
+          API.createSurvey(this.state.company._id, {
             title: this.state.title,
-            questions: this.state.questions
+            questions: [this.state.question1, this.state.question2, this.state.question3],
+            reward: this.state.rewardChoice
           })
-            .then(res => this.loadSurveys())
+            .then(res => this.loadCompanyInfo())
             .catch(err => console.log(err));
         }
+        console.log(this)
     };
 
     loadRewards = () => {
@@ -49,9 +50,10 @@ export default class BusHomepage extends React.Component {
     };
 
     handleAddReward = event => {
-        event.preventDefault();
-        if (this.state.rewardTitle && this.state.rewardDescription) {
+        // event.preventDefault();
             console.log(this.state.rewardTitle, this.state.rewardDescription)
+
+        if (this.state.rewardTitle && this.state.rewardDescription) {
           API.createReward(this.state.company._id, {
             title: this.state.rewardTitle,
             description: this.state.rewardDescription
@@ -120,6 +122,10 @@ export default class BusHomepage extends React.Component {
     render(){
         return(
             <Section>
+                <Button floating fab='horizontal' icon='mode_edit' className='red' large style={{bottom: '45px', right: '24px'}}>
+                   <Button floating icon='card_giftcard' className='green'/>
+                    <Button floating icon='note_add' className='blue'/>
+                </Button>
                 <Navbar fixed className="navbar" brand='Engage' right>
 	                <NavItem href='#'>My Account</NavItem>
 	                <NavItem href='#'>Survey Data</NavItem>
@@ -147,7 +153,7 @@ export default class BusHomepage extends React.Component {
                                                     <tr key={survey._id}>
                                                         <td>{survey.title}</td>
                                                         <td>{survey.customersCompleted.length}</td>
-                                                        <td className='avg-emoji'>{this.surveyAverage(survey.feedback)}</td>
+                                                        { survey.feedback.length > 0 ? <td className='avg-emoji'>{this.surveyAverage(survey.feedback)}</td> : <td>Not Data Yet</td>}
                                                         <td><Modal
                                                             header={`${survey.title} Data`}
                                                             trigger={<Button>View Info</Button>}>
@@ -164,7 +170,7 @@ export default class BusHomepage extends React.Component {
                                                                 <tr key={index + 1}>
                                                                     <td>{index + 1}</td> 
                                                                     <td>{question}</td>
-                                                                    <td className='avg-emoji'>{this.questionAverage(survey.feedback, index+1)}</td>
+                                                                     { survey.feedback.length > 0 ? <td className='avg-emoji'>{this.questionAverage(survey.feedback)}</td> : <td>Not Data Yet</td>}
                                                                 </tr>
                                                                 ))}
                                                             </tbody>
@@ -219,7 +225,7 @@ export default class BusHomepage extends React.Component {
                                         <div className='center-btn'>
                                             <Modal
                                                 header='Add a Survey'
-                                                trigger={<Button>Add a Survey</Button>}>
+                                                trigger={<Button className='blue'>Add a Survey</Button>}>
                                                     <Section>
                                                         <Row>
                                                             <Col s={3}></Col>
@@ -229,7 +235,7 @@ export default class BusHomepage extends React.Component {
                                                                     type="text"
                                                                     placeholder="Title" 
                                                                     className='offset-l3'
-                                                                    value={this.state.title} 
+                                                                    defaultValue={this.state.title} 
                                                                     onChange={this.handleInputChange}
                                                                 />
                                                         </Row>
@@ -241,7 +247,7 @@ export default class BusHomepage extends React.Component {
                                                                     type="text"
                                                                     placeholder="Add a question"
                                                                     className='offset-l3' 
-                                                                    value={this.state.questions} 
+                                                                    defaultValue={this.state.question1} 
                                                                     onChange={this.handleInputChange}
                                                                 />
                                                         </Row>
@@ -253,7 +259,7 @@ export default class BusHomepage extends React.Component {
                                                                     type="text"
                                                                     placeholder="Add a question"
                                                                     className='offset-l3' 
-                                                                    value={this.state.questions} 
+                                                                    defaultValue={this.state.question2} 
                                                                     onChange={this.handleInputChange}
                                                                 />
                                                         </Row>
@@ -265,14 +271,29 @@ export default class BusHomepage extends React.Component {
                                                                     type="text"
                                                                     placeholder="Add a question"
                                                                     className='offset-l3' 
-                                                                    value={this.state.questions} 
+                                                                    defaultValue={this.state.question3} 
                                                                     onChange={this.handleInputChange}
                                                                 />
                                                         </Row>
                                                         <Row>
-                                                            <Col s={4} className="center-align offset-l4">
+                                                            <Col s={3}></Col>
+                                                                <Input s={6} 
+                                                                    type='select' 
+                                                                    label='Choose A Reward'
+                                                                    name="rewardChoice"
+                                                                    className='offset-l3'
+                                                                    value={this.state.rewardChoice}
+                                                                    onChange={this.handleInputChange}>
+                                                                <option>Select A Reward</option>
+                                                                {this.state.rewards.map(reward =>(
+                                                                    <option value={reward._id} key={reward._id}>{reward.title}</option>
+                                                                    ))}
+                                                                </Input>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={4} className="center-align modal-close offset-l4">
                                                                 <Button onClick={this.handleAddSurvey} waves='light'>
-                                                                    Sign In 
+                                                                    Add Survey 
                                                                     <Icon right>send</Icon>
                                                                 </Button>                                   
                                                             </Col>
@@ -358,7 +379,8 @@ export default class BusHomepage extends React.Component {
                                         <div className='center-btn'>
                                             <Modal
                                                 header='Add a Reward'
-                                                trigger={<Button>Add a Reward</Button>}>
+                                                trigger={ <Button className='blue'>Add New Reward</Button>}
+                                                >
                                                     <Section>
                                                         <Row>
                                                             <Col s={3}></Col>
@@ -389,7 +411,7 @@ export default class BusHomepage extends React.Component {
                                                                 <Button onClick={this.handleAddReward} waves='light'>
                                                                     Add Reward 
                                                                     <Icon right>send</Icon>
-                                                                </Button>                                   
+                                                                </Button>                              
                                                             </Col>
                                                         </Row>
                                                 </Section>

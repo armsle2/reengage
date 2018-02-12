@@ -12,10 +12,6 @@ const SurveySchema = new Schema({
     required: true
   },
   feedback: [],
-  description:{
-    type: String,
-    required: true
-  },
   customersCompleted: [
     {
       type: Schema.Types.ObjectId,
