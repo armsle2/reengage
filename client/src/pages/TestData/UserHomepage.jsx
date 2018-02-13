@@ -3,9 +3,6 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card, CardTitle
 import styles from './UserHomepage.css';
 import Survey from '../../components/Survey';
 import API from "../../utils/API";
-import logo from "../../logo/engagePink.png";
-
-
 
 class UserHomepage extends Component {
     state = {
@@ -19,21 +16,10 @@ class UserHomepage extends Component {
         });
       };
 
-    componentWillMount(){
-        API.getCustomer(this.props.match.params.id)
-            .then((response)=>{
-                console.log(response.data.firstName);
-                this.state.customer;
-                console.log("params: "+this.props.match.params.id);
-            })
-            .catch(err => console.log(err));
-    }
-
     render() {
         return (
            <Section>
-                <Navbar fixed className="navbar topbar" brand={<img src={logo} className="cssTop" />} right>
-                
+                <Navbar fixed className="navbar topbar" brand='Engage' right>
 	                <NavItem href='#'>Current Rewards</NavItem>
 	                <NavItem href='#PendingRewards'>Pending Rewards</NavItem>
                     <NavItem href='#RedeemedRewards'>Redeemed Rewards</NavItem>
