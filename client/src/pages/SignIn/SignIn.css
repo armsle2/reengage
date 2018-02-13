@@ -1,16 +1,29 @@
-.form {
-    position:absolute;
-    right:0;
-    top:20%;
-    animation:fadeIn 2s ease-in-out 500ms;
+#form {
+    font-weight: 300;
+    background: rgba(96, 125, 139, .4);
+    padding: 40px;
+    border-radius: 10px;
 }
 
-@keyframes fadeIn{
-    0%{
-      transform: scale(0.1);
-    }
-    
-    100%{
-      transform: scale(1);
-    }
+.parallax {
+    width: 100%;
+};
+
+.logosize{
+
+}
+
+.container  {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
   }
+  
+  .container .row {
+    margin: 0 auto;
+  }
+
+

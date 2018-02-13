@@ -19,6 +19,10 @@ export default {
   createCustomer: function(customerData) {
     return axios.post("/api/customers/new", customerData);
   },
+  //login
+  login: function(loginInfo){
+    return axios.post("api/customers/login", loginInfo);
+  },
 
 //Businesses
   // Gets all businesses

@@ -63,7 +63,6 @@ class UserHomepage extends Component {
 
     componentWillMount(){
         this.loadCustomerInfo()
-        this.setState({phrase:'i work'})
     }
 
     componentDidMount() {
