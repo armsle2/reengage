@@ -11,6 +11,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 
+
 const style = {
     margin: 5,
     logo: {
@@ -95,17 +96,22 @@ export default class SignUp extends React.Component {
           <div>
               <img style={style.logo} className="logosize" image src={logo}/>
           </div>
-          </Col>
+    </Col>
+    <Col s={6} className="center-align offset-l4">
+    <div>
+        <h5>Reward yourself.</h5>
+    </div>
+</Col>
+
   <div>
   <Col s={4} className="center-align offset-l4">
-
+ {/*Rectangle background */}
    <Paper style={style.paper} zDepth={1}>        
       <Tabs
       value={this.state.value}
       onChange={this.handleChange}
     >
-   
-          
+     
       <Tab label="Customer" value="a">
         <div>
           <h2 style={style.headline}>Customer Sign Up</h2>
@@ -209,7 +215,7 @@ export default class SignUp extends React.Component {
 </Col>
 <Row>
 	<Col s={4} className="center-align offset-l4">
-		<p className="sign-in-txt">Already have an Account? Go login {<FlatButton href='/#' label="Sign Up" primary={true} style={style} />}</p> 
+		<p className="sign-in-txt">Already have an Account? Go login {<FlatButton href='/#' label="Sign In" primary={true} style={style} />}</p> 
 	</Col>
 </Row>
 </div>     
