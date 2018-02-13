@@ -20,7 +20,7 @@ export default {
     return axios.post("/api/customers/new", customerData);
   },
   //login
-  login: function(loginInfo){
+  loginCustomer: function(loginInfo){
     return axios.post("api/customers/login", loginInfo);
   },
 
@@ -57,6 +57,10 @@ export default {
   // Deletes the customer with the given id
   deleteSurvey: function(id) {
     return axios.delete("/api/surveys-api/" + id);
+  },
+
+  loginCompany : function(login){
+    return axios.post(`/api/companies/login/`, login)
   },
 
 //Rewards

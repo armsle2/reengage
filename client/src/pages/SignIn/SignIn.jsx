@@ -72,7 +72,7 @@ export default class SignIn extends React.Component {
        })
    }    
    
-   onSubmit = (e) => {
+   onSubmitCustomer = (e) => {
     e.preventDefault();
     if(this.state.email && this.state.password){
         API.login({
@@ -87,7 +87,23 @@ export default class SignIn extends React.Component {
     }
 
    }
- 
+    
+
+  onSubmitBusiness = (e) => {
+    e.preventDefault();
+    if(this.state.email && this.state.password){
+        API.login({
+        email: this.state.email,
+        password: this.state.password
+        }).then((response)=> {
+            console.log(response);
+            this.state.redirect=true;
+            this.state.userId = response.data;
+        })
+        .catch(err => console.log(err));
+    }
+
+   } 
    render(){
     //    const { redirect } = this.state;
     //    const { redirect_comp } = this.state;
@@ -103,11 +119,11 @@ export default class SignIn extends React.Component {
              title="Title"
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
           />*/}
-        <img className="parallax" image src={images}/>
+        <img className="parallax" src={images}/>
         <Section>
         <Col s={12} m={8} l={6}>
             <div>
-                <img style={style.logo} className="logosize" image src={logo}/>
+                <img style={style.logo} className="logosize" src={logo}/>
             </div>
             </Col>
     <div>
@@ -149,7 +165,7 @@ export default class SignIn extends React.Component {
             </Row>
             <Row>
             <Col s={4} className="center-align offset-l6">
-            <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+            <RaisedButton onClick={e => this.onSubmit(e)}label="Sign In" primary={true} style={style.signUp} />
             </Col>
             </Row>
         
@@ -183,7 +199,7 @@ export default class SignIn extends React.Component {
         </Row>
         <Row>
         <Col s={4} className="center-align offset-l6">
-        <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+        <RaisedButton label="Sign In" primary={true} style={style.signUp} />
         </Col>
         </Row>
           </div>
@@ -193,7 +209,7 @@ export default class SignIn extends React.Component {
 </Col>
 <Row>
     <Col s={4} className="center-align offset-l4">
-        <p className="sign-in-txt">Not Engaging yet? {<FlatButton href='/SignUp' label="Sign Up" primary={true} style={style} />}</p>
+      <div className="sign-in-txt"><span>Not Engaging yet?<FlatButton href='/SignUp' label="Sign Up" primary={true} style={style} /></span></div>
     </Col>
 </Row>
 </div>     

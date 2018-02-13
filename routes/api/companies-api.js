@@ -1,6 +1,38 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../../models');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
+//Password check
+router.post("/login", function(req, res){
+
+  db.Company.findOne({$or: [
+    {email: req.body.email},
+    {companyName: req.body.userName}
+  ]})
+  .then(dbComapny => {
+    const password = req.body.password;
+    const hash = dbComapny.password;
+    console.log(hash);
+    console.log(req.body);
+    console.log("***************************");
+    bcrypt.compare(password, dbComapny.password, function(err, doesMatch){
+      if (doesMatch){
+         //log him in
+       console.log(`match userID:`);
+       res.json(dbComapny._id);
+       
+      }else{
+         //go away
+       console.log("DOES NOT match");
+      }
+    });
+
+  })
+  .catch(err => res.json(err))
+});
 
 //view all companies
 router.get('/', function(req, res) {
@@ -30,14 +62,20 @@ router.get('/:id', function(req, res) {
 
 //create a new company
 router.post('/new', function(req, res){
-  db.Company.create(req.body)
-    .then(function(dbComapny) {
-      res.json(dbComapny);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
+  bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+       // Store hash in your password DB.
+      req.body.password = hash;
+      db.Company.create(req.body)
+        .then(function(dbComapny) {
+          res.json(dbComapny);
+        })
+        .catch(function(err) {
+          // If an error occurred, send it to the client
+          res.json(err);
+        });
     });
+  });
 });
 
 
