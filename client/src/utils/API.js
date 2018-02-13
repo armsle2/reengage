@@ -20,11 +20,14 @@ export default {
     return axios.post("/api/customers/new", customerData);
   },
   //login
-  login: function(loginInfo){
+  loginCustomer: function(loginInfo){
     return axios.post("api/customers/login", loginInfo);
   },
 
 //Businesses
+  loginCompany : function(login){
+    return axios.post(`/api/companies/login/`, login)
+  },
   // Gets all businesses
   getCompanies: function() {
     return axios.get("/api/companies");
@@ -58,6 +61,8 @@ export default {
   deleteSurvey: function(id) {
     return axios.delete("/api/surveys-api/" + id);
   },
+
+  
 
 //Rewards
   // Gets the survey with the given id

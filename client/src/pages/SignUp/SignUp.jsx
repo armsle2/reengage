@@ -55,17 +55,16 @@ const style = {
 };
 
 export default class SignUp extends React.Component {
-    state = {
-        firstName: "",
-        lastName: "",
-        userName: "",
-        companyName: "",
-        email: "",
-        password: "",
-        phoneNumber: "",
-        redirect_userId: "",
-        redirect_compId: ""
-    };
+   state = {
+       firstName: "",
+       lastName: "",
+       username: "",
+       companyName: "",
+       email: "",
+       password: "",
+       phoneNumber: ""
+   };
+
 
     change = e => {
         this.setState({
@@ -73,20 +72,21 @@ export default class SignUp extends React.Component {
         })
     }
 
-    handleCustomerSubmit = e => {
-        e.preventDefault();
-        if (this.state.firstName && this.state.lastName && this.state.userName && this.state.email && this.state.password) {
-            API
-                .saveCustomer({
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                userName: this.state.userName,
-                email: this.state.email,
-                password: this.state.password,
-                phoneNumber: this.state.phoneNumber
-            })
+   handleCustomerSubmit = e => {
+       e.preventDefault();
+            if(this.state.firstName && this.state.lastName && this.state.username && this.state.email && this.state.password ) {
+                console.log(this.state)
+                API.createCustomer({
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    username: this.state.username,
+                    email: this.state.email,
+                    password: this.state.password,
+                    phoneNumber: this.state.phoneNumber
+                })
                 .then((response) => {
-                    this.setState({redirect_user: true});
+                    this.setState({ redirect_userId: response.data._id });
+
                     console.log(response)
                 })
                 .catch(err => console.log(err));
@@ -96,157 +96,170 @@ export default class SignUp extends React.Component {
 
     handleCompanySubmit = e => {
         e.preventDefault();
-        if (this.state.companyName && this.state.email && this.state.password) {
-            API
-                .saveCompany({companyName: this.state.companyName, email: this.state.email, password: this.state.password})
-                .then((response) => {
-                    this.setState({redirect_compId: response.data._id});
-                    console.log(response)
-                })
-                .catch(err => console.log(err));
+        console.log(this.state)
+        if(this.state.companyName && this.state.email && this.state.password ) {
+            API.createCompany({
+                companyName: this.state.companyName,
+                email: this.state.email,
+                password: this.state.password
+            })
+            .then((response) => {
+                this.setState({ redirect_compId: response.data._id });
+                console.log(response)
+            })
+            .catch(err => console.log(err));      
         }
 
     }
+   render(){
+       const { redirect_userId, redirect_compId } = this.state;
+       if (redirect_userId) {
+           return <Redirect to={`/userhomepage/${this.state.redirect_userId}`}/>
+       }
+       if (redirect_compId) {
+           return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
+       }
+       return(
+        <Section>
+        {/*<AppBar
+           title="Title"
+              iconClassNameRight="muidocs-icon-navigation-expand-more"
+        />*/}
+      <img className="parallax" src={images}/>
+      <Section>
+      <Col s={12} m={8} l={6}>
+          <div>
+              <img style={style.logo} className="logosize" src={logo}/>
+          </div>
+          </Col>
+  <div>
+  <Col s={4} className="center-align offset-l4">
 
-    render() {
-        const {redirect_userId, redirect_compId} = this.state;
-        if (redirect_userId) {
-            return <Redirect to='/userhomepage'/>
-        }
-        if (redirect_compId) {
-            return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
-        }
-        return (
-            <Section>
-                <Section>
-                    <Col s={12} m={8} l={6}>
-                        <div>
-                            <img style={style.logo} className="logosize" image src={logo}/>
-                        </div>
-                    </Col>
-                    <div>
-                        <Col s={4} m={4} l={4} className="center-align offset-l4">
+   <Paper style={style.paper} zDepth={1}>        
+      <Tabs
+      value={this.state.value}
+      onChange={this.handleChange}
+    >
+   
+          
+      <Tab label="Customer" value="a">
+        <div>
+          <h2 style={style.headline}>Customer Sign Up</h2>
+          <Row>
+            <Col s={3}>
+            </Col>
+            <Input s={3}
+            name = "firstName"
+            label="First Name"
+            value={this.state.firstName} 
+            onChange={e => this.change(e)}
+            />
+            <Input s={3}
+            name = "lastName"
+            label="Last Name"
+            value={this.state.lastName} 
+            onChange={e => this.change(e)}
+            />
+          </Row> 
+          <Row>
+            <Col s={3}>
+            </Col>
+            <Input s={6}
+            name = "username"
+            label="Username"
+            value={this.state.username} 
+            onChange={e => this.change(e)}
+            />
+          </Row>  
+          <Row>
+              <Col s={3}></Col>
+              <Input s={6}
+                  label="Email"
+                  name="email"
+                  type="email"
+                  className='offset-l3'
+                  value={this.state.email} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={3}></Col>
+              <Input s={6}
+                  label="Password"
+                  name="password"
+                  type="password"
+                  className='offset-l3' 
+                  value={this.state.password} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={4} className="center-align offset-l6">
+          <RaisedButton onClick={this.handleCustomerSubmit} label="Sign Up" primary={true} style={style.signUp} />
+          </Col>
+          </Row>
+      
+        </div>
+      </Tab>
+      <Tab label="Company" value="b">
+        <div>
+          <h2 style={style.headline}>Company Sign Up</h2>
+          <Row>
+            <Col s={3}>
+            </Col>
+            <Input s={6}
+            name = "companyName"
+            label="Company Name"
+            value={this.state.companyName} 
+            onChange={e => this.change(e)}
+            />
+          </Row>  
+          <Row>
+              <Col s={3}></Col>
+              <Input s={6}
+                  label="Email"
+                  name="email"
+                  type="email"
+                  className='offset-l3'
+                  value={this.state.email} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={3}></Col>
+              <Input s={6}
+                  label="Password"
+                  name="password"
+                  type="password"
+                  className='offset-l3' 
+                  value={this.state.password} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={4} className="center-align offset-l6">
+          <RaisedButton onClick={this.handleCompanySubmit} label="Sign Up" primary={true} style={style.signUp} />
+          </Col>
+          </Row>
+      
+        </div>
+      </Tab>
+    </Tabs>
+</Paper>
+</Col>
+<Row>
+	<Col s={4} className="center-align offset-l4">
+         <div className="sign-in-txt">
+            <span>Already have an Account? Go login <FlatButton href='/' label="Sign In" primary={true} style={style} />
+            </span>
+        </div>
+	</Col>
+</Row>
+</div>     
+           
+  </Section>
+</Section>
+       );
+   }
 
-                            <Paper style={style.paper} zDepth={1}>
-                                <Tabs value={this.state.value} onChange={this.handleChange}>
-
-                                    <Tab icon={<FontIcon className="material-icons">face</FontIcon>} label="Customer" value="a">
-                                        <div>
-                                            <h2 style={style.headline}>Customer Sign Up</h2>
-                                            <Row>
-                                                <Col s={2} l={2}></Col>
-                                                <Input
-                                                    s={4}
-                                                    name="firstName"
-                                                    label="First Name"
-                                                    value={this.state.firstName}
-                                                    onChange={e => this.change(e)}/>
-                                                <Input
-                                                    s={4}
-                                                    name="lastName"
-                                                    label="Last Name"
-                                                    value={this.state.lastName}
-                                                    onChange={e => this.change(e)}/>
-                                            </Row>
-                                            <Row>
-                                            <Col s={2} l={3}></Col>
-                                                <Input
-                                                    s={8} l={6}
-                                                    label="Email"
-                                                    name="email"
-                                                    type="email"
-                                                    className='offset-l3'
-                                                    value={this.state.email}
-                                                    onChange={e => this.change(e)}/>
-                                            </Row>
-                                            <Row>
-                                            <Col s={2} l={3}></Col>
-                                                <Input
-                                                    s={8} l={6}
-                                                    label="Password"
-                                                    name="password"
-                                                    type="password"
-                                                    className='offset-l3'
-                                                    value={this.state.password}
-                                                    onChange={e => this.change(e)}/>
-                                            </Row>
-                                            <Row>
-                                                <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign Up" primary={true} style={style.signUp}/>
-                                                </Col>
-                                            </Row>
-
-                                                <Col s={4} className="center-align offset-l4">
-                                                    <p style={style.signIn}>Already have an Account? {< FlatButton href = '/' label = "Login" primary = {
-                                                            true
-                                                        }
-                                                        style = {
-                                                            style
-                                                        } />}</p>
-                                                </Col>
-
-                                        </div>
-                                    </Tab>
-                                    <Tab icon={<FontIcon className="material-icons">store</FontIcon>} label="Company" value="b">
-                                        <div>
-                                            <h2 style={style.headline}> Company Sign Up</h2>
-                                            <Row>
-                                            <Col s={2} l={3}></Col>
-                                                <Input
-                                                    s={8} l={6}
-                                                    label="Company Name"
-                                                    name="companyName"
-                                                    type="text"
-                                                    className='offset-l3'
-                                                    value={this.state.companyName}
-                                                    onChange={e => this.change(e)}/>
-                                            </Row>
-                                            <Row>
-                                            <Col s={2} l={3}></Col>
-                                                <Input
-                                                    s={8} l={6}
-                                                    label="Email"
-                                                    name="email"
-                                                    type="email"
-                                                    className='offset-l3'
-                                                    value={this.state.email}
-                                                    onChange={e => this.change(e)}/>
-                                            </Row>
-                                            <Row>
-                                            <Col s={2} l={3}></Col>
-                                                <Input
-                                                    s={8} l={6}
-                                                    label="Password"
-                                                    name="password"
-                                                    type="password"
-                                                    className='offset-l3'
-                                                    value={this.state.password}
-                                                    onChange={e => this.change(e)}/>
-                                            </Row>
-                                            <Row>
-                                                <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign Up" primary={true} style={style.signUp}/>
-                                                </Col>
-                                            </Row>
-
-                                                <Col s={4} className="center-align offset-l4">
-                                                    <p style={style.signIn}>Already have an Account? {< FlatButton href = '/' label = "Login" primary = {
-                                                            true
-                                                        }
-                                                        style = {
-                                                            style
-                                                        } />}</p>
-                                                </Col>
-
-                                        </div>
-                                    </Tab>
-                                </Tabs>
-                            </Paper>
-                        </Col>
-                    </div>
-
-                </Section>
-            </Section>
-        );
-    }
 }

@@ -19,7 +19,6 @@ a.brand-logo {
 	font-size: 27px;
 }
 
-.center-btn {
-	margin-left: 35%;
-	margin-top: 2%;
+.btn-style {
+	font-size: 80%;
 }
