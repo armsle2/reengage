@@ -28,12 +28,17 @@ a.brand-logo {
 
 h4 {
     margin-bottom:0px;
-    
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .blue{
     background-color: blue;
 }
+
+
+#sidenav-overlay{
+    /* background-color: aliceblue; */
 
 .modal-content {
     text-align: center;
@@ -42,4 +47,5 @@ h4 {
 
 .count-down {
     text-align: center;
+
 }
