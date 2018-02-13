@@ -85,23 +85,6 @@ router.get("/:id/", function(req, res){
 
 });
 
-//view Customer info
-// router.get("/:id/", function(req, res){
-// 	var token = req.query.token;
-//   jwt.verify(token, 'supersecret', function(err, decoded){
-//     if(!err){
-//       var secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};
-//       res.json(secrets);
-//     } else {
-//       res.send(err);
-//     }
-//   })
-//   db.Customer.findOne({ _id: req.params.id })
-//   	.populate('rewards')
-//   	.populate('surveys')
-//     .then(dbUserRewards => res.json(dbUserRewards))
-//     .catch(err => res.json(err));
-// });
 
 //add customer to customersCompleted field - YOU ALREADY KNOW WHAT IM GONNA SAY!
 router.post('/:customerId/:surveyId/completed', function(req, res){
