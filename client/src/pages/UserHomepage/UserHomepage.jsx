@@ -3,6 +3,9 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card, CardTitle
 import styles from './UserHomepage.css';
 import Survey from '../../components/Survey';
 import API from "../../utils/API";
+import logo from "../../logo/engagePink.png";
+
+
 
 class UserHomepage extends Component {
     state = {
@@ -72,7 +75,8 @@ class UserHomepage extends Component {
     render() {
         return (
            <Section>
-                <Navbar fixed className="navbar topbar" brand='Engage' right>
+                <Navbar fixed className="navbar topbar" brand={<img src={logo} className="cssTop" />} right>
+                
 	                <NavItem href='#'>Current Rewards</NavItem>
 	                <NavItem href='#PendingRewards'>Pending Rewards</NavItem>
                     <NavItem href='#RedeemedRewards'>Redeemed Rewards</NavItem>
