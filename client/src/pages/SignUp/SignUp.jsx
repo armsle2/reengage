@@ -1,6 +1,7 @@
 import React from "react";
 import { format } from "path";
 import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'react-materialize';
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import styles from './SignUp.css';
 import API from "../../utils/API";
 import images from "../../images/hybrid-437269.jpg"
@@ -43,9 +44,13 @@ export default class SignUp extends React.Component {
    state = {
        firstName: "",
        lastName: "",
-       username: "",
+       userName: "",
+       companyName: "",
        email: "",
-       password: ""
+       password: "",
+       phoneNumber: "",
+       redirect_userId: "",
+       redirect_compId: "",
    };
 
    change = e =>{
@@ -57,32 +62,48 @@ export default class SignUp extends React.Component {
    handleCustomerSubmit = e => {
        e.preventDefault();
             if(this.state.firstName && this.state.lastName && this.state.userName && this.state.email && this.state.password ) {
-            API.saveCustomer({
-                firstName: "",
-                lastName: "",
-                username: "",
-                email: "",
-                password: ""
-            })
-            .catch(err => console.log(err));
-        } 
+                API.saveCustomer({
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    userName: this.state.userName,
+                    email: this.state.email,
+                    password: this.state.password,
+                    phoneNumber: this.state.phoneNumber
+                })
+                .then((response) => {
+                    this.setState({ redirect_user: true });
+                    console.log(response)
+                })
+                .catch(err => console.log(err));
+         }
+         
     }
     
     handleCompanySubmit = e => {
         e.preventDefault();
-        if(this.state.firstName && this.state.lastName && this.state.userName && this.state.email && this.state.password ) {
+        if(this.state.companyName && this.state.email && this.state.password ) {
             API.saveCompany({
-                firstName: "",
-                lastName: "",
-                username: "",
-                email: "",
-                password: ""
+                companyName: this.state.companyName,
+                email: this.state.email,
+                password: this.state.password
+            })
+            .then((response) => {
+                this.setState({ redirect_compId: response.data._id });
+                console.log(response)
             })
             .catch(err => console.log(err));
         }
+        
     }
 
    render(){
+       const { redirect_userId, redirect_compId } = this.state;
+       if (redirect_userId) {
+           return <Redirect to='/userhomepage'/>
+       }
+       if (redirect_compId) {
+           return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
+       }
        return(
         <Section>
         {/*<AppBar
@@ -213,7 +234,7 @@ export default class SignUp extends React.Component {
 	</Col>
 </Row>
 </div>     
-
+           
   </Section>
 </Section>
        );
