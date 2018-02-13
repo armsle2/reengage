@@ -63,8 +63,6 @@ class Survey extends Component {
     </section>
         )
     }
-
-
 }
 export default Survey;
 

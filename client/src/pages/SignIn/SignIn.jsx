@@ -4,15 +4,65 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'r
 import styles from './SignIn.css';
 import images from "../../images/hybrid-437269.jpg"
 import logo from "../../logo/engage.png"
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import Paper from 'material-ui/Paper';
 
+const style = {
+    margin: 12,
+    logo: {
+        margin: '15% 25% 0 25%',
+        width: '50%',
+        
+    },
+    headline: {
+        margin:25,
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 200,
+      },
+    paper:{
+        height: 400,
+        width: 600,
+        margin: 50,
+        textAlign: 'center',
+        display: 'inline-block',
+    },
+    signUp:{
+        margin: 30,
+    },
+    etc:{
+        fontFamily: 'Roboto',
+          borderRadius: 2,
+          height: 400,
+          width: 600,
+          margin: 50,
+          textAlign: 'center',
+          display:'inline-block',
+          marginLeft: 25,
+    }
 
-
-
-
-
-
-
+  };
+  
 export default class SignIn extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          value: 'a',
+        };
+      }
+    
+      handleChange = (value) => {
+        this.setState({
+          value: value,
+        });
+      };
+    
+
+
    state = {
        email: "",
        password: ""
@@ -30,105 +80,105 @@ export default class SignIn extends React.Component {
    render(){
        return(
         <Section>
+          {/*<AppBar
+             title="Title"
+                iconClassNameRight="muidocs-icon-navigation-expand-more"
+          />*/}
         <img className="parallax" image src={images}/>
         <Section>
-                    <Row>
-                        <Col s={4} m={8} l={6}>
-                            <img className="logosize" image src={logo}/>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="center-align">
-                            {/*<h4 className="sign-in-txt">Engage</h4>*/}
-                            <Modal
-                                header='Customers Sign In'
-                                trigger={<Button>Customer Sign In</Button>}>
-                                <Section>
-                                    <Row>
-                                        <Col s={3}></Col>
-                                        <Input s={6}
-                                            label="Email"
-                                            name="email"
-                                            type="email"
-                                            placeholder="email" 
-                                            className='offset-l3'
-                                            value={this.state.email} 
-                                            onChange={e => this.change(e)}
-                                        />
-                                    </Row>
-                                    <Row>
-                                        <Col s={3}></Col>
-                                            <Input s={6}
-                                                label="Password"
-                                                name="password"
-                                                type="password"
-                                                placeholder="password"
-                                                className='offset-l3' 
-                                                value={this.state.password} 
-                                                onChange={e => this.change(e)}
-                                            />
-                                    </Row>
-                                    <Row>
-                                        <Col s={4} className="center-align offset-l4">
-                                            <Button onClick={e => this.onSubmit(e)} node='a' href='/UserHomepage' waves='light'>
-                                                Sign In 
-                                                <Icon right>send</Icon>
-                                            </Button>                                   
-                                        </Col>
-                                    </Row>
-                                </Section>
-                            </Modal>
-                            <Modal
-                                header='Company Sign In'
-                                trigger={<Button>Company Sign In</Button>}>
-                                <Section>
-                                    <Row>
-                                        <Col s={3}></Col>
-                                        <Input s={6}
-                                            label="Email"
-                                            name="email"
-                                            type="email"
-                                            placeholder="email" 
-                                            className='offset-l3'
-                                            value={this.state.email} 
-                                            onChange={e => this.change(e)}
-                                        />
-                                    </Row>
-                                    <Row>
-                                        <Col s={3}></Col>
-                                            <Input s={6}
-                                                label="Password"
-                                                name="password"
-                                                type="password"
-                                                placeholder="password"
-                                                className='offset-l3' 
-                                                value={this.state.password} 
-                                                onChange={e => this.change(e)}
-                                            />
-                                    </Row>
-                                    <Row>
-                                        <Col s={4} className="center-align offset-l4">
-                                            <Button onClick={e => this.onSubmit(e)} node='a' href='/BusHomepage' waves='light'>
-                                                Sign In 
-                                                <Icon right>send</Icon>
-                                            </Button>                                   
-                                        </Col>
-                                    </Row>
-                                </Section>
-                            </Modal>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col s={4} className="center-align offset-l4">
-                                <p className="sign-in-txt">Not Engaging yet? Sign Up below</p>
-                                <Button node='a' href='/SignUp' waves='light'>
-                                    Sign Up 
-                                    <Icon right>assignment</Icon>
-                                </Button> 
-                            </Col>
-                        </Row>
-                </Section>
-        </Section>  
+        <Col s={12} m={8} l={6}>
+            <div>
+                <img style={style.logo} className="logosize" image src={logo}/>
+            </div>
+            </Col>
+    <div>
+    <Col s={4} className="center-align offset-l4">
+
+     <Paper style={style.paper} zDepth={1}>        
+        <Tabs
+        value={this.state.value}
+        onChange={this.handleChange}
+      >
+     
+            
+        <Tab label="Customer" value="a">
+          <div>
+            <h2 style={style.headline}>Customer Sign In</h2>
+
+            <Row>
+            
+                <Col s={3}></Col>
+                <Input s={6}
+                    label="Email"
+                    name="email"
+                    type="email"
+                    className='offset-l3'
+                    value={this.state.email} 
+                    onChange={e => this.change(e)}
+                />
+            </Row>
+            <Row>
+            <Col s={3}></Col>
+                <Input s={6}
+                    label="Password"
+                    name="password"
+                    type="password"
+                    className='offset-l3' 
+                    value={this.state.password} 
+                    onChange={e => this.change(e)}
+                />
+            </Row>
+            <Row>
+            <Col s={4} className="center-align offset-l6">
+            <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+            </Col>
+            </Row>
+        
+          </div>
+        </Tab>
+        <Tab label="Company" value="b">
+          <div>
+            <h2 style={style.headline}>Company Sign In</h2>
+            <Row>
+            
+            <Col s={3}></Col>
+            <Input s={6}
+                label="Email"
+                name="email"
+                type="email"
+                className='offset-l3'
+                value={this.state.email} 
+                onChange={e => this.change(e)}
+            />
+        </Row>
+        <Row>
+        <Col s={3}></Col>
+            <Input s={6}
+                label="Password"
+                name="password"
+                type="password"
+                className='offset-l3' 
+                value={this.state.password} 
+                onChange={e => this.change(e)}
+            />
+        </Row>
+          </div>
+        </Tab>
+      </Tabs>
+</Paper>
+</Col>
+<Row>
+    <Col s={4} className="center-align offset-l4">
+        <p className="sign-in-txt">Not Engaging yet? Sign Up below</p>
+
+        <RaisedButton href='/SignUp' label="Sign Up" primary={true} style={style} />
+
+    </Col>
+</Row>
+</div>     
+
+    </Section>
+</Section>  
        );
    }
 }
