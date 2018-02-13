@@ -256,7 +256,6 @@ export default class BusHomepage extends React.Component {
                                                                     label="Title"
                                                                     name="title"
                                                                     type="text"
-                                                                    placeholder="Title" 
                                                                     className='offset-l3'
                                                                     defaultValue={this.state.title} 
                                                                     onChange={this.handleInputChange}
@@ -268,7 +267,6 @@ export default class BusHomepage extends React.Component {
                                                                     label="Question 1"
                                                                     name="question1"
                                                                     type="text"
-                                                                    placeholder="Add a question"
                                                                     className='offset-l3' 
                                                                     defaultValue={this.state.question1} 
                                                                     onChange={this.handleInputChange}
@@ -280,7 +278,6 @@ export default class BusHomepage extends React.Component {
                                                                     label="Question 2"
                                                                     name="question2"
                                                                     type="text"
-                                                                    placeholder="Add a question"
                                                                     className='offset-l3' 
                                                                     defaultValue={this.state.question2} 
                                                                     onChange={this.handleInputChange}
@@ -292,7 +289,6 @@ export default class BusHomepage extends React.Component {
                                                                     label="Question 3"
                                                                     name="question3"
                                                                     type="text"
-                                                                    placeholder="Add a question"
                                                                     className='offset-l3' 
                                                                     defaultValue={this.state.question3} 
                                                                     onChange={this.handleInputChange}

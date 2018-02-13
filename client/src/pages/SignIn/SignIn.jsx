@@ -86,7 +86,7 @@ export default class SignIn extends React.Component {
    }
     
 
-  onSubmitBusiness = (e) => {
+  onSubmitCompany = (e) => {
     e.preventDefault();
     if(this.state.email && this.state.password){
         API.loginCompany({
