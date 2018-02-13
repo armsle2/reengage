@@ -44,13 +44,11 @@ export default class SignUp extends React.Component {
    state = {
        firstName: "",
        lastName: "",
-       userName: "",
+       username: "",
        companyName: "",
        email: "",
        password: "",
-       phoneNumber: "",
-       redirect_userId: "",
-       redirect_compId: "",
+       phoneNumber: ""
    };
 
    change = e =>{
@@ -61,17 +59,18 @@ export default class SignUp extends React.Component {
 
    handleCustomerSubmit = e => {
        e.preventDefault();
-            if(this.state.firstName && this.state.lastName && this.state.userName && this.state.email && this.state.password ) {
-                API.saveCustomer({
+            if(this.state.firstName && this.state.lastName && this.state.username && this.state.email && this.state.password ) {
+                console.log(this.state)
+                API.createCustomer({
                     firstName: this.state.firstName,
                     lastName: this.state.lastName,
-                    userName: this.state.userName,
+                    username: this.state.username,
                     email: this.state.email,
                     password: this.state.password,
                     phoneNumber: this.state.phoneNumber
                 })
                 .then((response) => {
-                    this.setState({ redirect_user: true });
+                    this.setState({ redirect_userId: response.data._id });
                     console.log(response)
                 })
                 .catch(err => console.log(err));
@@ -81,8 +80,9 @@ export default class SignUp extends React.Component {
     
     handleCompanySubmit = e => {
         e.preventDefault();
+        console.log(this.state)
         if(this.state.companyName && this.state.email && this.state.password ) {
-            API.saveCompany({
+            API.createCompany({
                 companyName: this.state.companyName,
                 email: this.state.email,
                 password: this.state.password
@@ -99,7 +99,7 @@ export default class SignUp extends React.Component {
    render(){
        const { redirect_userId, redirect_compId } = this.state;
        if (redirect_userId) {
-           return <Redirect to='/userhomepage'/>
+           return <Redirect to={`/userhomepage/${this.state.redirect_userId}`}/>
        }
        if (redirect_compId) {
            return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
@@ -110,11 +110,11 @@ export default class SignUp extends React.Component {
            title="Title"
               iconClassNameRight="muidocs-icon-navigation-expand-more"
         />*/}
-      <img className="parallax" image src={images}/>
+      <img className="parallax" src={images}/>
       <Section>
       <Col s={12} m={8} l={6}>
           <div>
-              <img style={style.logo} className="logosize" image src={logo}/>
+              <img style={style.logo} className="logosize" src={logo}/>
           </div>
           </Col>
   <div>
@@ -145,6 +145,16 @@ export default class SignUp extends React.Component {
             value={this.state.lastName} 
             onChange={e => this.change(e)}
             />
+          </Row> 
+          <Row>
+            <Col s={3}>
+            </Col>
+            <Input s={6}
+            name = "username"
+            label="Username"
+            value={this.state.username} 
+            onChange={e => this.change(e)}
+            />
           </Row>  
           <Row>
               <Col s={3}></Col>
@@ -170,7 +180,7 @@ export default class SignUp extends React.Component {
           </Row>
           <Row>
           <Col s={4} className="center-align offset-l6">
-          <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+          <RaisedButton onClick={this.handleCustomerSubmit} label="Sign Up" primary={true} style={style.signUp} />
           </Col>
           </Row>
       
@@ -219,7 +229,7 @@ export default class SignUp extends React.Component {
           </Row>
           <Row>
           <Col s={4} className="center-align offset-l6">
-          <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+          <RaisedButton onClick={this.handleCustomerSubmit} label="Sign Up" primary={true} style={style.signUp} />
           </Col>
           </Row>
       
@@ -230,7 +240,10 @@ export default class SignUp extends React.Component {
 </Col>
 <Row>
 	<Col s={4} className="center-align offset-l4">
-		<p className="sign-in-txt">Already have an Account? Go login {<FlatButton href='/#' label="Sign Up" primary={true} style={style} />}</p> 
+         <div className="sign-in-txt">
+            <span>Already have an Account? Go login <FlatButton href='/' label="Sign In" primary={true} style={style} />
+            </span>
+        </div>
 	</Col>
 </Row>
 </div>     

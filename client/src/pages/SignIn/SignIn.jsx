@@ -62,9 +62,7 @@ export default class SignIn extends React.Component {
 
    state = {
        email: "",
-       password: "",
-       userId: "",
-       redirect: false
+       password: ""
    };
    change = e =>{
        this.setState({
@@ -75,13 +73,12 @@ export default class SignIn extends React.Component {
    onSubmitCustomer = (e) => {
     e.preventDefault();
     if(this.state.email && this.state.password){
-        API.login({
+        API.loginCustomer({
         email: this.state.email,
         password: this.state.password
         }).then((response)=> {
             console.log(response);
-            this.state.redirect=true;
-            this.state.userId = response.data;
+            this.setState({userId: response.data});
         })
         .catch(err => console.log(err));
     }
@@ -92,13 +89,12 @@ export default class SignIn extends React.Component {
   onSubmitBusiness = (e) => {
     e.preventDefault();
     if(this.state.email && this.state.password){
-        API.login({
+        API.loginCompany({
         email: this.state.email,
         password: this.state.password
         }).then((response)=> {
             console.log(response);
-            this.state.redirect=true;
-            this.state.userId = response.data;
+            this.setState({companyId: response.data});
         })
         .catch(err => console.log(err));
     }
@@ -107,12 +103,13 @@ export default class SignIn extends React.Component {
    render(){
     //    const { redirect } = this.state;
     //    const { redirect_comp } = this.state;
-       if (this.state.redirect) {
-           return <Redirect to={`/UserHomepage/${this.state.userId}`} />
+       if (this.state.userId) {
+        console.log('userId is set')
+           return <Redirect to={`/userhomepage/${this.state.userId}`} />
        }
-    //    if (redirect_comp) {
-    //        return <Redirect to='/bushomepage'/>
-    //    }
+       if (this.state.companyId) {
+           return <Redirect to={`/bushomepage/${this.state.companyId}`} />
+       }
        return(
         <Section>
           {/*<AppBar
@@ -165,7 +162,7 @@ export default class SignIn extends React.Component {
             </Row>
             <Row>
             <Col s={4} className="center-align offset-l6">
-            <RaisedButton onClick={e => this.onSubmit(e)}label="Sign In" primary={true} style={style.signUp} />
+            <RaisedButton onClick={e => this.onSubmitCustomer(e)}label="Sign In" primary={true} style={style.signUp} />
             </Col>
             </Row>
         
@@ -199,7 +196,7 @@ export default class SignIn extends React.Component {
         </Row>
         <Row>
         <Col s={4} className="center-align offset-l6">
-        <RaisedButton label="Sign In" primary={true} style={style.signUp} />
+        <RaisedButton onClick={e => this.onSubmitCompany(e)} label="Sign In" primary={true} style={style.signUp} />
         </Col>
         </Row>
           </div>
@@ -209,7 +206,10 @@ export default class SignIn extends React.Component {
 </Col>
 <Row>
     <Col s={4} className="center-align offset-l4">
-      <div className="sign-in-txt"><span>Not Engaging yet?<FlatButton href='/SignUp' label="Sign Up" primary={true} style={style} /></span></div>
+      <div className="sign-in-txt">
+        <span>Not Engaging yet?<FlatButton href='/SignUp' label="Sign Up" primary={true} style={style} />
+        </span>
+      </div>
     </Col>
 </Row>
 </div>     

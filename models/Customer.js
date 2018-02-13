@@ -11,7 +11,7 @@ const CustomerSchema = new Schema({
     required: true
   },
   lastName: String,
-  userName: {
+  username: {
     type: String,
     unique: true,
     required:true
@@ -37,11 +37,11 @@ const CustomerSchema = new Schema({
       "Password should be longer."
     ]
   },
-  phoneNumber: {
-    type: String,
-    minlength: 10,
-    maxlength: 11
-  },
+  // phoneNumber: {
+  //   type: String,
+  //   minlength: 10,
+  //   maxlength: 11
+  // },
   // `date` must be of type Date. The default value is the current date
   customerCreated: {
     type: Date,

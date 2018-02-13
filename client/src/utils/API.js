@@ -25,6 +25,9 @@ export default {
   },
 
 //Businesses
+  loginCompany : function(login){
+    return axios.post(`/api/companies/login/`, login)
+  },
   // Gets all businesses
   getCompanies: function() {
     return axios.get("/api/companies");
@@ -59,9 +62,7 @@ export default {
     return axios.delete("/api/surveys-api/" + id);
   },
 
-  loginCompany : function(login){
-    return axios.post(`/api/companies/login/`, login)
-  },
+  
 
 //Rewards
   // Gets the survey with the given id
