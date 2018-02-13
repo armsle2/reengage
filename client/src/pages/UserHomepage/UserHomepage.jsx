@@ -6,7 +6,8 @@ import API from "../../utils/API";
 
 class UserHomepage extends Component {
     state = {
-        customer: {}
+        customer: {},
+        surveys: []
     }
 
     handleInputChange = event => {
@@ -17,11 +18,24 @@ class UserHomepage extends Component {
       };
 
     componentWillMount(){
+        // API.getCustomer(this.props.match.params.id)
+        //     .then((response)=>{
+        //         console.log(response.data);
+        //         this.state.customer;
+        //         console.log("params: "+this.props.match.params.id);
+        //     })
+        //     .catch(err => console.log(err));
+
+        this.loadPending();
+    }
+
+    loadPending = () =>{
         API.getCustomer(this.props.match.params.id)
             .then((response)=>{
-                console.log(response.data.firstName);
-                this.state.customer;
+                console.log(response.data);
                 console.log("params: "+this.props.match.params.id);
+                this.setState({ surveys: response.data.surveys})
+
             })
             .catch(err => console.log(err));
     }

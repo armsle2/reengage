@@ -32,8 +32,7 @@ export default class SignIn extends React.Component {
         password: this.state.password
         }).then((response)=> {
             console.log(response);
-            this.state.redirect=true;
-            this.state.userId = response.data;
+            this.setState({userId: response.data});
         })
         .catch(err => console.log(err));
     }
@@ -43,7 +42,7 @@ export default class SignIn extends React.Component {
    render(){
     //    const { redirect } = this.state;
     //    const { redirect_comp } = this.state;
-       if (this.state.redirect) {
+       if (this.state.userId) {
            return <Redirect to={`/UserHomepage/${this.state.userId}`} />
        }
     //    if (redirect_comp) {
@@ -87,7 +86,7 @@ export default class SignIn extends React.Component {
                                             />
                                     </Row>
                                     <Row>
-                                        <Col s={4} className="center-align offset-l4">
+                                        <Col s={4} className="center-align offset-l4 modal-action modal-close">
                                             <Button onClick={e => this.onSubmit(e)} node='a' href='/UserHomepage' waves='light'>
                                                 Sign In 
                                                 <Icon right>send</Icon>
@@ -125,7 +124,7 @@ export default class SignIn extends React.Component {
                                             />
                                     </Row>
                                     <Row>
-                                        <Col s={4} className="center-align offset-l4">
+                                        <Col s={4} className="center-align offset-l4 modal-action modal-close">
                                             <Button onClick={e => this.onSubmit(e)} node='a' href='/BusHomepage' waves='light'>
                                                 Sign In 
                                                 <Icon right>send</Icon>
