@@ -5,6 +5,35 @@ const db = require('../../models');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+//Password check
+router.post("/login", function(req, res){
+
+db.Company.findOne({$or: [
+  {email: req.body.email},
+  {companyName: req.body.userName}
+]} )
+  .then(dbComapny => {
+    const password = req.body.password;
+    const hash = dbComapny.password;
+    console.log(hash);
+    console.log(req.body);
+    console.log("***************************");
+    bcrypt.compare(password, dbComapny.password, function(err, doesMatch){
+      if (doesMatch){
+         //log him in
+       console.log(`match userID:`);
+       res.json(dbComapny._id);
+       
+      }else{
+         //go away
+       console.log("DOES NOT match");
+      }
+     });
+
+  })
+  .catch(err => res.json(err))
+});
+
 //view all companies
 router.get('/', function(req, res) {
   db.Company.find()

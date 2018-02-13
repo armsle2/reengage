@@ -16,6 +16,7 @@ export default class SignIn extends React.Component {
        email: "",
        password: "",
        userId: "",
+       companyID: "",
        redirect: false
    };
    change = e =>{
@@ -24,20 +25,33 @@ export default class SignIn extends React.Component {
        })
    }    
    
-   onSubmit = (e) => {
-    e.preventDefault();
-    if(this.state.email && this.state.password){
-        API.login({
-        email: this.state.email,
-        password: this.state.password
-        }).then((response)=> {
-            console.log(response);
-            this.setState({userId: response.data});
-        })
-        .catch(err => console.log(err));
+    onSubmit = (e) => {
+        e.preventDefault();
+        if(this.state.email && this.state.password){
+            API.login({
+            email: this.state.email,
+            password: this.state.password
+            }).then((response)=> {
+                console.log(response);
+                this.setState({userId: response.data});
+            })
+            .catch(err => console.log(err));
+        }
     }
 
-   }
+    onSubmitBus = (e) => {
+        e.preventDefault();
+        if(this.state.email && this.state.password){
+            API.companyLogin({
+            email: this.state.email,
+            password: this.state.password
+            }).then((response)=> {
+                console.log(response);
+                this.setState({companyID: response.data});
+            })
+            .catch(err => console.log(err));
+        }
+    }
  
    render(){
     //    const { redirect } = this.state;
@@ -45,9 +59,9 @@ export default class SignIn extends React.Component {
        if (this.state.userId) {
            return <Redirect to={`/UserHomepage/${this.state.userId}`} />
        }
-    //    if (redirect_comp) {
-    //        return <Redirect to='/bushomepage'/>
-    //    }
+       if (this.state.companyID) {
+           return <Redirect to={`/BusHomepage/${this.state.userId}`}/>
+       }
        return(
         <Section>
             <Parallax className='parallax' imageSrc="http://www.freegreatpicture.com/files/photo105/52413-landscape.jpg"/>  
@@ -125,7 +139,7 @@ export default class SignIn extends React.Component {
                                     </Row>
                                     <Row>
                                         <Col s={4} className="center-align offset-l4 modal-action modal-close">
-                                            <Button onClick={e => this.onSubmit(e)} node='a' href='/BusHomepage' waves='light'>
+                                            <Button onClick={e => this.onSubmitBus(e)} node='a' href='/BusHomepage' waves='light'>
                                                 Sign In 
                                                 <Icon right>send</Icon>
                                             </Button>                                   

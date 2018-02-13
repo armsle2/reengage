@@ -59,6 +59,10 @@ export default {
   saveSurvey: function(surveyData) {
     return axios.post("/api/surveys-api", surveyData);
   },
+  //login
+  companyLogin: function(loginInfo){
+    return axios.post("api/companies/login", loginInfo);
+  },
 
 //Rewards
   // Gets all rewards
