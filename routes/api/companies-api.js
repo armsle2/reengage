@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const db = require('../../models');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 //view all companies
 router.get('/', function(req, res) {
   db.Company.find()
@@ -41,14 +44,20 @@ router.post('/:companyId/:surveyId/activate', function(req, res) {
 
 //create a new company
 router.post('/new', function(req, res){
-  db.Company.create(req.body)
-    .then(function(dbComapny) {
-      res.json(dbComapny);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
+  bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+       // Store hash in your password DB.
+      req.body.password = hash;
+      db.Company.create(req.body)
+        .then(function(dbComapny) {
+          res.json(dbComapny);
+        })
+        .catch(function(err) {
+          // If an error occurred, send it to the client
+          res.json(err);
+        });
     });
+  });
 });
 
 
