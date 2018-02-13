@@ -4,8 +4,41 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'r
 import styles from './SignUp.css';
 import API from "../../utils/API";
 import images from "../../images/hybrid-437269.jpg"
+import logo from "../../logo/engage.png"
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 
+const style = {
+    margin: 5,
+    logo: {
+        margin: '0 25% 0 25%',
+        width: '50%',
+        paddingTop: '5%',
+        
+    },
+    headline: {
+        margin:25,
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 200,
+      },
+    paper:{
+        height: 500,
+        width: 600,
+        margin: 30,
+        textAlign: 'center',
+        display: 'inline-block',
+    },
+    signUp:{
+        margin: 10,
+    },
 
+  };
+  
 export default class SignUp extends React.Component {
    state = {
        firstName: "",
@@ -51,140 +84,138 @@ export default class SignUp extends React.Component {
 
    render(){
        return(
-           <Section>
-                <Row>
-                    <Col s={8} className='center-align offset-l2'>
-                        <h2>Sign Up Below</h2>
-                    </Col>
-                </Row>
-                <Row>
-                        <Col s={4}>
-                        </Col>
-                        <Modal
-                            header='Customers Sign Up'
-                            trigger={<Button>Customer Sign Up</Button>}>
-                            <Section>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Input s={3}
-                                        name = "firstName"
-                                        label="First Name"
-                                        placeholder="First name" 
-                                        value={this.state.firstName} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                        <Input s={3}
-                                        name = "lastName"
-                                        label="Last Name"
-                                        placeholder="last name" 
-                                        value={this.state.lastName} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                </Row>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Input s={6}
-                                        name = "email"
-                                        label="Email"
-                                        placeholder="email" 
-                                        value={this.state.email} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                </Row>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Input s={6}
-                                        name = "password"
-                                        label="Password"
-                                        type='password'
-                                        placeholder="Password" 
-                                        value={this.state.password} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                </Row>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Button s={2} onClick={this.handleCustomerSubmit}>                                        
-                                        Create Customer Account 
-                                        <Icon right>check</Icon>
-                                        </Button>
+        <Section>
+        {/*<AppBar
+           title="Title"
+              iconClassNameRight="muidocs-icon-navigation-expand-more"
+        />*/}
+      <img className="parallax" image src={images}/>
+      <Section>
+      <Col s={12} m={8} l={6}>
+          <div>
+              <img style={style.logo} className="logosize" image src={logo}/>
+          </div>
+          </Col>
+  <div>
+  <Col s={4} className="center-align offset-l4">
 
-                                </Row>
-                            </Section>
-                        </Modal>
-                        <Modal
-                            header='Comapany Sign Up'
-                            trigger={<Button>Company Sign Up</Button>}>
-                            <Section>
-                                <Row>
-                                        <Col s={2}>
-                                        </Col>
-                                        <Input s={4}
-                                        name = "firstName"
-                                        label="First Name"
-                                        placeholder="First name" 
-                                        value={this.state.firstName} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                        <Input s={4}
-                                        name = "lastName"
-                                        label="Last Name"
-                                        placeholder="last name" 
-                                        value={this.state.lastName} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                </Row>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Input s={6}
-                                        name = "email"
-                                        label="Email"
-                                        placeholder="email" 
-                                        value={this.state.email} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                </Row>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Input s={6}
-                                        name = "password"
-                                        label="Password"
-                                        type='password'
-                                        placeholder="Password" 
-                                        value={this.state.password} 
-                                        onChange={e => this.change(e)}
-                                        />
-                                </Row>
-                                <Row>
-                                        <Col s={3}>
-                                        </Col>
-                                        <Button s={2}  onClick={this.handleCompanySubmit}>                                      
-                                        Create Company Account 
-                                        <Icon right>check</Icon>
-                                        </Button>
+   <Paper style={style.paper} zDepth={1}>        
+      <Tabs
+      value={this.state.value}
+      onChange={this.handleChange}
+    >
+   
+          
+      <Tab label="Customer" value="a">
+        <div>
+          <h2 style={style.headline}>Customer Sign Up</h2>
+          <Row>
+            <Col s={3}>
+            </Col>
+            <Input s={3}
+            name = "firstName"
+            label="First Name"
+            value={this.state.firstName} 
+            onChange={e => this.change(e)}
+            />
+            <Input s={3}
+            name = "lastName"
+            label="Last Name"
+            value={this.state.lastName} 
+            onChange={e => this.change(e)}
+            />
+          </Row>  
+          <Row>
+              <Col s={3}></Col>
+              <Input s={6}
+                  label="Email"
+                  name="email"
+                  type="email"
+                  className='offset-l3'
+                  value={this.state.email} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={3}></Col>
+              <Input s={6}
+                  label="Password"
+                  name="password"
+                  type="password"
+                  className='offset-l3' 
+                  value={this.state.password} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={4} className="center-align offset-l6">
+          <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+          </Col>
+          </Row>
+      
+        </div>
+      </Tab>
+      <Tab label="Company" value="b">
+        <div>
+          <h2 style={style.headline}>Company Sign Up</h2>
+          <Row>
+            <Col s={3}>
+            </Col>
+            <Input s={3}
+            name = "firstName"
+            label="First Name"
+            value={this.state.firstName} 
+            onChange={e => this.change(e)}
+            />
+            <Input s={3}
+            name = "lastName"
+            label="Last Name"
+            value={this.state.lastName} 
+            onChange={e => this.change(e)}
+            />
+          </Row>  
+          <Row>
+              <Col s={3}></Col>
+              <Input s={6}
+                  label="Email"
+                  name="email"
+                  type="email"
+                  className='offset-l3'
+                  value={this.state.email} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={3}></Col>
+              <Input s={6}
+                  label="Password"
+                  name="password"
+                  type="password"
+                  className='offset-l3' 
+                  value={this.state.password} 
+                  onChange={e => this.change(e)}
+              />
+          </Row>
+          <Row>
+          <Col s={4} className="center-align offset-l6">
+          <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+          </Col>
+          </Row>
+      
+        </div>
+      </Tab>
+    </Tabs>
+</Paper>
+</Col>
+<Row>
+	<Col s={4} className="center-align offset-l4">
+		<p className="sign-in-txt">Already have an Account? Go login {<FlatButton href='/#' label="Sign Up" primary={true} style={style} />}</p> 
+	</Col>
+</Row>
+</div>     
 
-                                </Row>
-                            </Section>
-                        </Modal>
-                </Row>
-                <Row>
-                    <Col s={4} className="center-align offset-l4">
-                        <h3 className="sign-in-txt">Already have an Account? Go login</h3>
-                        <Button node='a' href='/#' waves='light'>
-                            Back to Login 
-                        </Button> 
-                    </Col>
-                </Row>
-                <Row>
-                    <img className="parallax" image src={images}/>
-                </Row>
-            </Section>
+  </Section>
+</Section>
        );
    }
 }
