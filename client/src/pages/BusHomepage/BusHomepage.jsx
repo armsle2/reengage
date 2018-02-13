@@ -245,10 +245,12 @@ export default class BusHomepage extends React.Component {
                                                 ))}
                                             </tbody>
                                         </Table>
-                                        <div className='center-btn'>
+                                        
+                                        {this.state.rewards.length ?
+                                        <Col s={8} className='offset-s3 btn-style'> 
                                             <Modal
                                                 header='Add a Survey'
-                                                trigger={<Button className='blue'>Add a Survey</Button>}>
+                                                trigger={<Button className='blue'>Add Survey</Button>}>
                                                     <Section>
                                                         <Row>
                                                             <Col s={3}></Col>
@@ -319,7 +321,57 @@ export default class BusHomepage extends React.Component {
                                                         </Row>
                                                 </Section>
                                             </Modal>
-                                        </div>
+                                            </Col>
+                                           : (  
+                                           <div>
+                                           <p style={{textAlign: 'center'}}>Please create  a reward before adding a survey</p>
+                                        <Col s={8} className='offset-s3 btn-style'> 
+
+                                           <Modal
+                                                header='Add a Reward'
+                                                trigger={ <Button className='blue'>Add Reward</Button>}
+                                                >
+                                                    <Section>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Title"
+                                                                    name="rewardTitle"
+                                                                    type="text"
+                                                                    className='offset-l3'
+                                                                    defaultValue={this.state.rewardTitle}
+                                                                    onChange={this.handleInputChange}
+                                                                           
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={3}></Col>
+                                                                <Input s={6}
+                                                                    label="Description"
+                                                                    name="rewardDescription"
+                                                                    type="text"
+                                                                    className='offset-l3' 
+                                                                    defaultValue={this.state.rewardDescription}
+                                                                    onChange={this.handleInputChange}
+                                                                   
+                                                                />
+                                                        </Row>
+                                                        <Row>
+                                                            <Col s={4} className="center-align modal-close offset-l4">
+                                                                <Button onClick={this.handleAddReward} waves='light'>
+                                                                    Add Reward 
+                                                                    <Icon right>send</Icon>
+                                                                </Button>                              
+                                                            </Col>
+                                                        </Row>
+                                                </Section>
+                                            </Modal>
+                                            </Col>
+                                            </div>
+                                            ) 
+                                        }
+                                            
+                                        
                                     </Section>
                                 }>
                             </Card>
@@ -395,10 +447,10 @@ export default class BusHomepage extends React.Component {
                                                 ))}
                                             </tbody>
                                         </Table>
-                                        <div className='center-btn'>
+                                        <Col s={8} className='offset-s3 btn-style'>
                                             <Modal
                                                 header='Add a Reward'
-                                                trigger={ <Button className='blue'>Add New Reward</Button>}
+                                                trigger={ <Button className='blue'>Add Reward</Button>}
                                                 >
                                                     <Section>
                                                         <Row>
@@ -435,7 +487,7 @@ export default class BusHomepage extends React.Component {
                                                         </Row>
                                                 </Section>
                                             </Modal>
-                                        </div>
+                                        </Col>
                                     </Section>
                                 }>
                             </Card>
