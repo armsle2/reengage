@@ -19,7 +19,7 @@ class Survey extends Component {
                 
                <Row> 
                <Col s={2} className='grid-example'>
-               <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">😍</i></a>
+               <a class="btn-floating btn-large waves-effect waves-light green"><i className="material-icons">😍</i></a>
                </Col>
                <Col s={2} className='grid-example'>
                <a class="btn-floating btn-large waves-effect waves-light yellow"><i class="material-icons">🙂</i></a>

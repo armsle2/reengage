@@ -17,6 +17,7 @@ export default class SignIn extends React.Component {
        password: "",
        userId: "",
        companyID: "",
+       token: "",
        redirect: false
    };
    change = e =>{
@@ -33,7 +34,9 @@ export default class SignIn extends React.Component {
             password: this.state.password
             }).then((response)=> {
                 console.log(response);
-                this.setState({userId: response.data});
+                this.setState({userId: response.data.userId, token: response.data.token});
+                // setter
+                sessionStorage.setItem('token', this.state.token);
             })
             .catch(err => console.log(err));
         }

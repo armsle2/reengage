@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 var express = require('express');
 var router = express.Router();
 const db = require('../../models');
+var jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
 
 
 //Password check
@@ -24,7 +26,8 @@ router.post("/login", function(req, res){
 				if (doesMatch){
 					 //log him in
 				 console.log(`match userID:`);
-				 res.json(dbCustomer._id);
+				 var token = jwt.sign({userID: dbCustomer._id},  process.env.SECRET);
+				 res.json({ token: token, userId: dbCustomer._id });
 				 
 				}else{
 					 //go away
@@ -60,12 +63,45 @@ router.post('/new', function(req, res) {
 
 //view Customer info
 router.get("/:id/", function(req, res){
-  db.Customer.findOne({ _id: req.params.id })
-  	.populate('rewards')
-  	.populate('surveys')
-    .then(dbUserRewards => res.json(dbUserRewards))
-    .catch(err => res.json(err));
+	//grab token from header
+	// console.log(req.headers);
+	const token = req.headers['x-access-token']
+	// const token = req;
+	console.log(token);
+  jwt.verify(token, process.env.SECRET, function(err, decoded){
+    if(!err){
+			const secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};
+			console.log(decoded);
+			db.Customer.findOne({ _id: decoded.userID })
+			.populate('rewards')
+			.populate('surveys')
+			.then(dbUserRewards => res.json(dbUserRewards))
+			.catch(err => res.json(err));
+      // res.json(decoded);
+    } else {
+      res.status(401).send(err);
+    }
+  })
+
 });
+
+//view Customer info
+// router.get("/:id/", function(req, res){
+// 	var token = req.query.token;
+//   jwt.verify(token, 'supersecret', function(err, decoded){
+//     if(!err){
+//       var secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};
+//       res.json(secrets);
+//     } else {
+//       res.send(err);
+//     }
+//   })
+//   db.Customer.findOne({ _id: req.params.id })
+//   	.populate('rewards')
+//   	.populate('surveys')
+//     .then(dbUserRewards => res.json(dbUserRewards))
+//     .catch(err => res.json(err));
+// });
 
 //add customer to customersCompleted field - YOU ALREADY KNOW WHAT IM GONNA SAY!
 router.post('/:customerId/:surveyId/completed', function(req, res){

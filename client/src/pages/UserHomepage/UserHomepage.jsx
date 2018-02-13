@@ -25,20 +25,24 @@ class UserHomepage extends Component {
         //         console.log("params: "+this.props.match.params.id);
         //     })
         //     .catch(err => console.log(err));
-
+        const token = sessionStorage.getItem('token');
+        this.setState({token});
         this.loadPending();
+
     }
 
     loadPending = () =>{
-        API.getCustomer(this.props.match.params.id)
-            .then((response)=>{
-                console.log(response.data);
-                console.log("params: "+this.props.match.params.id);
-                this.setState({ surveys: response.data.surveys})
-
-            })
-            .catch(err => console.log(err));
+        API.getCustomer(this.props.match.params.id, sessionStorage.getItem('token'))
+        .then((response)=>{
+            console.log("token: "+sessionStorage.getItem('token'));
+            console.log(response.data);
+            console.log("params: "+this.props.match.params.id);
+            this.setState({ surveys: response.data.surveys})
+        })
+        .catch(err => console.log(err));
     }
+
+    
 
     render() {
         return (
