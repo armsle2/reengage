@@ -13,27 +13,37 @@ class Survey extends Component {
         return(
             <section>
                 <h3 className="Thin">Taste</h3>
-                
-                <h5>How would you rate the food at the restaurant?</h5>
-                
-                
-               <Row> 
-               <Col s={2} className='grid-example'>
-               <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">😍</i></a>
-               </Col>
-               <Col s={2} className='grid-example'>
-               <a class="btn-floating btn-large waves-effect waves-light yellow"><i class="material-icons">🙂</i></a>
-               </Col> 
-               <Col s={2} className='grid-example'>
-               <a class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">😐</i></a>
-               </Col> 
-               <Col s={2} className='grid-example'>
-               <a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">🙁</i></a>
-               </Col> 
-               <Col s={2} className='grid-example'>
-               <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">😠</i></a>
-               </Col> 
-            </Row>
+                {this.props.question.map(question => {
+
+                  
+
+                  return (
+
+                      <div>
+                        <h5>{question}</h5>
+                        <Row>
+                           <Col s={2} className='grid-example'>
+                           <a className="btn-floating btn-large waves-effect waves-light green"><i className="material-icons">😍</i></a>
+                           </Col>
+                           <Col s={2} className='grid-example'>
+                           <a className="btn-floating btn-large waves-effect waves-light yellow"><i className="material-icons">🙂</i></a>
+                           </Col> 
+                           <Col s={2} className='grid-example'>
+                           <a className="btn-floating btn-large waves-effect waves-light grey"><i className="material-icons">😐</i></a>
+                           </Col> 
+                           <Col s={2} className='grid-example'>
+                           <a className="btn-floating btn-large waves-effect waves-light blue"><i className="material-icons">🙁</i></a>
+                           </Col> 
+                           <Col s={2} className='grid-example'>
+                           <a className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">😠</i></a>
+                           </Col> 
+                        </Row>
+
+                      </div>
+                    )
+                  
+
+            })}
 
 
             </section>

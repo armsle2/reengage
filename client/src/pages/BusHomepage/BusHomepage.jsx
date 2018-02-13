@@ -65,7 +65,8 @@ export default class BusHomepage extends React.Component {
         if (this.state.rewardTitle && this.state.rewardDescription) {
           API.createReward(this.state.company._id, {
             title: this.state.rewardTitle,
-            description: this.state.rewardDescription
+            description: this.state.rewardDescription,
+            company: this.state.company._id
           })
             .then(res => this.loadCompanyInfo())
             .catch(err => console.log(err));

@@ -7,16 +7,16 @@ export default {
   getCustomers: function() {
     return axios.get("/api/customers");
   },
-  // Gets the customer with the given id
+  // Gets customer info with the given id
   getCustomer: function(id) {
-    return axios.get("/api/customers/" + id);
+    return axios.get(`/api/customers/${id}`);
   },
   // Deletes the customer with the given id
   deleteCustomer: function(id) {
     return axios.delete("/api/customers/" + id);
   },
   // Saves a customer to the database
-  saveCustomer: function(customerData) {
+  createCustomer: function(customerData) {
     return axios.post("/api/customers/new", customerData);
   },
 
@@ -27,14 +27,14 @@ export default {
   },
   // Gets the customer with the given id
   getCompany: function(id) {
-    return axios.get("/api/companies/" + id);
+    return axios.get(`/api/companies/${id}`);
   },
   // Deletes the customer with the given id
   deleteCompany: function(id) {
     return axios.delete("/api/companies/" + id);
   },
   // Saves a customer to the database
-  saveCompany: function(companyData) {
+  createCompany: function(companyData) {
     return axios.post("/api/companies/new", companyData);
   },
 
@@ -42,6 +42,9 @@ export default {
   // Gets all surveys
   createSurvey: function(companyId, surveyData) {
     return axios.post(`/api/companies/${companyId}/survey`, surveyData);
+  },
+  getOneSurvey: function(id){
+    return axios.get(`/api/surveys/${id}`)
   },
   // Gets the survey with the given id
   activateSurvey: function(data) {
@@ -56,6 +59,14 @@ export default {
   // Gets the survey with the given id
   createReward: function(companyId, rewardData) {
     return axios.post(`/api/companies/${companyId}/reward`, rewardData);
+  },
+  //GET all rewards
+  getAllRewards: function(){
+    return axios.get('/api/rewards/')
+  },
+  //GET specific reward
+  getOneReward: function(id){
+    return axios.get(`/api/rewards/${id}`)
   },
   // Deletes the customer with the given id
   deleteReward: function(id) {
