@@ -65,16 +65,16 @@ export default class SignUp extends React.Component {
                             trigger={<Button>Customer Sign Up</Button>}>
                             <Section>
                                 <Row>
-                                        <Col s={2}>
+                                        <Col s={3}>
                                         </Col>
-                                        <Input s={4}
+                                        <Input s={3}
                                         name = "firstName"
                                         label="First Name"
                                         placeholder="First name" 
                                         value={this.state.firstName} 
                                         onChange={e => this.change(e)}
                                         />
-                                        <Input s={4}
+                                        <Input s={3}
                                         name = "lastName"
                                         label="Last Name"
                                         placeholder="last name" 

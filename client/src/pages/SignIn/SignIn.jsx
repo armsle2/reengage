@@ -8,12 +8,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
+
 
 const style = {
-    margin: 12,
+    margin: 5,
     logo: {
-        margin: '15% 25% 0 25%',
+        margin: '0 25% 0 25%',
         width: '50%',
+        paddingTop: '5%',
         
     },
     headline: {
@@ -31,18 +34,8 @@ const style = {
         display: 'inline-block',
     },
     signUp:{
-        margin: 30,
+        margin: 10,
     },
-    etc:{
-        fontFamily: 'Roboto',
-          borderRadius: 2,
-          height: 400,
-          width: 600,
-          margin: 50,
-          textAlign: 'center',
-          display:'inline-block',
-          marginLeft: 25,
-    }
 
   };
   
@@ -162,6 +155,11 @@ export default class SignIn extends React.Component {
                 onChange={e => this.change(e)}
             />
         </Row>
+        <Row>
+        <Col s={4} className="center-align offset-l6">
+        <RaisedButton label="Sign Up" primary={true} style={style.signUp} />
+        </Col>
+        </Row>
           </div>
         </Tab>
       </Tabs>
@@ -169,10 +167,7 @@ export default class SignIn extends React.Component {
 </Col>
 <Row>
     <Col s={4} className="center-align offset-l4">
-        <p className="sign-in-txt">Not Engaging yet? Sign Up below</p>
-
-        <RaisedButton href='/SignUp' label="Sign Up" primary={true} style={style} />
-
+        <p className="sign-in-txt">Not Engaging yet? {<FlatButton href='/SignUp' label="Sign Up" primary={true} style={style} />}</p>
     </Col>
 </Row>
 </div>     
