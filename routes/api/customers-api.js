@@ -26,7 +26,7 @@ router.post("/login", function(req, res){
 				if (doesMatch){
 					 //log him in
 				 console.log(`match userID:`);
-				 var token = jwt.sign({userID: dbCustomer._id},  process.env.SECRET);
+				 var token = jwt.sign({userID: dbCustomer._id},  process.env.SECRET,{expiresIn: 30});
 				 res.json({ token: token, userId: dbCustomer._id });
 				 
 				}else{
@@ -65,12 +65,11 @@ router.post('/new', function(req, res) {
 router.get("/:id/", function(req, res){
 	//grab token from header
 	// console.log(req.headers);
-	const token = req.headers['x-access-token']
+	const token = req.headers['x-access-token'];
 	// const token = req;
 	console.log(token);
   jwt.verify(token, process.env.SECRET, function(err, decoded){
     if(!err){
-			const secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};
 			console.log(decoded);
 			db.Customer.findOne({ _id: decoded.userID })
 			.populate('rewards')
