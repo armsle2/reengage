@@ -192,16 +192,10 @@ export default class SignUp extends React.Component {
           <Row>
             <Col s={3}>
             </Col>
-            <Input s={3}
-            name = "firstName"
-            label="First Name"
-            value={this.state.firstName} 
-            onChange={e => this.change(e)}
-            />
-            <Input s={3}
-            name = "lastName"
-            label="Last Name"
-            value={this.state.lastName} 
+            <Input s={6}
+            name = "companyName"
+            label="Company Name"
+            value={this.state.companyName} 
             onChange={e => this.change(e)}
             />
           </Row>  
@@ -229,7 +223,7 @@ export default class SignUp extends React.Component {
           </Row>
           <Row>
           <Col s={4} className="center-align offset-l6">
-          <RaisedButton onClick={this.handleCustomerSubmit} label="Sign Up" primary={true} style={style.signUp} />
+          <RaisedButton onClick={this.handleCompanySubmit} label="Sign Up" primary={true} style={style.signUp} />
           </Col>
           </Row>
       
