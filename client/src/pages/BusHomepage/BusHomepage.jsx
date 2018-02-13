@@ -33,7 +33,8 @@ export default class BusHomepage extends React.Component {
           API.createSurvey(this.state.company._id, {
             title: this.state.title,
             questions: [this.state.question1, this.state.question2, this.state.question3],
-            reward: this.state.rewardChoice
+            reward: this.state.rewardChoice,
+            company: this.state.company._id
           })
             .then(res => this.loadCompanyInfo())
             .catch(err => console.log(err));

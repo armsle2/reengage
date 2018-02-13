@@ -80,13 +80,6 @@ export default class SignIn extends React.Component {
         userId: "",
         redirect: false
     };
-    change = e => {
-        this.setState({
-          value: value,
-        });
-      };
-    
-
 
    state = {
        email: "",
@@ -172,7 +165,7 @@ export default class SignIn extends React.Component {
                     name="email"
                     type="email"
                     className='offset-l3'
-                    value={this.state.email} 
+                    defaultValue={this.state.email} 
                     onChange={e => this.change(e)}
                 />
             </Row>
@@ -183,7 +176,7 @@ export default class SignIn extends React.Component {
                     name="password"
                     type="password"
                     className='offset-l3' 
-                    value={this.state.password} 
+                    defaultValue={this.state.password} 
                     onChange={e => this.change(e)}
                 />
             </Row>
@@ -206,7 +199,7 @@ export default class SignIn extends React.Component {
                 name="email"
                 type="email"
                 className='offset-l3'
-                value={this.state.email} 
+                defaultValue={this.state.email} 
                 onChange={e => this.change(e)}
             />
         </Row>
@@ -217,7 +210,7 @@ export default class SignIn extends React.Component {
                 name="password"
                 type="password"
                 className='offset-l3' 
-                value={this.state.password} 
+                defaultValue={this.state.password} 
                 onChange={e => this.change(e)}
             />
         </Row>
