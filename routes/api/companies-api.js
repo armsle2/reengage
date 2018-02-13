@@ -28,17 +28,6 @@ router.get('/:id', function(req, res) {
   });
 });
 
-//set active survey - THIS WORKS!
-router.post('/:companyId/:surveyId/activate', function(req, res) {
-  db.Company.updateOne({_id: req.params.companyId}, {$set: {activeSurvey: req.params.surveyId}})
-  .then(function(dbActiveSurvey) {
-    res.json(dbActiveSurvey)
-  })
-  .catch(function(err) {
-      res.json(err);
-  });
-});
-
 //create a new company
 router.post('/new', function(req, res){
   db.Company.create(req.body)
@@ -72,7 +61,7 @@ router.post('/:companyID/survey', function(req, res){
 router.post('/:companyId/reward', function(req, res){
   db.Reward.create(req.body)
     .then(function(dbReward){
-      return db.Company.updateOne({ _id: req.params.companyId }, { $push: {rewards: dbReward._id, }})
+      return db.Company.updateOne({ _id: req.params.companyId }, { $push: {rewards: dbReward._id}})
     })
     .then(function(dbComapny) {
       // If we were able to successfully update an Article, send it back to the client

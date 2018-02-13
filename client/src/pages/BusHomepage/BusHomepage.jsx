@@ -41,6 +41,15 @@ export default class BusHomepage extends React.Component {
         console.log(this)
     };
 
+    activateSurvey = (surveyId) => {
+        API.activateSurvey({
+            companyId: this.state.company._id,
+            surveyId: surveyId
+        })
+        .then(res => this.loadCompanyInfo())
+        .catch(err => console.log(err))
+    }
+
     loadRewards = () => {
         API.getRewards()
         .then(res => 
@@ -56,7 +65,8 @@ export default class BusHomepage extends React.Component {
         if (this.state.rewardTitle && this.state.rewardDescription) {
           API.createReward(this.state.company._id, {
             title: this.state.rewardTitle,
-            description: this.state.rewardDescription
+            description: this.state.rewardDescription,
+            company: this.state.company._id
           })
             .then(res => this.loadCompanyInfo())
             .catch(err => console.log(err));
@@ -214,9 +224,22 @@ export default class BusHomepage extends React.Component {
                                                                     <td>{question}</td>
                                                                 </tr>
                                                                 ))}
+                                                                <tr>
+                                                                    <td>
+                                                                    {survey.reward}
+                                                                    </td>
+                                                                </tr>
                                                             </tbody>
                                                             </Table> 
                                                         </Modal>
+                                                    </td>
+                                                    <td>
+                                                        {survey._id == this.state.company.activeSurvey ? 'Active' : (
+                                                                <Button 
+                                                                    className='red' 
+                                                                    onClick={() => this.activateSurvey(survey._id)}>Activate
+                                                                </Button>
+                                                            )}
                                                     </td>
                                                 </tr>
                                                 ))}
