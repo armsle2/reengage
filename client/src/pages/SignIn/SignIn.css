@@ -9,10 +9,6 @@
     width: 100%;
 };
 
-.logosize{
-
-}
-
 .container  {
     display: flex;
     position: absolute;
@@ -26,4 +22,20 @@
     margin: 0 auto;
   }
 
+  .section{
+    padding-bottom: 0;
+  }
 
+  .row {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+html {
+  background-image: url(../../images/hybrid-437269.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}

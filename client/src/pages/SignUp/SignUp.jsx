@@ -1,7 +1,17 @@
 import React from "react";
-import { format } from "path";
-import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Modal } from 'react-materialize';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import {format} from "path";
+import {
+    Button,
+    Icon,
+    Section,
+    Row,
+    Col,
+    Parallax,
+    Toast,
+    Input,
+    Modal
+} from 'react-materialize';
+import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import styles from './SignUp.css';
 import API from "../../utils/API";
 import images from "../../images/hybrid-437269.jpg"
@@ -11,35 +21,39 @@ import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
 
 const style = {
     margin: 5,
     logo: {
-        margin: '0 25% 0 25%',
+        margin: '-2% 25% -2% 25%',
         width: '50%',
-        paddingTop: '5%',
-        
+        paddingTop: '5%'
     },
     headline: {
-        margin:25,
+        margin: 10,
         fontSize: 24,
         paddingTop: 16,
         marginBottom: 12,
         fontWeight: 200,
-      },
-    paper:{
-        height: 500,
-        width: 600,
+        textAlign: 'center'
+    },
+    paper: {
+        height: '50%',
+        width: '70%',
         margin: 30,
         textAlign: 'center',
-        display: 'inline-block',
+        display: 'inline-block'
     },
-    signUp:{
+    signUp: {
         margin: 10,
+        paddingTop: 2,
     },
+    signIn: {
+        marginTop: 0
+    }
+};
 
-  };
-  
 export default class SignUp extends React.Component {
    state = {
        firstName: "",
@@ -51,11 +65,12 @@ export default class SignUp extends React.Component {
        phoneNumber: ""
    };
 
-   change = e =>{
-       this.setState({
-           [e.target.name]:e.target.value
-       })
-   } 
+
+    change = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
    handleCustomerSubmit = e => {
        e.preventDefault();
@@ -71,13 +86,14 @@ export default class SignUp extends React.Component {
                 })
                 .then((response) => {
                     this.setState({ redirect_userId: response.data._id });
+
                     console.log(response)
                 })
                 .catch(err => console.log(err));
-         }
-         
+        }
+
     }
-    
+
     handleCompanySubmit = e => {
         e.preventDefault();
         console.log(this.state)
@@ -91,11 +107,10 @@ export default class SignUp extends React.Component {
                 this.setState({ redirect_compId: response.data._id });
                 console.log(response)
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err));      
         }
-        
-    }
 
+    }
    render(){
        const { redirect_userId, redirect_compId } = this.state;
        if (redirect_userId) {
@@ -246,4 +261,5 @@ export default class SignUp extends React.Component {
 </Section>
        );
    }
+
 }
