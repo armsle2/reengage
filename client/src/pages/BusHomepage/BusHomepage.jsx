@@ -1,9 +1,7 @@
 import React from "react";
-import { format } from "path";
-import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Navbar, NavItem, Card, CardTitle, Table, Modal} from 'react-materialize';
+import {Button, Icon, Section, Row, Col, Input, Navbar, NavItem, Card, CardTitle, Table, Modal} from 'react-materialize';
 import styles from "./BusHomepage.css";
 import API from "../../utils/API";
-import RewardModal from '../../components/Modals/RewardModal'
 
 export default class BusHomepage extends React.Component {
     state = {

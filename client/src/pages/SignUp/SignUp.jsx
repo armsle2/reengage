@@ -1,23 +1,15 @@
 import React from "react";
-import {format} from "path";
 import {
-    Button,
-    Icon,
     Section,
     Row,
     Col,
-    Parallax,
-    Toast,
-    Input,
-    Modal
+    Input
 } from 'react-materialize';
-import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
+import {BrowserRouter as Redirect} from "react-router-dom";
 import styles from './SignUp.css';
 import API from "../../utils/API";
-import images from "../../images/hybrid-437269.jpg"
 import logo from "../../logo/engage.png"
 import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
@@ -121,7 +113,7 @@ export default class SignUp extends React.Component {
                 <Section>
                     <Col s={12} m={8} l={6}>
                         <div>
-                            <img style={style.logo} className="logosize" image src={logo}/>
+                            <img style={style.logo} className="logosize" alt="logo" image src={logo}/>
                         </div>
                     </Col>
                     <div>

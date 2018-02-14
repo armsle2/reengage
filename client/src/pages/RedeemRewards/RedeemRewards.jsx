@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import {Button, Icon, Section, Row, Col, Parallax, tbody, Table, tr, th, td, thead, Input, Card, CardTitle, Navbar, NavItem, Modal } from 'react-materialize';
+import {Section, Row, tbody, Table, tr, th, td, thead, Navbar, NavItem } from 'react-materialize';
 import styles from './RedeemRewards.css';
 
 class RedeemRewards extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card, CardTitle, Navbar, NavItem, Modal, Table, Preloader } from 'react-materialize';
+import {Button, Section, Row, Col, Card, CardTitle, Navbar, NavItem, Modal, Table, Preloader } from 'react-materialize';
 import styles from './UserHomepage.css';
 import Survey from '../../components/Survey';
 import API from "../../utils/API";
@@ -75,7 +75,7 @@ class UserHomepage extends Component {
     render() {
         return (
            <Section>
-                <Navbar fixed className="navbar topbar" brand={<img src={logo} className="cssTop" />} right>
+                <Navbar fixed className="navbar topbar" brand={<img src={logo} className="cssTop" alt="logo"/>} right>
                 
 	                <NavItem href='#'>Current Rewards</NavItem>
 	                <NavItem href='#PendingRewards'>Pending Rewards</NavItem>

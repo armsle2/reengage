@@ -1,5 +1,4 @@
 import React, { Component } from 'react'; 
-import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Card, CardTitle, Navbar, NavItem, Modal } from 'react-materialize';
 import styles from './Survey.css';
 
 class Survey extends Component {
