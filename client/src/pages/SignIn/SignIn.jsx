@@ -76,9 +76,7 @@ export default class SignIn extends React.Component {
 
     state = {
         email: "",
-        password: "",
-        userId: "",
-        redirect: false
+        password: ""
     };
     change = e => {
         this.setState({
@@ -86,27 +84,44 @@ export default class SignIn extends React.Component {
         })
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        if (this.state.email && this.state.password) {
-            API
-                .login({email: this.state.email, password: this.state.password})
-                .then((response) => {
-                    console.log(response);
-                    this.state.redirect = true;
-                    this.state.userId = response.data;
-                })
-                .catch(err => console.log(err));
-        }
-
+  onSubmitCustomer = (e) => {
+    e.preventDefault();
+    if(this.state.email && this.state.password){
+        API.loginCustomer({
+        email: this.state.email,
+        password: this.state.password
+        }).then((response)=> {
+            console.log(response);
+            this.setState({userId: response.data});
+        })
+        .catch(err => console.log(err));
     }
 
+  }
+    
+
+  onSubmitCompany = (e) => {
+    e.preventDefault();
+    if(this.state.email && this.state.password){
+        API.loginCompany({
+        email: this.state.email,
+        password: this.state.password
+        }).then((response)=> {
+            console.log(response);
+            this.setState({companyId: response.data});
+        })
+        .catch(err => console.log(err));
+    }
+
+  } 
+
     render() {
-        //    const { redirect } = this.state;    const { redirect_comp } = this.state;
-        if (this.state.redirect) {
-            return <Redirect to={`/UserHomepage/${this.state.userId}`}/>
+        if (this.state.userId) {
+            return <Redirect to={`/userhomepage/${this.state.userId}`}/>
         }
-        //    if (redirect_comp) {        return <Redirect to='/bushomepage'/>    }
+        if (this.state.companyId) {
+            return <Redirect to={`/bushomepage/${this.state.companyId}`}/>
+        }
         return (
             <Section>
                 <Section>
@@ -150,7 +165,7 @@ export default class SignIn extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign In" primary={true} style={style.signIn}/>
+                                                    <RaisedButton onClick={e => this.onSubmitCustomer(e)} label="Sign In" primary={true} style={style.signIn}/>
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -191,7 +206,7 @@ export default class SignIn extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign In" primary={true} style={style.signIn}/>
+                                                    <RaisedButton onClick={e => this.onSubmitCompany(e)} label="Sign In" primary={true} style={style.signIn}/>
                                                 </Col>
                                             </Row>
                                             <Row>
