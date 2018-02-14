@@ -4,6 +4,7 @@ import {Button, Icon, Section, Row, Col, Parallax, Toast, Input, Navbar, NavItem
 import styles from "./BusHomepage.css";
 import API from "../../utils/API";
 import RewardModal from '../../components/Modals/RewardModal'
+import logo from "../../logo/engagePink.png";
 
 export default class BusHomepage extends React.Component {
     state = {
@@ -207,7 +208,7 @@ export default class BusHomepage extends React.Component {
                     </Modal>
                     
                 </Button>
-                <Navbar fixed className="navbar" brand='Engage' right>
+                <Navbar fixed className="navbar topbar" brand={<img src={logo} className="cssTop" />} right>
 	                <NavItem href='#'>My Account</NavItem>
 	                <NavItem href='#'>Survey Data</NavItem>
                     <NavItem href='#CurrentSurveys'>Current Surveys</NavItem>

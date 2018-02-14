@@ -94,7 +94,9 @@ class UserHomepage extends Component {
                     </Row>
                     <Row>
                         {this.state.rewards.map(reward => (
-                            <Col s={12} m={8} l={3}>
+                            <Col s={12} m={8} l={3} 
+                                    key={reward._id}>
+
                                 <Card 
                                     header={<CardTitle reveal image={"https://img1.10bestmedia.com/Images/Photos/329093/p-blacks_54_990x660.jpg"} waves='light'/>}
                                     title={reward.company.companyName}
@@ -141,7 +143,7 @@ class UserHomepage extends Component {
                         </Row>
                         <Row>
                            {this.state.surveys.map(survey => (
-                                <Col s={12} m={8} l={4} >                     
+                                <Col s={12} m={8} l={4} key={survey._id} >                     
                                     <Card 
                                     header={<CardTitle reveal image={"https://img1.10bestmedia.com/Images/Photos/329093/p-blacks_54_990x660.jpg"} waves='light'/>}
                                     title={survey.company.companyName}

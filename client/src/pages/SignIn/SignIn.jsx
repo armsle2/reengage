@@ -13,7 +13,7 @@ import {
 } from 'react-materialize';
 import styles from './SignIn.css';
 
-import images from "../../images/hybrid-437269.jpg"
+import images from "../../images/whiteBackgroundEngage.png"
 import logo from "../../logo/engage.png"
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';

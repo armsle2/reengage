@@ -14,13 +14,12 @@ class Survey extends Component {
             <section>
                 <h3 className="Thin">Taste</h3>
 
-                {this.props.question.map(question => {
-
+                {this.props.question.map((question, index) => {
                   
 
                   return (
 
-                      <div>
+                      <div key={index} >
                         <h5>{question}</h5>
                          <form action="#">
 

@@ -14,7 +14,7 @@ import {
 import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import styles from './SignUp.css';
 import API from "../../utils/API";
-import images from "../../images/hybrid-437269.jpg"
+import images from "../../images/whiteBackgroundEngage.png"
 import logo from "../../logo/engage.png"
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
