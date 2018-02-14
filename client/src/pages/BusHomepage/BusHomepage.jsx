@@ -14,10 +14,11 @@ export default class BusHomepage extends React.Component {
 
     constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRewardFloat = this.handleRewardFloat.bind(this);
+    this.sendSurvey = this.sendSurvey.bind(this);
   }
 
-  handleSubmit(event) {
+  handleRewardFloat(event) {
     event.preventDefault();
     const rewardTitle = this.rewardTitle.value
     const rewardDescription = this.rewardDescription.value;
@@ -27,6 +28,21 @@ export default class BusHomepage extends React.Component {
         title: rewardTitle,
         description: rewardDescription,
         company: this.state.company._id
+      })
+        .then(res => this.loadCompanyInfo())
+        .catch(err => console.log(err));
+    }
+  }
+
+  sendSurvey(event) {
+    event.preventDefault();
+    const email = this.email.value
+    
+    if (email){
+        console.log(email, this.state.company._id)
+     API.sendSurvey({
+        customerEmail: email,
+        companyId: this.state.company._id
       })
         .then(res => this.loadCompanyInfo())
         .catch(err => console.log(err));
@@ -159,7 +175,7 @@ export default class BusHomepage extends React.Component {
                         >
                         <Section>
                             <Row>
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.handleRewardFloat}>
                                     <label>
                                       Title:
                                       <input type="text" ref={(input) => this.rewardTitle = input} />
@@ -170,13 +186,26 @@ export default class BusHomepage extends React.Component {
                                     </label>
                                     <Button className='modal-close' type='submit' waves='light'>Add Reward <Icon right>send</Icon>
                                     </Button>
-                                   {/* <input type="submit" value="Submit" />*/}
                                   </form>
                                 </Row>
                         </Section>
                     </Modal>
-                   {/*<Button floating icon='card_giftcard' className='green'/>*/}
-                    <Button floating icon='note_add' className='blue'/>
+                    <Modal header='Send Survey' trigger={ <Button floating icon='note_add' className='blue'/>}
+                        >
+                        <Section>
+                            <Row>
+                                <form onSubmit={this.sendSurvey}>
+                                    <label>
+                                      Email:
+                                      <input type="text" ref={(input) => this.email = input} />
+                                    </label>
+                                    <Button className='modal-close' type='submit' waves='light'>Send Survey <Icon right>send</Icon>
+                                    </Button>
+                                  </form>
+                                </Row>
+                        </Section>
+                    </Modal>
+                    
                 </Button>
                 <Navbar fixed className="navbar" brand='Engage' right>
 	                <NavItem href='#'>My Account</NavItem>
