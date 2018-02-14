@@ -135,7 +135,7 @@ export default class BusHomepage extends React.Component {
                    <Button floating icon='card_giftcard' className='green'/>
                     <Button floating icon='note_add' className='blue'/>
                 </Button>
-                <Navbar fixed className="navbar" brand='Engage' right>
+                <Navbar fixed className="navbar topbar" brand={<img src={logo} className="cssTop" alt="logo"/>} right>
 	                <NavItem href='#'>My Account</NavItem>
 	                <NavItem href='#'>Survey Data</NavItem>
                     <NavItem href='#CurrentSurveys'>Current Surveys</NavItem>
