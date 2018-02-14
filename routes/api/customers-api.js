@@ -1,3 +1,6 @@
+//loads environment variables from a .env file into process.env.
+require('dotenv').config();
+
 var express = require('express');
 var router = express.Router();
 const db = require('../../models');
