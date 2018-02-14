@@ -58,13 +58,10 @@ export default class SignUp extends React.Component {
     state = {
         firstName: "",
         lastName: "",
-        userName: "",
+        username: "",
         companyName: "",
         email: "",
-        password: "",
-        phoneNumber: "",
-        redirect_userId: "",
-        redirect_compId: ""
+        password: ""
     };
 
     change = e => {
@@ -74,44 +71,47 @@ export default class SignUp extends React.Component {
     }
 
     handleCustomerSubmit = e => {
-        e.preventDefault();
-        if (this.state.firstName && this.state.lastName && this.state.userName && this.state.email && this.state.password) {
-            API
-                .saveCustomer({
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                userName: this.state.userName,
-                email: this.state.email,
-                password: this.state.password,
-                phoneNumber: this.state.phoneNumber
-            })
+       e.preventDefault();
+            if(this.state.firstName && this.state.lastName && this.state.username && this.state.email && this.state.password ) {
+                console.log(this.state)
+                API.createCustomer({
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    username: this.state.username,
+                    email: this.state.email,
+                    password: this.state.password
+                })
                 .then((response) => {
-                    this.setState({redirect_user: true});
+                    this.setState({ redirect_userId: response.data._id });
                     console.log(response)
                 })
                 .catch(err => console.log(err));
-        }
-
+         }
+         
     }
-
+    
     handleCompanySubmit = e => {
         e.preventDefault();
-        if (this.state.companyName && this.state.email && this.state.password) {
-            API
-                .saveCompany({companyName: this.state.companyName, email: this.state.email, password: this.state.password})
-                .then((response) => {
-                    this.setState({redirect_compId: response.data._id});
-                    console.log(response)
-                })
-                .catch(err => console.log(err));
+        console.log(this.state)
+        if(this.state.companyName && this.state.email && this.state.password ) {
+            API.createCompany({
+                companyName: this.state.companyName,
+                email: this.state.email,
+                password: this.state.password
+            })
+            .then((response) => {
+                this.setState({ redirect_compId: response.data._id });
+                console.log(response)
+            })
+            .catch(err => console.log(err));
         }
-
+        
     }
 
     render() {
         const {redirect_userId, redirect_compId} = this.state;
         if (redirect_userId) {
-            return <Redirect to='/userhomepage'/>
+            return <Redirect to={`/userhomepage/${this.state.redirect_userId}`}/>
         }
         if (redirect_compId) {
             return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
@@ -152,6 +152,17 @@ export default class SignUp extends React.Component {
                                             <Col s={2} l={3}></Col>
                                                 <Input
                                                     s={8} l={6}
+                                                    label="Username"
+                                                    name="username"
+                                                    type="email"
+                                                    className='offset-l3'
+                                                    defaultValue={this.state.email}
+                                                    onChange={e => this.change(e)}/>
+                                            </Row>
+                                            <Row>
+                                            <Col s={2} l={3}></Col>
+                                                <Input
+                                                    s={8} l={6}
                                                     label="Email"
                                                     name="email"
                                                     type="email"
@@ -172,7 +183,7 @@ export default class SignUp extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign Up" primary={true} style={style.signUp}/>
+                                                    <RaisedButton onClick={this.handleCustomerSubmit} label="Sign Up" primary={true} style={style.signUp}/>
                                                 </Col>
                                             </Row>
 
@@ -222,7 +233,7 @@ export default class SignUp extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign Up" primary={true} style={style.signUp}/>
+                                                    <RaisedButton onClick={this.handleCompanySubmit} label="Sign Up" primary={true} style={style.signUp}/>
                                                 </Col>
                                             </Row>
 
