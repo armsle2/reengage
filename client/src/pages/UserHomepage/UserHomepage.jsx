@@ -145,7 +145,7 @@ class UserHomepage extends Component {
                            {this.state.surveys.map(survey => (
                                 <Col s={12} m={8} l={4} key={survey._id} >                     
                                     <Card 
-                                    header={<CardTitle reveal image={"https://img1.10bestmedia.com/Images/Photos/329093/p-blacks_54_990x660.jpg"} waves='light'/>}
+                                    header={<CardTitle reveal image={survey.company.image} waves='light'/>}
                                     title={survey.company.companyName}
                                     reveal={
                                         <Section>
