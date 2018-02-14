@@ -12,6 +12,43 @@ export default class BusHomepage extends React.Component {
         surveys: []
     }
 
+    constructor(props) {
+    super(props);
+    this.handleRewardFloat = this.handleRewardFloat.bind(this);
+    this.sendSurvey = this.sendSurvey.bind(this);
+  }
+
+  handleRewardFloat(event) {
+    event.preventDefault();
+    const rewardTitle = this.rewardTitle.value
+    const rewardDescription = this.rewardDescription.value;
+    if (rewardTitle && rewardDescription){
+        console.log(rewardTitle, rewardDescription, this.state.company._id)
+     API.createReward(this.state.company._id, {
+        title: rewardTitle,
+        description: rewardDescription,
+        company: this.state.company._id
+      })
+        .then(res => this.loadCompanyInfo())
+        .catch(err => console.log(err));
+    }
+  }
+
+  sendSurvey(event) {
+    event.preventDefault();
+    const email = this.email.value
+    
+    if (email){
+        console.log(email, this.state.company._id)
+     API.sendSurvey({
+        customerEmail: email,
+        companyId: this.state.company._id
+      })
+        .then(res => this.loadCompanyInfo())
+        .catch(err => console.log(err));
+    }
+  }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -134,8 +171,41 @@ export default class BusHomepage extends React.Component {
         return(
             <Section>
                 <Button floating fab='horizontal' icon='mode_edit' className='red' large style={{bottom: '45px', right: '24px'}}>
-                   <Button floating icon='card_giftcard' className='green'/>
-                    <Button floating icon='note_add' className='blue'/>
+                    <Modal header='Add a Reward' trigger={ <Button floating icon='card_giftcard' className='green'/>}
+                        >
+                        <Section>
+                            <Row>
+                                <form onSubmit={this.handleRewardFloat}>
+                                    <label>
+                                      Title:
+                                      <input type="text" ref={(input) => this.rewardTitle = input} />
+                                    </label>
+                                    <label>
+                                      Description:
+                                      <input type="text" ref={(input) => this.rewardDescription = input} />
+                                    </label>
+                                    <Button className='modal-close' type='submit' waves='light'>Add Reward <Icon right>send</Icon>
+                                    </Button>
+                                  </form>
+                                </Row>
+                        </Section>
+                    </Modal>
+                    <Modal header='Send Survey' trigger={ <Button floating icon='note_add' className='blue'/>}
+                        >
+                        <Section>
+                            <Row>
+                                <form onSubmit={this.sendSurvey}>
+                                    <label>
+                                      Email:
+                                      <input type="text" ref={(input) => this.email = input} />
+                                    </label>
+                                    <Button className='modal-close' type='submit' waves='light'>Send Survey <Icon right>send</Icon>
+                                    </Button>
+                                  </form>
+                                </Row>
+                        </Section>
+                    </Modal>
+                    
                 </Button>
                 <Navbar fixed className="navbar" brand='Engage' right>
 	                <NavItem href='#'>My Account</NavItem>

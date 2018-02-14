@@ -44,6 +44,9 @@ export default {
   createCompany: function(companyData) {
     return axios.post("/api/companies/new", companyData);
   },
+  sendSurvey: function(companyData) {
+    return axios.post("/api/companies/pending-survey", companyData);
+  },
 
 //Surveys
   // Gets all surveys
