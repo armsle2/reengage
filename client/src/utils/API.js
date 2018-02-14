@@ -8,8 +8,8 @@ export default {
     return axios.get("/api/customers");
   },
   // Gets customer info with the given id
-  getCustomer: function(id, token) {
-    return axios.get("/api/customers/" + id, {
+  getCustomer: function(token) {
+    return axios.get("/api/customers/id", {
       headers: {
         'x-access-token': token
       }

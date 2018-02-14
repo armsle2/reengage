@@ -16,8 +16,14 @@ class UserHomepage extends Component {
 
     loadCustomerInfo = () => {
         const userId = this.props.match.params.id;
-        API.getCustomer(userId, sessionStorage.getItem('token'))
+        API.getCustomer(sessionStorage.getItem('token'))
         .then(res => {
+            console.log("*************");
+            console.log("token: "+sessionStorage.getItem('token'));
+            console.log(res.data);
+            console.log("params: "+this.props.match.params.id);
+            console.log("*************");
+            
             this.setState({customer: res.data});
             this.rewardInfo();
             this.surveyInfo();
@@ -66,8 +72,8 @@ class UserHomepage extends Component {
 
     componentWillMount(){
         const token = sessionStorage.getItem('token');
-        this.setState({token})
-        this.loadCustomerInfo()
+        this.setState({token});
+        this.loadCustomerInfo();
     }
 
     componentDidMount() {

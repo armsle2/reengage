@@ -92,6 +92,8 @@ export default class SignIn extends React.Component {
         email: this.state.email,
         password: this.state.password
         }).then((response)=> {
+            // sessionStorage.clear();
+            console.log("*****************");
             console.log(response);
             //save companyID and token so we can use them later            
             this.setState({userID: response.data.userID, token: response.data.token});
@@ -124,6 +126,7 @@ export default class SignIn extends React.Component {
 
     render() {
         if (this.state.userID) {
+            // setTimeout(function());
             return <Redirect to={`/userhomepage/${this.state.userID}`}/>
         }
         if (this.state.companyID) {

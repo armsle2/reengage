@@ -14,17 +14,14 @@ const saltRounds = 10;
 //Password check
 router.post("/login", function(req, res){
 
-	db.Customer.findOne({$or: [
-	    {email: req.body.email},
-	    {userName: req.body.userName}
-	]})
+	db.Customer.findOne({email: req.body.email})
 	.then(dbCustomer => {
 		const password = req.body.password;
 		const hash = dbCustomer.password;
 		console.log(hash);
 		console.log(req.body);
 		console.log("***************************");
-		bcrypt.compare(password, dbCustomer.password, function(err, doesMatch){
+		bcrypt.compare(password, hash, function(err, doesMatch){
 			if (doesMatch){
 				 //log him in
 			 console.log(`match userID:`);
@@ -63,13 +60,39 @@ router.post('/new', function(req, res) {
 	});
 });
 
+//verify token
+router.get("/token", function(req, res){
+		//grab token from the header
+		const token = req.headers['x-access-token'];
+		// console.log(token);
+		jwt.verify(token, process.env.SECRET, function(err, decoded){
+			if(!err){
+				res.json(decoded);
+			} else {
+				res.status(401).send(err);
+			}
+		})
+});
+
+
 //view Customer info
-router.get("/:id/", function(req, res){
-  db.Customer.findOne({ _id: req.params.id })
-  	.populate('rewards')
-  	.populate('surveys')
-    .then(dbUserRewards => res.json(dbUserRewards))
-    .catch(err => res.json(err));
+router.get("/id", function(req, res){
+	//grab token from the header
+	const token = req.headers['x-access-token'];
+	// console.log(token);
+  jwt.verify(token, process.env.SECRET, function(err, decoded){
+    if(!err){
+			console.log(decoded);
+			db.Customer.findOne({ _id: decoded.userID })
+				.populate('rewards')
+				.populate('surveys')
+				.then(dbUserRewards => res.json(dbUserRewards))
+				.catch(err => res.json(err));
+				// res.json(decoded);
+    } else {
+      res.status(401).send(err);
+    }
+	})
 });
 
 //add customer to customersCompleted field - YOU ALREADY KNOW WHAT IM GONNA SAY!
