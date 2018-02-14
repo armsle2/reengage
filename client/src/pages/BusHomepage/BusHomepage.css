@@ -1,24 +1,62 @@
-.navbar {
-    background-color: rgb(8, 6, 112);
-    
-}
 
-.section{
-    padding-top: 0;
-
-}
 
 .spacer {
     height:75px;
 }
 
-a.brand-logo {
-    padding-left: 15px;
-}
 .avg-emoji {
 	font-size: 27px;
 }
 
 .btn-style {
 	font-size: 80%;
+}
+
+Card {
+    height: 300px;
+}
+a.brand-logo {
+    padding-left: 15px;
+}
+
+.btn {
+    text-align: center;
+}
+
+.topbar {
+    padding-top: 0;
+}
+.section{
+    padding-top: 0;
+
+}
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    background-color:#00bcd4
+}
+
+ul.navbar.topbar.right.hide-on-med-and-down{
+    background-color:#00bcd4
+}
+
+
+h4 {
+    margin-bottom:0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+
+}
+.cssTop{
+    width: 20%;
+    padding-top: 10px;
+}
+.modal-content {
+    text-align: center;
+
+}
+
+.count-down {
+    text-align: center;
+
 }
