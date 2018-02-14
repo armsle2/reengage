@@ -248,7 +248,7 @@ export default class BusHomepage extends React.Component {
                                         </Table>
                                         
                                         {this.state.rewards.length ?
-                                        <Col s={8} className='offset-s3 btn-style'> 
+                                        <Col s={9} className='offset-s4 btn-style'> 
                                             <Modal
                                                 header='Add a Survey'
                                                 trigger={<Button className='blue'>Add Survey</Button>}>
@@ -326,7 +326,7 @@ export default class BusHomepage extends React.Component {
                                            : (  
                                            <div>
                                            <p style={{textAlign: 'center'}}>Please create  a reward before adding a survey</p>
-                                        <Col s={8} className='offset-s3 btn-style'> 
+                                        <Col s={9} className='offset-s4 btn-style'> 
 
                                            <Modal
                                                 header='Add a Reward'
@@ -448,7 +448,7 @@ export default class BusHomepage extends React.Component {
                                                 ))}
                                             </tbody>
                                         </Table>
-                                        <Col s={8} className='offset-s3 btn-style'>
+                                        <Col s={9} className='offset-s4 btn-style'>
                                             <Modal
                                                 header='Add a Reward'
                                                 trigger={ <Button className='blue'>Add Reward</Button>}
