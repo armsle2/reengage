@@ -98,7 +98,7 @@ class UserHomepage extends Component {
                                     key={reward._id}>
 
                                 <Card 
-                                    header={<CardTitle reveal image={"https://img1.10bestmedia.com/Images/Photos/329093/p-blacks_54_990x660.jpg"} waves='light'/>}
+                                    header={<CardTitle reveal image={reward.company.image} waves='light'/>}
                                     title={reward.company.companyName}
                                     reveal={
                                     <Section>
