@@ -112,14 +112,14 @@ export default class SignIn extends React.Component {
                 <Section>
                     <Col s={12} m={8} l={6}>
                         <div>
-                            <img style={style.logo} className="logosize" image src={logo}/>
+                            <img style={style.logo} className="logosize" src={logo}/>
                         </div>
                     </Col>
                     <div>
                         <Col s={12} m={4} l={4} className="center-align offset-l4">
 
                             <Paper style={style.paper} zDepth={1}>
-                                <Tabs value={this.state.value} onChange={this.handleChange}>
+                                <Tabs defaultValue={this.state.value} onChange={this.handleChange}>
 
                                     <Tab icon={<FontIcon className="material-icons">face</FontIcon>} label="Customer" value="a">
                                         <div>
@@ -134,7 +134,7 @@ export default class SignIn extends React.Component {
                                                     name="email"
                                                     type="email"
                                                     className='offset-l3'
-                                                    value={this.state.email}
+                                                    defaultValue={this.state.email}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -145,7 +145,7 @@ export default class SignIn extends React.Component {
                                                     name="password"
                                                     type="password"
                                                     className='offset-l3'
-                                                    value={this.state.password}
+                                                    defaultValue={this.state.password}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -154,13 +154,10 @@ export default class SignIn extends React.Component {
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col s={8} m={6} l={6} className="center-align offset-l3 offset-m3 offset-s2">
-                                                    <p>Not Engaging yet? {< FlatButton href = '/SignUp' label = "Sign Up" primary = {
-                                                            true
-                                                        }
-                                                        style = {
-                                                            style
-                                                        } />}</p>
+                                              <Col s={8} m={6} l={6} className="center-align offset-l3 offset-m3 offset-s2">
+                                                <span className="sign-in-txt">Not Engaging yet? 
+                                                  {<FlatButton href = '/SignUp' label = "Sign Up" primary = {true} style = {style} />}
+                                                  </span>
                                                 </Col>
                                             </Row>
 
@@ -178,7 +175,7 @@ export default class SignIn extends React.Component {
                                                     name="email"
                                                     type="email"
                                                     className='offset-l3'
-                                                    value={this.state.email}
+                                                    defaultValue={this.state.email}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -189,7 +186,7 @@ export default class SignIn extends React.Component {
                                                     name="password"
                                                     type="password"
                                                     className='offset-l3'
-                                                    value={this.state.password}
+                                                    defaultValue={this.state.password}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -199,12 +196,9 @@ export default class SignIn extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={8} m={6} l={6} className="center-align offset-l3 offset-m3 offset-s2">
-                                                    <p className="sign-in-txt">Not Engaging yet? {< FlatButton href = '/SignUp' label = "Sign Up" primary = {
-                                                            true
-                                                        }
-                                                        style = {
-                                                            style
-                                                        } />}</p>
+                                                    <span className="sign-in-txt">Not Engaging yet? 
+                                                      {<FlatButton href = '/SignUp' label = "Sign Up" primary = {true} style = {style} />}
+                                                    </span>
                                                 </Col>
                                             </Row>
                                         </div>

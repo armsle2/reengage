@@ -121,7 +121,7 @@ export default class SignUp extends React.Component {
                 <Section>
                     <Col s={12} m={8} l={6}>
                         <div>
-                            <img style={style.logo} className="logosize" image src={logo}/>
+                            <img style={style.logo} className="logosize" src={logo}/>
                         </div>
                     </Col>
                     <div>
@@ -139,13 +139,13 @@ export default class SignUp extends React.Component {
                                                     s={4}
                                                     name="firstName"
                                                     label="First Name"
-                                                    value={this.state.firstName}
+                                                    defaultValue={this.state.firstName}
                                                     onChange={e => this.change(e)}/>
                                                 <Input
                                                     s={4}
                                                     name="lastName"
                                                     label="Last Name"
-                                                    value={this.state.lastName}
+                                                    defaultValue={this.state.lastName}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -156,7 +156,7 @@ export default class SignUp extends React.Component {
                                                     name="email"
                                                     type="email"
                                                     className='offset-l3'
-                                                    value={this.state.email}
+                                                    defaultValue={this.state.email}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -167,7 +167,7 @@ export default class SignUp extends React.Component {
                                                     name="password"
                                                     type="password"
                                                     className='offset-l3'
-                                                    value={this.state.password}
+                                                    defaultValue={this.state.password}
                                                     onChange={e => this.change(e)}/>
                                             </Row>
                                             <Row>
@@ -177,12 +177,9 @@ export default class SignUp extends React.Component {
                                             </Row>
 
                                                 <Col s={4} className="center-align offset-l4">
-                                                    <p style={style.signIn}>Already have an Account? {< FlatButton href = '/' label = "Login" primary = {
-                                                            true
-                                                        }
-                                                        style = {
-                                                            style
-                                                        } />}</p>
+                                                    <span style={style.signIn}>Already have an Account? 
+                                                        {<FlatButton href = '/' label = "Login"primary = {true} style = {style} />}
+                                                    </span>
                                                 </Col>
 
                                         </div>
@@ -230,14 +227,10 @@ export default class SignUp extends React.Component {
                                             </Row>
 
                                                 <Col s={4} className="center-align offset-l4">
-                                                    <p style={style.signIn}>Already have an Account? {< FlatButton href = '/' label = "Login" primary = {
-                                                            true
-                                                        }
-                                                        style = {
-                                                            style
-                                                        } />}</p>
+                                                    <span style={style.signIn}>Already have an Account? 
+                                                        {<FlatButton href = '/' label = "Login" primary = {true} style = {style} />}
+                                                    </span>
                                                 </Col>
-
                                         </div>
                                     </Tab>
                                 </Tabs>
