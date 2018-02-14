@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../../models');
+const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -24,7 +25,8 @@ router.post("/login", function(req, res){
 			if (doesMatch){
 				 //log him in
 			 console.log(`match userID:`);
-			 res.json(dbCustomer._id);
+			 const token = jwt.sign({userID: dbCustomer._id},  process.env.SECRET, {expiresIn: 30});
+			 res.json({ token: token, userId: dbCustomer._id });
 			 
 			}else{
 				 //go away
