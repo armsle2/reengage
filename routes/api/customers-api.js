@@ -29,7 +29,7 @@ router.post("/login", function(req, res){
 				 //log him in
 			 console.log(`match userID:`);
 			 const token = jwt.sign({userID: dbCustomer._id},  process.env.SECRET, {expiresIn: 30});
-			 res.json({ token: token, userId: dbCustomer._id });
+			 res.json({ token: token, userID: dbCustomer._id });
 			 
 			}else{
 				 //go away
