@@ -1,6 +1,11 @@
+//loads environment variables from a .env file into process.env.
+require('dotenv').config();
+
 var express = require('express');
 var router = express.Router();
 const db = require('../../models');
+const jwt = require('jsonwebtoken');
+
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -21,7 +26,9 @@ router.post("/login", function(req, res){
     bcrypt.compare(password, dbComapny.password, function(err, doesMatch){
       if (doesMatch){
          //log him in
-       console.log(`match userID:`);
+       console.log(`match companyID:`);
+       const token = jwt.sign({companyID: dbCompany._id},  process.env.SECRET, {expiresIn: 30});
+			 res.json({ token: token, companyID: dbCompany._id });
        res.json(dbComapny._id);
        
       }else{
