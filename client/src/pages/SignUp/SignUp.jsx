@@ -62,9 +62,7 @@ export default class SignUp extends React.Component {
         companyName: "",
         email: "",
         password: "",
-        phoneNumber: "",
-        redirect_userId: "",
-        redirect_compId: ""
+        phoneNumber: ""
     };
 
     change = e => {
@@ -86,7 +84,7 @@ export default class SignUp extends React.Component {
                 phoneNumber: this.state.phoneNumber
             })
                 .then((response) => {
-                    this.setState({redirect_user: true});
+                    this.setState({redirect_userId: response.data._id});
                     console.log(response)
                 })
                 .catch(err => console.log(err));
@@ -111,7 +109,7 @@ export default class SignUp extends React.Component {
     render() {
         const {redirect_userId, redirect_compId} = this.state;
         if (redirect_userId) {
-            return <Redirect to='/userhomepage'/>
+            return <Redirect to={`/userhomepage/${this.state.redirect_userId}`}/>
         }
         if (redirect_compId) {
             return <Redirect to={`/bushomepage/${this.state.redirect_compId}`}/>
@@ -172,7 +170,7 @@ export default class SignUp extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign Up" primary={true} style={style.signUp}/>
+                                                    <RaisedButton onClick={this.handleCustomerSubmit} label="Sign Up" primary={true} style={style.signUp}/>
                                                 </Col>
                                             </Row>
 
@@ -222,7 +220,7 @@ export default class SignUp extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col s={4} className="center-align offset-l4 offset-s3">
-                                                    <RaisedButton label="Sign Up" primary={true} style={style.signUp}/>
+                                                    <RaisedButton onClick={this.handleCompanySubmit} label="Sign Up" primary={true} style={style.signUp}/>
                                                 </Col>
                                             </Row>
 
