@@ -9,6 +9,7 @@ Engage is crucial for anyone who wants to keep their customers happy and coming 
 
 ## Live Site
 Engage is deployed to Heroku. Please check it out here.
+https://safe-everglades-80808.herokuapp.com
 
 ### Siging Up
 In order to create an account navigate to the customer or company sign up page and enter the necessary info. Your password is saved using bcrypt which hashes the password into a series of random numbers and letters that can only be matched by entering the same password through the same hash filter. Signing up will create your very own portal for you to access.
