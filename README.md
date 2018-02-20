@@ -12,8 +12,8 @@ Engage is deployed to Heroku. Please check it out here.
 https://engage-the-news-team.herokuapp.com/
 
 Login information 
-## business view: email: emilio@gmail.com password: 1234567
-## customer view: email: bob@gmail.com password: password
+#### business view: email: emilio@gmail.com password: 1234567
+#### customer view: email: bob@gmail.com password: password
 
 ### Signing Up
 In order to create an account navigate to the customer or company sign up page and enter the necessary info. Your password is saved using bcrypt which hashes the password into a series of random numbers and letters that can only be matched by entering the same password through the same hash filter. Signing up will create your very own portal for you to access.
